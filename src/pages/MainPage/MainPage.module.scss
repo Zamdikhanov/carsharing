@@ -1,0 +1,21 @@
+.mainContainer {
+    display: flex;
+    width: 100%;
+}
+
+.mainContainer__sideBarBlock {}
+
+.mainContainer__content {
+    display: flex;
+    flex: 1 0 auto;
+}
+
+.content__mainBlock {
+    width: 50%;
+}
+
+.content__sliderBlock {
+    width: 50%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+    mix-blend-mode: normal;
+}

@@ -15,8 +15,42 @@
     transition: all ease-in-out 0.3s;
 }
 
-@mixin button {
+@mixin button ($h1, $s1, $l1, $h2, $s2, $l2) {
     @include btn();
-    background: linear-gradient(90deg, #0EC261 2.61%, #039F67 112.6%);
+    background: linear-gradient(90deg, hsl($h1, $s1, $l1) 2.61%, hsl($h2, $s2, $l2) 112.6%);
     color: #fff;
+    &:hover {
+        background: linear-gradient(90deg, hsl($h1, $s1, ($l1 - 10%)) 2.61%, hsl($h2, $s2, ($l2 - 10%)) 112.6%);
+    }
+    &:active {
+        background: linear-gradient(90deg, hsl($h1, $s1, ($l1 - 10%)) 2.61%, hsl($h2, $s2, ($l2 - 10%)) 112.6%);
+    }
+    &:focus {
+        background: linear-gradient(90deg, hsl($h1, $s1, ($l1 - 20%)) 2.61%, hsl($h2, $s2, ($l2 - 20%)) 112.6%);
+    }
+    &:disabled {
+        background: $color_gray_light;
+    }
+}
+
+@mixin button_main {
+    @include button(148, 87%, 41%, 158, 96%, 32%)
+}
+
+@mixin lnk {
+    text-decoration: none;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+}
+
+@mixin link_dark {
+    @include lnk();
+    color: $color_main_black;
+    &:hover,
+    &:active {
+        color: $color_main_accent;
+    }
+    &:disabled {
+        color: $color_gray_light;
+    }
 }

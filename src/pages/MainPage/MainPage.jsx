@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Header from "../../components/Header/Header";
 import Sidebar from "../../components/SideBar/Sidebar";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import css from './MainPage.module.scss';
 
 const MainPage = () => {
@@ -30,7 +31,7 @@ const MainPage = () => {
                         </NavLink>
                     </div>
                     <div className={css.mainBlock_footer}>
-
+                        <Footer />
                     </div>
                 </div>
                 <div className={css.content__sliderBlock}>

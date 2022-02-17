@@ -1,0 +1,20 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__copy {
+        height: 16px;
+        font-size: 13px;
+        line-height: 15px;
+        color: $color_gray_dark;
+    }
+    &__phone {
+        height: 16px;
+        text-decoration: none;
+        font-size: 13px;
+        line-height: 15px;
+        @include link_dark;
+    }
+}

@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import Sidebar from "../../components/SideBar/Sidebar";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import Slider from "../../components/Slider/Slider";
 import css from './MainPage.module.scss';
 
 const MainPage = () => {
@@ -35,7 +36,7 @@ const MainPage = () => {
                     </div>
                 </div>
                 <div className={css.content__sliderBlock}>
-                    Слайдер
+                    <Slider />
                 </div>
             </main>
         </div>

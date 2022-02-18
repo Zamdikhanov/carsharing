@@ -1,61 +1,61 @@
-    .menu {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        height: 100vh;
-        width: 64px;
-        background: #151B1F;
-        color: #fff;
-        padding: 32px 0 31px;
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    width: 64px;
+    background: #151B1F;
+    color: #fff;
+    padding: 32px 0 31px;
+}
+
+.nav_burger {
+    z-index: 4;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    & span,
+    &::before,
+    &::after {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 24px;
+        border-radius: 1.5px;
+        background-color: #fff;
+        margin: 0 auto;
+        left: 4px;
+        transition: all 0.5s ease 0s;
     }
-    
-    .nav_burger {
-        z-index: 4;
-        width: 32px;
-        height: 32px;
-        position: relative;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        & span,
-        &::before,
+    & span {
+        top: 50%;
+        transform: scale(1) translate(0px, -50%);
+    }
+    &::before,
+    &::after {
+        content: '';
+    }
+    &::before {
+        top: 8px;
+    }
+    &::after {
+        bottom: 8px;
+    }
+    &.menu_button__active {
+        &::before {
+            top: 50%;
+            transform: translate(0px, -50%) rotate(45deg);
+        }
         &::after {
-            display: block;
-            position: absolute;
-            height: 3px;
-            width: 24px;
-            border-radius: 1.5px;
-            background-color: #fff;
-            margin: 0 auto;
-            left: 4px;
-            transition: all 0.5s ease 0s;
+            bottom: 50%;
+            transform: translate(0px, 50%) rotate(-45deg);
         }
         & span {
-            top: 50%;
-            transform: scale(1) translate(0px, -50%);
-        }
-        &::before,
-        &::after {
-            content: '';
-        }
-        &::before {
-            top: 8px;
-        }
-        &::after {
-            bottom: 8px;
-        }
-        &.menu_button__active {
-            &::before {
-                top: 50%;
-                transform: translate(0px, -50%) rotate(45deg);
-            }
-            &::after {
-                bottom: 50%;
-                transform: translate(0px, 50%) rotate(-45deg);
-            }
-            & span {
-                transform: scale(0);
-            }
+            transform: scale(0);
         }
     }
+}

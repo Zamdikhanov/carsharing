@@ -6,7 +6,7 @@ import css from './Header.module.scss';
 const Header = () => {
     return (
         <menu className={css.header}>
-            <NavLink className={css.header__logo} to='#' >
+            <NavLink className={css.header__logo} to='/' >
                 <h3 className={css.logo__title}>
                     Need for drive
                 </h3>

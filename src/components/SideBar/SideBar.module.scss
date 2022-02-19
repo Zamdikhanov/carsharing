@@ -1,13 +1,30 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+$width_menu: 64px;
 .menu {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100vh;
-    width: 64px;
+    width: $width_menu;
     background: #151B1F;
     color: #fff;
-    padding: 32px 0 31px;
+    padding: 32px 0 15px;
+    &__nav {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(21, 27, 31, 0.81);
+        left: -100vw;
+        top: 0vh;
+        transition: all ease-in-out 0.5s;
+        &.menu__nav__active {
+            left: 0vw;
+            top: 0vh;
+        }
+    }
 }
 
 .nav_burger {
@@ -58,4 +75,84 @@
             transform: scale(0);
         }
     }
+}
+
+.buttonLang {
+    display: block;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: $color_main_accent;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 15px;
+    position: relative;
+    transition: all ease-in-out 0.3s;
+    &.buttonLang_ru::before {
+        position: absolute;
+        content: 'Рус';
+        color: inherit;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &.buttonLang_en::before {
+        position: absolute;
+        content: 'Eng';
+        color: inherit;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &:hover {
+        border: 1px solid $color_gray_light;
+        color: $color_gray_light;
+    }
+    &:active {
+        color: $color_main_accent;
+    }
+}
+
+.nav__ {
+    &contentBlock {
+        width: calc((100% - #{$width_menu})/2 + #{$width_menu});
+        height: 100%;
+        padding: 0 64px 0 128px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #111518;
+        & .contentBlock__box {
+            padding: 70px 0;
+            position: relative;
+        }
+    }
+    &list {
+        display: block;
+    }
+    &listItem {
+        list-style: none;
+    }
+    &link {
+        @include link_light;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 37px;
+    }
+}
+
+.social__list {
+    position: absolute;
+    bottom: 0;
+    &Item {
+        display: inline-block;
+        text-decoration: none;
+        margin-right: 24px;
+    }
+}
+
+.social__svg {
+    @include svg_white;
 }

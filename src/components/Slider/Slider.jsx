@@ -7,27 +7,31 @@ import imgSlide4 from './../../assets/images/slider/slide-4.jpg';
 
 const slidesData = [
     {
+        id: 1,
         title: 'Бесплатная парковка',
         description: 'Оставляйте машину на платных городских парковках и разрешенных местах, не нарушая ПДД, а также в аэропортах.',
-        url: imgSlide1,
-        color: [],
+        imgUrl: imgSlide1,
+        color: [12],
     },
     {
+        id: 2,
         title: 'Страховка',
         description: 'Полная страховка автомобиля',
-        url: imgSlide2,
-        color: [],
+        imgUrl: imgSlide2,
+        color: '[12]',
     },
     {
+        id: 3,
         title: 'Бензин',
         description: 'Полный бак на любой заправке города за наш счёт',
-        url: imgSlide3,
+        imgUrl: imgSlide3,
         color: [],
     },
     {
+        id: 4,
         title: 'Обслуживание',
         description: 'Автомобиль проходит еженедельное ТО',
-        url: imgSlide4,
+        imgUrl: imgSlide4,
         color: [],
     },
 ];

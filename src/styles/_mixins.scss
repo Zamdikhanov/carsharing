@@ -78,3 +78,15 @@
         color: $color_gray_light;
     }
 }
+
+@mixin svg_white {
+    @include lnk();
+    fill: $color_gray_light;
+    &:hover,
+    &:active {
+        fill: $color_main_accent;
+    }
+    &:disabled {
+        fill: $color_gray_light;
+    }
+}

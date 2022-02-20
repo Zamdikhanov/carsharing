@@ -15,6 +15,10 @@
     transition: all ease-in-out 0.3s;
     color: #fff;
     background: linear-gradient(90deg, hsl($_color_1_h, $_color_1_s, $_color_1_l) 2.61%, hsl($_color_2_h, $_color_2_s, $_color_2_l) 112.6%);
+    @media (max-width: 767px) {
+        width: 100%;
+        border-radius: 0px;
+    }
     &:hover {
         background: linear-gradient(90deg, hsl($_color_1_h, $_color_1_s, ($_color_1_l - 10)) 2.61%, hsl($_color_2_h, $_color_2_s, ($_color_2_l - 10)) 112.6%);
     }

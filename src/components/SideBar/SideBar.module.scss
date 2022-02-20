@@ -12,6 +12,10 @@ $width_menu: 64px;
     background: #151B1F;
     color: #fff;
     padding: 32px 0 15px;
+    @media (max-width: 767px) {
+        background: transparent;
+        padding: 16px 0 15px;
+    }
     &__nav {
         position: absolute;
         z-index: 2;
@@ -48,6 +52,9 @@ $width_menu: 64px;
         margin: 0 auto;
         left: 4px;
         transition: all 0.5s ease 0s;
+        @media (max-width: 767px) {
+            background-color: $color_main_black;
+        }
     }
     &:hover span,
     &:hover::before,
@@ -70,10 +77,16 @@ $width_menu: 64px;
     }
     &.menu_button__active {
         &::before {
+            @media (max-width: 767px) {
+                background-color: #fff;
+            }
             top: 50%;
             transform: translate(0px, -50%) rotate(45deg);
         }
         &::after {
+            @media (max-width: 767px) {
+                background-color: #fff;
+            }
             bottom: 50%;
             transform: translate(0px, 50%) rotate(-45deg);
         }
@@ -96,6 +109,10 @@ $width_menu: 64px;
     line-height: 15px;
     position: relative;
     transition: all ease-in-out 0.3s;
+    @media (max-width: 767px) {
+        display: none;
+        z-index: 5;
+    }
     &.buttonLang_ru::before {
         position: absolute;
         content: 'Рус';
@@ -121,6 +138,13 @@ $width_menu: 64px;
     }
 }
 
+.mediaButtonShow {
+    @media (max-width: 767px) {
+        display: block;
+        z-index: 5;
+    }
+}
+
 .nav__ {
     &contentBlock {
         width: calc((100% - #{$width_menu})/2 + #{$width_menu});
@@ -130,9 +154,22 @@ $width_menu: 64px;
         flex-direction: column;
         justify-content: center;
         background-color: #111518;
+        @media (max-width: 1439px) {
+            width: calc((100vw - 64px)/2 + 134px);
+        }
+        @media (max-width: 1023px) {
+            width: 100%;
+        }
+        @media (max-width: 767px) {
+            justify-content: flex-start;
+            padding: 0 28px;
+        }
         & .contentBlock__box {
             padding: 70px 0;
             position: relative;
+            @media (max-width: 767px) {
+                padding: 80px 0;
+            }
         }
     }
     &list {
@@ -146,6 +183,14 @@ $width_menu: 64px;
         font-weight: 500;
         font-size: 32px;
         line-height: 37px;
+        @media (max-width: 1023px) {
+            font-size: 28px;
+            line-height: 33px;
+        }
+        @media (max-width: 767px) {
+            font-size: 22px;
+            line-height: 26px;
+        }
     }
 }
 

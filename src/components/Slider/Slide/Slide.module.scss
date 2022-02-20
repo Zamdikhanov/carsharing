@@ -19,6 +19,9 @@
         width: 100%;
         padding: 0 96px;
         min-height: 337px;
+        @media (max-width: 1439px) {
+            padding: 0 64px;
+        }
     }
     &__title {
         width: 100%;
@@ -27,6 +30,10 @@
         line-height: 47px;
         color: #fff;
         margin-bottom: 8px;
+        @media (max-width: 1439px) {
+            font-size: 32px;
+            line-height: 37px;
+        }
     }
     &__description {
         display: block;
@@ -36,6 +43,9 @@
         line-height: 100%;
         color: $color_gray_light;
         margin-bottom: 32px;
+        @media (max-width: 1439px) {
+            font-size: 22px;
+        }
     }
     &__button {
         width: 164px;

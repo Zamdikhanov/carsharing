@@ -26,9 +26,13 @@ const Sidebar = () => {
                 onClick={handleClick}>
                 <span></span>
             </button>
-            <button className={!isRu
+            <button className={!isShow 
+            ? (!isRu
                 ? (`${css.buttonLang} ${css.buttonLang_ru}`)
-                : (`${css.buttonLang} ${css.buttonLang_en}`)}
+                : (`${css.buttonLang} ${css.buttonLang_en}`))
+            : (!isRu
+                ? (`${css.buttonLang} ${css.buttonLang_ru} ${css.mediaButtonShow}`)
+                : (`${css.buttonLang} ${css.buttonLang_en} ${css.mediaButtonShow}`))}
                 onClick={handleLangClick}>
             </button>
             <nav className={!isShow

@@ -14,10 +14,10 @@ const MainPage = () => {
             </div>
             <main className={css.mainContainer__content}>
                 <div className={css.content__mainBlock}>
-                    <div className={css.mainBlock_header}>
+                    <div className={css.mainBlock__header}>
                         <Header />
                     </div>
-                    <div className={css.mainBlock_heroBlock}>
+                    <div className={css.mainBlock__heroBlock}>
                         <h2 className={css.heroBlock__caption}>
                             Каршеринг
                         </h2>
@@ -31,7 +31,7 @@ const MainPage = () => {
                             Забронировать
                         </NavLink>
                     </div>
-                    <div className={css.mainBlock_footer}>
+                    <div className={css.mainBlock__footer}>
                         <Footer />
                     </div>
                 </div>

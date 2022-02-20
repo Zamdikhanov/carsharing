@@ -4,11 +4,23 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 767px) {
+        background-color: #151B1F;
+        padding: 16px;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
     &__copy {
         height: 16px;
         font-size: 13px;
         line-height: 15px;
         color: $color_gray_dark;
+        @media (max-width: 767px) {
+            width: 100%;
+            text-align: right;
+            color: $color_gray_light;
+        }
     }
     &__phone {
         height: 16px;
@@ -16,5 +28,12 @@
         font-size: 13px;
         line-height: 15px;
         @include link_dark;
+        @media (max-width: 767px) {
+            @include link_accent;
+            width: 100%;
+            text-align: right;
+            margin-bottom: 8px;
+            order: -1;
+        }
     }
 }

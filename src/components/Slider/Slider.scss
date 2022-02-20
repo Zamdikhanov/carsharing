@@ -3,6 +3,9 @@
 .swiper {
     width: calc((100vw - 64px)/2);
     height: 100vh;
+    @media (max-width: 1439px) {
+        width: calc((100vw - 64px)/2 - 70px);
+    }
 }
 
 .swiper__wrapper {
@@ -27,14 +30,30 @@
     }
 }
 
-// .swiper-button-prev {
-//     height: 100%;
-//     width: 64px;
-//     margin: 0;
-//     left: 0;
-//     top: 0;
-//     color: #eee;
-//     &:hover {
-//         background: rgba($color_main_accent, 0.2);
-//     }
-// }
+.swiper-button-prev,
+.swiper-button-next {
+    height: 100%;
+    width: 64px;
+    margin: 0;
+    top: 0;
+    @media (max-width: 1439px) {
+        width: 32px;
+    }
+    &:hover,
+    &:focus {
+        background: rgba($color_main_accent, 0.2);
+        outline: none;
+    }
+    &:after {
+        color: $color_gray_light;
+        font-size: 18px;
+    }
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.swiper-button-next {
+    right: 0;
+}

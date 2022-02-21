@@ -4,7 +4,7 @@ import css from './Footer.module.scss';
 const Footer = () => {
     return (
         <menu className={css.footer}>
-            <div className={css.footer__copy} >
+            <div className={css.footer__copy}>
                 © 2016-2019 «Need for drive»
             </div>
             <a className={css.footer__phone} href="tel:+74952342244">

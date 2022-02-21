@@ -39,8 +39,7 @@
     @media (max-width: 1439px) {
         width: 32px;
     }
-    &:hover,
-    &:focus {
+    &:hover {
         background: rgba($color_main_accent, 0.2);
         outline: none;
     }

@@ -17,6 +17,7 @@ const Sidebar = () => {
     const handleLangClick = () => {
         setIsRu(!isRu);
     }
+    const linksArray = ['ПАРКОВКА', 'СТРАХОВКА', 'БЕНЗИН', 'ОБСЛУЖИВАНИЕ'];
 
     return (
         <menu className={css.menu}>
@@ -26,13 +27,7 @@ const Sidebar = () => {
                 onClick={handleClick}>
                 <span></span>
             </button>
-            <button className={!isShow 
-            ? (!isRu
-                ? (`${css.buttonLang} ${css.buttonLang_ru}`)
-                : (`${css.buttonLang} ${css.buttonLang_en}`))
-            : (!isRu
-                ? (`${css.buttonLang} ${css.buttonLang_ru} ${css.mediaButtonShow}`)
-                : (`${css.buttonLang} ${css.buttonLang_en} ${css.mediaButtonShow}`))}
+            <button className={`${css.buttonLang} ${!isRu ? css.buttonLang_ru : css.buttonLang_en} ${!isShow ? css.mediaButtonShow : ''}`}
                 onClick={handleLangClick}>
             </button>
             <nav className={!isShow
@@ -41,26 +36,15 @@ const Sidebar = () => {
                 <div className={css.nav__contentBlock}>
                     <div className={css.contentBlock__box}>
                         <ul className={css.nav__list}>
-                            <li className={css.nav__listItem}>
-                                <Link className={css.nav__link} to='/'>
-                                    ПАРКОВКА
-                                </Link>
-                            </li>
-                            <li className={css.nav__listItem}>
-                                <Link className={css.nav__link} to='/'>
-                                    СТРАХОВКА
-                                </Link>
-                            </li>
-                            <li className={css.nav__listItem}>
-                                <Link className={css.nav__link} to='/'>
-                                    БЕНЗИН
-                                </Link>
-                            </li>
-                            <li className={css.nav__listItem}>
-                                <Link className={css.nav__link} to='/'>
-                                    ОБСЛУЖИВАНИЕ
-                                </Link>
-                            </li>
+                            {linksArray.map((linkName, index) => {
+                                return (
+                                    <li className={css.nav__listItem} key={index}>
+                                        <Link className={css.nav__link} to='/'>
+                                            {linkName}
+                                        </Link>
+                                    </li>
+                                )
+                            })}
                         </ul>
                         <div className={css.social__list}>
                             <a className={css.social__listItem}

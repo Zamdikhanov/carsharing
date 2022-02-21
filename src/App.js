@@ -1,14 +1,14 @@
 import './App.scss';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import MainPage from './pages/MainPage/MainPage';
 
 function App() {
   return (
-    <HashRouter >
+    <BrowserRouter basename="process.env.PUBLIC_URL" >
       <div className="App" >
         <MainPage />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

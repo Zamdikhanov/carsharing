@@ -16,19 +16,19 @@ const Sidebar = () => {
     const handleLangClick = () => {
         setIsRu(!isRu);
     }
-    
+
     return (
         <menu className={css.menu}>
-            <button className={`${css.nav_burger} ${!isShow ? css.menu_button__active : ''}`}
+            <button className={`${css.nav_burger} ${isShow ? css.menu_button__active : ''}`}
                 onClick={handleClick}>
                 <span></span>
             </button>
             <button className={`${css.buttonLang} 
-            ${!isRu ? css.buttonLang_ru : css.buttonLang_en} 
-            ${!isShow ? css.mediaButtonShow : ''}`}
+                ${!isRu ? css.buttonLang_ru : css.buttonLang_en} 
+                ${isShow ? css.mediaButtonShow : ''}`}
                 onClick={handleLangClick}>
             </button>
-            <nav className={`${css.menu__nav} ${!isShow ? css.menu__nav__active : ''}`}>
+            <nav className={`${css.menu__nav} ${isShow ? css.menu__nav__active : ''}`}>
                 <div className={css.nav__contentBlock}>
                     <div className={css.contentBlock__box}>
                         <ul className={css.nav__list}>
@@ -44,14 +44,14 @@ const Sidebar = () => {
                         </ul>
                         <div className={css.social__list}>
                             {socialArray.map(social => {
-                            return (
-                                <a className={css.social__listItem}
-                                    key={social.id}
-                                    href={social.href}
-                                    target='_blank'
-                                    rel='noopener noreferrer'>
-                                    {social.renderSvg()}
-                                </a>)
+                                return (
+                                    <a className={css.social__listItem}
+                                        key={social.id}
+                                        href={social.href}
+                                        target='_blank'
+                                        rel='noopener noreferrer'>
+                                        {social.renderSvg()}
+                                    </a>)
                             })}
                         </div>
                     </div>

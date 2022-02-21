@@ -1,12 +1,14 @@
 import './App.scss';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainPage from './pages/MainPage/MainPage';
 
 function App() {
   return (
-    <BrowserRouter basename="process.env.PUBLIC_URL" >
+    <BrowserRouter basename="/" >
       <div className="App" >
-        <MainPage />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );

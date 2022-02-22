@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { ReactComponent as SvgMapPosition } from '../../assets/icons/map-postion.svg';
 import css from './Header.module.scss';
 
-const Header = () => {
+function Header() {
     return (
         <menu className={css.header}>
             <NavLink className={css.header__logo} to='/' >

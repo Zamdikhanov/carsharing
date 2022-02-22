@@ -4,8 +4,13 @@
         "es2021": true
     },
     "extends": [
+        "eslint:recommended",
         "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:jsx-a11y/recommended",
+        "plugin:import/recommended",
         "airbnb",
+        "plugin:react/jsx-runtime",
         "prettier"
     ],
     "parserOptions": {
@@ -19,6 +24,12 @@
         "react"
     ],
     "rules": {
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-props-no-spreading": "off",
+        "settings":{
+            "import/resolver": {
+                "node": { "extensions": [".js", ".jsx", ".ts", ".tsx"]}
+            }
+        }
     }
 }

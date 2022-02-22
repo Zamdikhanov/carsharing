@@ -5,7 +5,7 @@ import MainPage from './pages/MainPage/MainPage';
 
 function App() {
   return (
-    <BrowserRouter basename='/'>
+    <BrowserRouter>
       <div className='App' >
         <Routes>
           <Route path='/' element={<MainPage />} />

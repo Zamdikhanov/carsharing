@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import css from './SideBar.module.scss';
 import { linksArray, socialArray } from './constants';
 
@@ -19,9 +19,8 @@ function Sidebar() {
     return (
         <menu className={css.menu}>
             <button
-                className={`${css.nav_burger} ${
-                    isShow ? css.menu_button__active : ''
-                }`}
+                className={`${css.nav_burger} ${isShow ? css.menu_button__active : ''
+                    }`}
                 type="button"
                 onClick={handleClick}
             >
@@ -37,44 +36,39 @@ function Sidebar() {
                 <span />
             </button>
             <nav
-                className={`${css.menu__nav} ${
-                    isShow ? css.menu__nav__active : ''
-                }`}
+                className={`${css.menu__nav} ${isShow ? css.menu__nav__active : ''
+                    }`}
             >
                 <div className={css.nav__contentBlock}>
                     <div className={css.contentBlock__box}>
                         <ul className={css.nav__list}>
-                            {linksArray.map((linkName, index) => {
-                                return (
-                                    <li
-                                        className={css.nav__listItem}
-                                        key={index}
-                                    >
-                                        <Link className={css.nav__link} to="/">
-                                            {linkName}
-                                        </Link>
-                                    </li>
-                                );
-                            })}
+                            {linksArray.map((linkName) => (
+                                <li
+                                    className={css.nav__listItem}
+                                    key={linkName}
+                                >
+                                    <Link className={css.nav__link} to="/">
+                                        {linkName}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                         <div className={css.social__list}>
-                            {socialArray.map((social) => {
-                                return (
-                                    <a
-                                        className={css.social__listItem}
-                                        key={social.id}
-                                        href={social.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {social.renderSvg()}
-                                    </a>
-                                );
-                            })}
+                            {socialArray.map((social) => (
+                                <a
+                                    className={css.social__listItem}
+                                    key={social.id}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {social.renderSvg()}
+                                </a>
+                            ))}
                         </div>
                     </div>
                 </div>
-                <div className={css.nav__transparentBlock}></div>
+                <div className={css.nav__transparentBlock} />
             </nav>
         </menu>
     );

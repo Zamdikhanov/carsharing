@@ -1,9 +1,11 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import { Link } from 'react-router-dom';
 import css from './Slide.module.scss';
 import './SlideButtons.scss';
 
-const Slide = (props) => {
+function Slide(props) {
     return (
         <div className={css.slide} style={{ backgroundImage: `url(${props.imgUrl})` }} >
             <div className={css.slide__innerDark}>

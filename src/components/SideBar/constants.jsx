@@ -1,7 +1,7 @@
 import css from './SideBar.module.scss';
-import { ReactComponent as SvgTelegramm } from './../../assets/icons/telegram.svg';
-import { ReactComponent as SvgFacebook } from './../../assets/icons/facebook.svg';
-import { ReactComponent as SvgInstagram } from './../../assets/icons/Instagram.svg';
+import { ReactComponent as SvgTelegramm } from "../../assets/icons/telegram.svg";
+import { ReactComponent as SvgFacebook } from "../../assets/icons/facebook.svg";
+import { ReactComponent as SvgInstagram } from "../../assets/icons/Instagram.svg";
 
 export const linksArray = ['ПАРКОВКА', 'СТРАХОВКА', 'БЕНЗИН', 'ОБСЛУЖИВАНИЕ'];
 

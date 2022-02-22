@@ -1,7 +1,7 @@
-import imgSlide1 from './../../assets/images/slider/slide-1.jpg';
-import imgSlide2 from './../../assets/images/slider/slide-2.jpg';
-import imgSlide3 from './../../assets/images/slider/slide-3.jpg';
-import imgSlide4 from './../../assets/images/slider/slide-4.jpg';
+import imgSlide1 from '../../assets/images/slider/slide-1.jpg';
+import imgSlide2 from '../../assets/images/slider/slide-2.jpg';
+import imgSlide3 from '../../assets/images/slider/slide-3.jpg';
+import imgSlide4 from '../../assets/images/slider/slide-4.jpg';
 
 export const slidesData = [
     {

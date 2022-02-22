@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as SvgMapPosition } from '../../assets/icons/map-postion.svg';
 import css from './Header.module.scss';

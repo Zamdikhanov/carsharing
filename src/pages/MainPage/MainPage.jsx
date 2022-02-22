@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import Sidebar from "../../components/SideBar/Sidebar";
 import Header from "../../components/Header/Header";
@@ -6,7 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import Slider from "../../components/Slider/Slider";
 import css from './MainPage.module.scss';
 
-const MainPage = () => {
+function MainPage() {
     return (
         <div className={css.mainContainer}>
             <div className={css.mainContainer__sideBarBlock}>

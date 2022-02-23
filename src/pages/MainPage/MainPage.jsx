@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
-import Sidebar from "../../components/SideBar/Sidebar";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import Slider from "../../components/Slider/Slider";
-import css from './MainPage.module.scss';
+import { NavLink } from 'react-router-dom'
+import Sidebar from '../../components/SideBar/Sidebar'
+import Header from '../../components/Header/Header'
+import Footer from '../../components/Footer/Footer'
+import Slider from '../../components/Slider/Slider'
+import css from './MainPage.module.scss'
 
 function MainPage() {
     return (
@@ -17,16 +17,12 @@ function MainPage() {
                         <Header />
                     </div>
                     <div className={css.mainBlock__heroBlock}>
-                        <h2 className={css.heroBlock__caption}>
-                            Каршеринг
-                        </h2>
-                        <h2 className={css.heroBlock__title}>
-                            Need for drive
-                        </h2>
+                        <h2 className={css.heroBlock__caption}>Каршеринг</h2>
+                        <h2 className={css.heroBlock__title}>Need for drive</h2>
                         <div className={css.heroBlock__descrption}>
                             Поминутная аренда авто твоего города
                         </div>
-                        <NavLink className={css.heroBlock__button} to='#'>
+                        <NavLink className={css.heroBlock__button} to="/order">
                             Забронировать
                         </NavLink>
                     </div>
@@ -42,4 +38,4 @@ function MainPage() {
     )
 }
 
-export default MainPage;
+export default MainPage

@@ -1,0 +1,36 @@
+@import './styles/variables';
+@import url('./assets/fonts/fonts');
+#root,
+html,
+body {
+    height: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    overflow-wrap: break-word;
+    font-family: 'Roboto', sans-serif;
+    color: $color_main_black;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+.App {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+body.lock {
+    overflow: auto;
+}

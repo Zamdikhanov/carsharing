@@ -1,0 +1,16 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+.slide__button {
+    &_1 {
+        @include button(169, 59, 18, 128, 82, 26);
+    }
+    &_2 {
+        @include button(216, 59, 18, 169, 82, 26);
+    }
+    &_3 {
+        @include button(32, 59, 18, 335, 82, 26);
+    }
+    &_4 {
+        @include button(263, 59, 18, 295, 82, 26);
+    }
+}

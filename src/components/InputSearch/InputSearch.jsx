@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import css from './InputSearch.module.scss';
 
-function InputSearch() {
+function InputSearch({ label = 'Имя поля' }) {
     const [searchText, setSearchText] = useState('');
     const handleChange = (e) => {
         setSearchText(e.target.value);
@@ -11,7 +11,7 @@ function InputSearch() {
     return (
         <div className={css.container}>
             <label className={css.search}>
-                <span className={css.search_label}>Город</span>
+                <span className={css.search_label}>{label}</span>
                 <input
                     className={css.search_input}
                     type="text"

@@ -1,8 +1,7 @@
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs';
 import Header from '../../components/Header/Header';
-import OrderData from '../../components/OrderData/OrderData';
 import Sidebar from '../../components/SideBar/Sidebar';
-import UserLocation from '../../components/UserLocation/UserLocation';
+import UserLocation from './UserLocation/UserLocation';
 import css from './OrderPage.module.scss';
 
 function OrderPage() {
@@ -26,14 +25,7 @@ function OrderPage() {
                     <div
                         className={`${css.mainBlock__wrapper} ${css.heightMax}`}
                     >
-                        <div className={css.contentBlock}>
-                            <div className={css.contentBlock__currentData}>
-                                <UserLocation />
-                            </div>
-                            <div className={css.contentBlock__allOrderData}>
-                                <OrderData />
-                            </div>
-                        </div>
+                        <UserLocation />
                     </div>
                 </div>
             </main>

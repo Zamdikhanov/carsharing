@@ -8,7 +8,7 @@ function BreadCrumbs() {
         <nav className={css.container}>
             <ul className={css.linksList}>
                 {linksArray.map((link) => (
-                    <li className={css.linksList__item}>
+                    <li className={css.linksList__item} key={link.linkText}>
                         <NavLink className={css.item__link} to={link.linkUrl}>
                             <SvgTriangle className={css.item__svg} />
                             {link.linkText}

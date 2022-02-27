@@ -15,3 +15,45 @@
         border-left: 1px solid $color_gray_light;
     }
 }
+
+.formContainer {
+    margin-bottom: 45px;
+}
+
+.search {
+    display: flex;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    color: $color_main_black;
+    align-items: baseline;
+    margin-bottom: 10px;
+    &:last-child {
+        margin-bottom: 0px;
+    }
+    &__label {
+        min-width: 96px;
+        padding-right: 5px;
+        text-align: end;
+    }
+    &__input {
+        width: 224px;
+        padding: 3px 8px;
+        border-radius: none;
+        border: none;
+        border-bottom: 1px solid $color_gray_dark;
+    }
+}
+
+.description {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 16px;
+    color: $color_main_black;
+}
+
+.map {
+    height: 352px;
+    max-width: 736px;
+}

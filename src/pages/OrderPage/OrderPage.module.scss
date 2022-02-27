@@ -8,6 +8,7 @@
 
 .orderContainer__sideBarBlock {
     position: fixed;
+    z-index: 1;
 }
 
 .orderContainer__mainBlock {
@@ -42,6 +43,7 @@
 }
 
 .mainBlock__content {
-    height: max-content;
+    max-height: 100%;
     width: 100%;
+    z-index: -1;
 }

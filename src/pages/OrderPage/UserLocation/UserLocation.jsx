@@ -16,7 +16,7 @@ function UserLocation() {
         { value: 'Увельский', label: 'Увельский' },
     ];
     const pointOptions = [
-        { value: 'ул.Ленина', label: 'ул.Ленина' },
+        { value: 'Нариманова 42', label: 'Нариманова 42' },
         { value: 'ул.Мира', label: 'ул.Мира' },
         { value: 'ул.Победы', label: 'ул.Победы' },
     ];
@@ -36,6 +36,7 @@ function UserLocation() {
                             className={css.input}
                             classNamePrefix={css.input}
                             placeholder="Начните вводить город ..."
+                            isClearable="true"
                             options={options}
                             id="city"
                             name="city"
@@ -48,6 +49,7 @@ function UserLocation() {
                             className={css.input}
                             classNamePrefix={css.input}
                             placeholder="Начните вводить пункт ..."
+                            isClearable="true"
                             options={pointOptions}
                             id="point"
                             name="point"

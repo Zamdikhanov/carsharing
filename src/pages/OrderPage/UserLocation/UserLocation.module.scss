@@ -26,22 +26,15 @@
     font-size: 14px;
     line-height: 16px;
     color: $color_main_black;
-    align-items: baseline;
+    align-items: flex-end;
     margin-bottom: 10px;
     &:last-child {
         margin-bottom: 0px;
     }
     &__label {
         min-width: 96px;
-        padding-right: 5px;
+        padding: 0 5px 3px 0;
         text-align: end;
-    }
-    &__input {
-        width: 224px;
-        padding: 3px 8px;
-        border-radius: none;
-        border: none;
-        border-bottom: 1px solid $color_gray_dark;
     }
 }
 
@@ -75,7 +68,8 @@
         max-width: 200px;
     }
     [class*='-control'] {
-        min-height: 25px;
+        box-sizing: border-box;
+        min-height: 22px;
         border-radius: 0;
         border: none;
         width: 224px;
@@ -116,13 +110,13 @@
             opacity: 1;
         }
     }
-    [class*='-IndicatorsContainer'] {
+    [class*='indicatorContainer'] {
+        padding: 0px;
+    }
+    [class*='indicatorSeparator'] {
         display: none;
     }
-    [class*='-indicators'] {
-        display: none;
-    }
-    [class*='indicators'] {
+    [class*='dropdown-indicator'] {
         display: none;
     }
     [class*='-singleValue'] {

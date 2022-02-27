@@ -1,7 +1,11 @@
-import './App.scss'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import MainPage from './pages/MainPage/MainPage'
-import OrderPage from './pages/OrderPage/OrderPage'
+import './App.scss';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MainPage from './pages/MainPage/MainPage';
+import OrderPage from './pages/OrderPage/OrderPage';
+import UserLocation from './pages/OrderPage/UserLocation/UserLocation';
+import Model from './pages/OrderPage/Model/Model';
+import More from './pages/OrderPage/More/More';
+import Total from './pages/OrderPage/Total/Total';
 
 function App() {
     return (
@@ -9,11 +13,17 @@ function App() {
             <div className="App">
                 <Routes>
                     <Route path="/" element={<MainPage />} />
-                    <Route path="order" element={<OrderPage />} />
+                    <Route path="order/" element={<OrderPage />}>
+                        <Route path="location" element={<UserLocation />} />
+                        <Route path="model" element={<Model />} />
+                        <Route path="more" element={<More />} />
+                        <Route path="total" element={<Total />} />
+                        <Route path="*" element={<UserLocation />} />
+                    </Route>
                 </Routes>
             </div>
         </BrowserRouter>
-    )
+    );
 }
 
-export default App
+export default App;

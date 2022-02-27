@@ -1,9 +1,9 @@
-import { NavLink } from 'react-router-dom'
-import Sidebar from '../../components/SideBar/Sidebar'
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
-import Slider from '../../components/Slider/Slider'
-import css from './MainPage.module.scss'
+import { NavLink } from 'react-router-dom';
+import Sidebar from '../../components/SideBar/Sidebar';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import Slider from '../../components/Slider/Slider';
+import css from './MainPage.module.scss';
 
 function MainPage() {
     return (
@@ -22,7 +22,10 @@ function MainPage() {
                         <div className={css.heroBlock__descrption}>
                             Поминутная аренда авто твоего города
                         </div>
-                        <NavLink className={css.heroBlock__button} to="/order">
+                        <NavLink
+                            className={css.heroBlock__button}
+                            to="/order/location"
+                        >
                             Забронировать
                         </NavLink>
                     </div>
@@ -35,7 +38,7 @@ function MainPage() {
                 </div>
             </main>
         </div>
-    )
+    );
 }
 
-export default MainPage
+export default MainPage;

@@ -57,3 +57,88 @@
     height: 352px;
     max-width: 736px;
 }
+
+.input {
+    color: $color_main_black;
+    border: none;
+    padding: 0;
+    outline: none;
+    align-self: center;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    max-width: 224px;
+    @media (max-width: 767px) {
+        font-size: 12px;
+        line-height: 14px;
+        min-width: 200px;
+        max-width: 200px;
+    }
+    [class*='-control'] {
+        min-height: 25px;
+        border-radius: 0;
+        border: none;
+        width: 224px;
+        border-bottom: 1px solid $color_gray_dark;
+        outline: none;
+        box-shadow: none;
+        &:hover {
+            border-color: $color_gray_dark;
+        }
+        @media (max-width: 767px) {
+            width: 200px;
+            min-height: 20px;
+        }
+    }
+    [class*='-ValueContainer'] {
+        color: $color_gray_dark;
+        padding: 0 8px 0;
+        @media (max-width: 767px) {
+            padding: 0 4px 0;
+        }
+    }
+    [class*='-option'] {
+        color: $color_gray_dark;
+        padding: 8px;
+        background-color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 16px;
+        @media (max-width: 767px) {
+            font-size: 12px;
+            line-height: 14px;
+        }
+        &:hover {
+            color: $color_main_accent;
+        }
+        &:active {
+            background-color: white;
+            opacity: 1;
+        }
+    }
+    [class*='-IndicatorsContainer'] {
+        display: none;
+    }
+    [class*='-indicators'] {
+        display: none;
+    }
+    [class*='indicators'] {
+        display: none;
+    }
+    [class*='-singleValue'] {
+        margin: 0;
+        padding: 0;
+    }
+    [class*='-placeholder'] {
+        margin: 0;
+        padding: 0;
+    }
+    [class*='-Input'] {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+input[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}

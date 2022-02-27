@@ -1,19 +1,19 @@
 const linksArray = [
     {
         linkText: 'Местоположение',
-        linkUrl: '/order',
+        linkUrl: 'location',
     },
     {
         linkText: 'Модель',
-        linkUrl: 'step-2',
+        linkUrl: 'model',
     },
     {
         linkText: 'Дополнительно',
-        linkUrl: 'step-3',
+        linkUrl: 'more',
     },
     {
         linkText: 'Итого',
-        linkUrl: 'step-4',
+        linkUrl: 'total',
     },
 ];
 

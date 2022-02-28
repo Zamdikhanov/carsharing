@@ -9,7 +9,14 @@ function BreadCrumbs() {
             <ul className={css.linksList}>
                 {linksArray.map((link) => (
                     <li className={css.linksList__item} key={link.linkText}>
-                        <NavLink className={css.item__link} to={link.linkUrl}>
+                        <NavLink
+                            className={(navLink) =>
+                                navLink.isActive
+                                    ? `${css.item__link_active} ${css.item__link}`
+                                    : css.item__link
+                            }
+                            to={link.linkUrl}
+                        >
                             <SvgTriangle className={css.item__svg} />
                             {link.linkText}
                         </NavLink>

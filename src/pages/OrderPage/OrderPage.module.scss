@@ -18,6 +18,9 @@
     width: 100%;
     height: 100vh;
     padding: 32px 0 0;
+    @media (max-width: 1023px) {
+        margin-left: 86px;
+    }
 }
 
 .mainBlock__wrapper {
@@ -25,6 +28,14 @@
     max-width: 1248px;
     width: 100%;
     margin: 0 auto;
+    @media (max-width: 1439px) {
+        width: calc(100% - 128px);
+        margin: 0 64px;
+    }
+    @media (max-width: 1023px) {
+        width: calc(100% - 64px);
+        margin: 0 32px;
+    }
 }
 
 .mainBlock__header {

@@ -4,6 +4,13 @@
     width: 100%;
 }
 
+.wrap {
+    width: 100%;
+    @media (max-width: 767px) {
+        padding: 0 16px;
+    }
+}
+
 .title {
     width: 100%;
     margin-bottom: 26px;
@@ -28,16 +35,6 @@
         &:last-child {
             margin-bottom: 0;
         }
-        // &::after {
-        //     background-image: radial-gradient( circle, $color_gray_dark 0.04em, transparent 0.05em);
-        //     background-position: bottom 0.08em right;
-        //     background-size: 0.3em 0.3em;
-        //     background-repeat: space no-repeat;
-        //     content: '';
-        //     flex-grow: 1;
-        //     height: 1em;
-        //     order: 2;
-        // }
         & .item__name {
             flex: 1 0 auto;
             display: block;
@@ -56,7 +53,7 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: clip;
-                content: '........................................................................................';
+                content: '.................................................................................................................................';
             }
         }
         & .item__value {
@@ -83,4 +80,12 @@
 .button {
     @include button_default;
     width: 100%;
+    margin-bottom: 32px;
+    @media (max-width: 1023px) {
+        max-width: 320px;
+    }
+    @media (max-width: 767px) {
+        max-width: none;
+        width: 100%;
+    }
 }

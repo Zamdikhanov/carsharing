@@ -8,7 +8,7 @@
 
 .orderContainer__sideBarBlock {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
 }
 
 .orderContainer__mainBlock {
@@ -20,6 +20,12 @@
     padding: 32px 0 0;
     @media (max-width: 1023px) {
         margin-left: 86px;
+        width: calc(100% - 86px);
+    }
+    @media (max-width: 767px) {
+        margin-left: 0;
+        width: 100%;
+        padding: 16px 0 0;
     }
 }
 
@@ -36,6 +42,10 @@
         width: calc(100% - 64px);
         margin: 0 32px;
     }
+    @media (max-width: 767px) {
+        width: 100%;
+        margin: 0;
+    }
 }
 
 .mainBlock__header {
@@ -43,12 +53,25 @@
     width: 100%;
     margin-bottom: 32px;
     flex: 0 1 auto;
+    @media (max-width: 767px) {
+        z-index: 1;
+        margin: 0;
+        padding: 16px 0 0;
+        height: 80px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: #fff;
+    }
 }
 
 .mainBlock__breadCrumbs {
     width: 100%;
     border-top: 1px solid $color_gray_light;
     border-bottom: 1px solid $color_gray_light;
+    @media (max-width: 767px) {
+        margin: 72px 0 0 0;
+    }
 }
 
 .mainBlock__content {

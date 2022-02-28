@@ -4,11 +4,20 @@
     display: flex;
     min-height: 100%;
     width: 100%;
+    @media (max-width: 1023px) {
+        flex-wrap: wrap;
+    }
     &__currentData {
         flex: 1 0 auto;
         padding-top: 32px;
         @media (max-width: 1439px) {
             padding: 32px 32px 32px 0;
+        }
+        @media (max-width: 1023px) {
+            width: 100%;
+        }
+        @media (max-width: 767px) {
+            padding: 16px 16px 0 16px;
         }
     }
     &__allOrderData {
@@ -16,6 +25,12 @@
         width: 320px;
         padding: 32px 0 0 32px;
         border-left: 1px solid $color_gray_light;
+        @media (max-width: 1023px) {
+            width: 100%;
+            padding: 32px 0 0;
+            border: none;
+            height: auto;
+        }
     }
 }
 

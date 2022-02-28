@@ -12,7 +12,8 @@
 }
 
 .orderContainer__mainBlock {
-    display: block;
+    display: flex;
+    flex-direction: column;
     margin-left: 64px;
     width: 100%;
     height: 100vh;
@@ -21,19 +22,16 @@
 
 .mainBlock__wrapper {
     display: flex;
-    flex: 1 0 auto;
     max-width: 1248px;
+    width: 100%;
     margin: 0 auto;
-}
-
-.heightMax {
-    height: 100%;
 }
 
 .mainBlock__header {
     display: block;
     width: 100%;
     margin-bottom: 32px;
+    flex: 0 1 auto;
 }
 
 .mainBlock__breadCrumbs {
@@ -43,7 +41,11 @@
 }
 
 .mainBlock__content {
-    max-height: 100%;
+    height: 100%;
     width: 100%;
-    z-index: -1;
+}
+
+.heightMax {
+    height: 100%;
+    flex-grow: 1;
 }

@@ -22,7 +22,7 @@ function OrderPage() {
                         <BreadCrumbs />
                     </div>
                 </div>
-                <div className={css.mainBlock__content}>
+                <div className={`${css.mainBlock__content} ${css.heightMax}`}>
                     <div
                         className={`${css.mainBlock__wrapper} ${css.heightMax}`}
                     >

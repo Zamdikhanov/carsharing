@@ -1,14 +1,9 @@
-// import { useState } from 'react';
 import Select from 'react-select';
 import css from './UserLocation.module.scss';
-// import InputSearch from '../../../components/InputSearch/InputSearch';
 import OrderData from '../../../components/OrderData/OrderData';
 import YandexMap from '../../../components/YandexMap/YandexMap';
 
 function UserLocation() {
-    // const [searchCity, setSearchCity] = useState('');
-    // const [searchPoint, setSearchPoint] = useState('');
-
     const options = [
         { value: 'Ульяновск', label: 'Ульяновск' },
         { value: 'Уфа', label: 'Уфа' },
@@ -20,10 +15,6 @@ function UserLocation() {
         { value: 'ул.Мира', label: 'ул.Мира' },
         { value: 'ул.Победы', label: 'ул.Победы' },
     ];
-
-    // const handleChangePoint = (e) => {
-    //     setSearchPoint(e.target.value);
-    // };
 
     return (
         <div className={css.contentBlock}>

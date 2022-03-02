@@ -9,10 +9,7 @@
     }
     &__currentData {
         flex: 1 0 auto;
-        padding-top: 32px;
-        @media (max-width: 1439px) {
-            padding: 32px 32px 32px 0;
-        }
+        padding: 32px 0;
         @media (max-width: 1023px) {
             width: 100%;
         }
@@ -67,7 +64,12 @@
 .map {
     height: 352px;
     max-width: 736px;
-    @media (max-width: 1246px) {
+    width: 100%;
+    @media (max-width: 1282px) {
+        width: calc(100% - 32px);
+        max-width: none;
+    }
+    @media (max-width: 1023px) {
         width: 100%;
     }
 }

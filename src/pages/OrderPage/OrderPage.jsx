@@ -2,7 +2,6 @@ import { Outlet } from 'react-router-dom';
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/SideBar/Sidebar';
-// import UserLocation from './UserLocation/UserLocation';
 import css from './OrderPage.module.scss';
 
 function OrderPage() {

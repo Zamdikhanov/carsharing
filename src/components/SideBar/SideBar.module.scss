@@ -19,6 +19,13 @@ $width_menu: 64px;
         background: transparent;
         width: 64px;
         padding: 16px 0 15px;
+        min-height: auto;
+        // height: 128px;
+    }
+    &__active {
+        @media (max-width: 767px) {
+            min-height: 100vh;
+        }
     }
     &__nav {
         position: absolute;

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import css from './OrderData.module.scss';
 
-function OrderData() {
+function OrderData({ linkHref, linkText }) {
     return (
         <div className={css.container}>
             <div className={css.wrap} >
@@ -21,8 +21,8 @@ function OrderData() {
                 </ul>
                 <div className={css.price}>Цена: от 8 000 до 12 000 ₽</div>
             </div>
-            <NavLink className={css.button} to="#">
-                Выбрать модель
+            <NavLink className={css.button} to={linkHref} >
+                {linkText}
             </NavLink>
         </div>
     );

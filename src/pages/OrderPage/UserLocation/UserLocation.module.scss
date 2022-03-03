@@ -49,7 +49,9 @@
     &__label {
         min-width: 96px;
         padding: 0 5px 3px 0;
-        text-align: end;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
     }
 }
 

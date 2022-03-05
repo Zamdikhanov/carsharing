@@ -43,14 +43,18 @@
     color: $color_main_black;
     align-items: flex-end;
     margin-bottom: 10px;
+    @media (max-width: 767px) {
+        font-size: 12px;
+        line-height: 14px;
+    }
     &:last-child {
         margin-bottom: 0px;
     }
     &__label {
         min-width: 96px;
-        padding: 0 5px 3px 0;
+        padding: 0 5px 1px 0;
         display: flex;
-        align-items: center;
+        align-self: center;
         justify-content: flex-end;
     }
 }

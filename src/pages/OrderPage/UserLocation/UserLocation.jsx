@@ -5,7 +5,6 @@ import OrderData from '../../../components/OrderData/OrderData';
 import YandexMap from '../../../components/YandexMap/YandexMap';
 
 function UserLocation() {
-
     return (
         <div className={css.contentBlock}>
             <div className={css.contentBlock__currentData}>
@@ -22,18 +21,16 @@ function UserLocation() {
                             name="city"
                         />
                     </div>
-                    <div className={css.search} htmlFor='point'>
-                        <div className={css.search__label}>
-                            Пункт выдачи
-                        </div>
+                    <div className={css.search} htmlFor="point">
+                        <div className={css.search__label}>Пункт выдачи</div>
                         <Select
                             className={css.input}
                             classNamePrefix={css.input}
                             placeholder="Начните вводить пункт ..."
                             isClearable="true"
                             options={pointOptions}
-                            id='point'
-                            name='point'
+                            id="point"
+                            name="point"
                         />
                     </div>
                 </div>
@@ -43,7 +40,12 @@ function UserLocation() {
                 </div>
             </div>
             <div className={css.contentBlock__allOrderData}>
-                <OrderData linkHref="/order/model" linkText="Выбрать модель" />
+                <OrderData
+                    linkHref="/order/model"
+                    linkText="Выбрать модель"
+                    city="Ульяновск"
+                    cityPoint="Нариманова 42"
+                />
             </div>
         </div>
     );

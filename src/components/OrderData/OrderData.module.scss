@@ -26,7 +26,7 @@
 .dataList {
     width: 100%;
     margin-bottom: 32px;
-    overflow-x: hidden;
+    overflow: hidden;
     &__item {
         display: flex;
         align-items: flex-end;

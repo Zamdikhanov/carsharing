@@ -1,6 +1,7 @@
 @import '../../../../styles/variables';
 @import '../../../../styles/mixins';
 .card {
+    cursor: pointer;
     display: block;
     position: relative;
     width: 50%;

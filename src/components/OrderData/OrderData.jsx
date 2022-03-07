@@ -11,10 +11,18 @@ function OrderData({
     dateStart = null,
     dateEnd = null,
     selectedRate = null,
-    isFullTank = null,
-    isChildChair = null,
-    isRightHandDrive = null,
+    isFullTank = false,
+    isChildChair = false,
+    isRightHandDrive = false,
+    priceMin = 0,
+    priceMax = 0,
+    price = 0,
+    cansel = false,
 }) {
+    function getInterval() {
+        return '1д2ч';
+    }
+
     return (
         <div className={css.container}>
             <div className={css.wrap}>
@@ -60,7 +68,7 @@ function OrderData({
                                 <span />
                             </div>
                             <div className={css.item__value}>
-                                {dateEnd - dateStart}
+                                {getInterval(dateStart, dateEnd, selectedRate)}
                             </div>
                         </li>
                     ) : null}
@@ -103,9 +111,15 @@ function OrderData({
                         </li>
                     ) : null}
                 </ul>
-                <div className={css.price}>Цена: от 8 000 до 12 000 ₽</div>
+                <div className={css.price}>
+                    Цена:
+                    {price ? `${price} ₽` : `от ${priceMin} до ${priceMax} ₽`}
+                </div>
             </div>
-            <NavLink className={css.button} to={linkHref}>
+            <NavLink
+                className={cansel ? css.canselButton : css.button}
+                to={linkHref}
+            >
                 {linkText}
             </NavLink>
         </div>

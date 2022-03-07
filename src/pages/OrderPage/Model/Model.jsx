@@ -40,6 +40,8 @@ function Model() {
                     city="Ульяновск"
                     cityPoint="Нариманова 42"
                     carModel="Hyndai, i30 N"
+                    priceMin="10 000"
+                    priceMax="32 000"
                 />
             </div>
         </div>

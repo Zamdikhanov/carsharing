@@ -45,6 +45,8 @@ function UserLocation() {
                     linkText="Выбрать модель"
                     city="Ульяновск"
                     cityPoint="Нариманова 42"
+                    priceMin="8 000"
+                    priceMax="12 000"
                 />
             </div>
         </div>

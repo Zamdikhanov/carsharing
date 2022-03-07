@@ -89,3 +89,16 @@
         width: 100%;
     }
 }
+
+.canselButton {
+    @include button_cansel;
+    width: 100%;
+    margin-bottom: 32px;
+    @media (max-width: 1023px) {
+        max-width: 320px;
+    }
+    @media (max-width: 767px) {
+        max-width: none;
+        width: 100%;
+    }
+}

@@ -39,6 +39,10 @@
     @include button( $color_1_h_button, $color_1_s_button, $color_1_l_button, $color_2_h_button, $color_2_s_button, $color_2_l_button);
 }
 
+@mixin button_cansel {
+    @include button( $color_1_h_button_cansel, $color_1_s_button_cansel, $color_1_l_button_cansel, $color_2_h_button_cansel, $color_2_s_button_cansel, $color_2_l_button_cansel);
+}
+
 @mixin lnk {
     text-decoration: none;
     cursor: pointer;
@@ -123,6 +127,7 @@
 }
 
 @mixin radio_label {
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     user-select: none;
@@ -146,5 +151,68 @@
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 50% 50%;
+    }
+}
+
+@mixin checkbox_input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    &:not(:disabled):not(:checked)+div:hover::before {
+        border-color: $color_main_accent;
+    }
+    &:not(:disabled):active+div::before {
+        background-color: $color_gray_light;
+    }
+    &:focus+div::before {
+        box-shadow: 0 0 0 0.2rem $color_gray_light;
+    }
+    &:checked+div::before {
+        border: 1px solid $color_main_accent;
+    }
+    &:checked+div::after {
+        position: absolute;
+        content: '';
+        width: 13px;
+        height: 10px;
+        left: 2px;
+        bottom: 4px;
+        background-image: url(../assets/icons/check-mark.svg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    &:checked+div {
+        color: $color_main_black;
+    }
+    &:checked+div:hover {
+        color: $color_main_accent;
+    }
+}
+
+@mixin checkbox_label {
+    cursor: pointer;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    user-select: none;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    color: $color_gray_dark;
+    &:hover {
+        color: $color_main_accent;
+    }
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        flex-shrink: 0;
+        flex-grow: 0;
+        border: 1px solid $color_gray_dark;
+        margin-right: 8px;
+        background-repeat: no-repeat;
+        background-position: 2px -2px;
+        background-size: 100% 100%;
     }
 }

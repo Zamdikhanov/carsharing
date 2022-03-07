@@ -1,65 +1,66 @@
-    @import '../../styles/variables';
-    .header {
+@import '../../styles/variables';
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media (max-width: 767px) {
+        margin: 0 16px 0 80px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    &__logo {
+        height: 32px;
+        text-decoration: none;
         display: flex;
-        justify-content: space-between;
         align-items: center;
         @media (max-width: 767px) {
-            margin: 0 16px 0 80px;
-            flex-wrap: wrap;
+            width: 100%;
             justify-content: flex-end;
         }
-        &__logo {
-            height: 32px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            @media (max-width: 767px) {
-                width: 100%;
-                justify-content: flex-end;
-            }
-        }
-        &__location {
-            height: 18px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            @media (max-width: 767px) {
-                width: 100%;
-                justify-content: flex-end;
-                margin: 9px 0;
-            }
+    }
+    &__location {
+        height: 18px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        @media (max-width: 767px) {
+            width: 100%;
+            justify-content: flex-end;
+            margin: 9px 0;
         }
     }
-    
-    .logo__title {
-        font-weight: bold;
-        font-size: 30px;
-        line-height: 35px;
+}
+
+.logo__title {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 35px;
+    color: $color_main_accent;
+    @media (max-width: 767px) {
+        text-align: right;
+    }
+}
+
+.location__name {
+    margin-left: 7px;
+    font-size: 14px;
+    line-height: 16px;
+    color: $color_gray_dark;
+    font-weight: 400;
+    transition: all ease-in-out 0.3s;
+    @media (max-width: 767px) {
+        text-align: right;
+    }
+    .header__location:hover & {
         color: $color_main_accent;
-        @media (max-width: 767px) {
-            text-align: right;
-        }
     }
-    
-    .location__name {
-        margin-left: 7px;
-        font-size: 14px;
-        line-height: 16px;
-        color: $color_gray_dark;
-        transition: all ease-in-out 0.3s;
-        @media (max-width: 767px) {
-            text-align: right;
-        }
-        .header__location:hover & {
-            color: $color_main_accent;
-        }
+}
+
+.location__svg * {
+    fill: transparent;
+    stroke: $color_gray_dark;
+    transition: all ease-in-out 0.3s;
+    .header__location:hover & {
+        stroke: $color_main_accent;
     }
-    
-    .location__svg * {
-        fill: transparent;
-        stroke: $color_gray_dark;
-        transition: all ease-in-out 0.3s;
-        .header__location:hover & {
-            stroke: $color_main_accent;
-        }
-    }
+}

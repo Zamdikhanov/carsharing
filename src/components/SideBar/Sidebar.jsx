@@ -17,10 +17,11 @@ function Sidebar() {
     };
 
     return (
-        <menu className={css.menu}>
+        <menu className={`${css.menu} ${isShow ? css.menu__active : ''}`}>
             <button
-                className={`${css.nav_burger} ${isShow ? css.menu_button__active : ''
-                    }`}
+                className={`${css.nav_burger} ${
+                    isShow ? css.menu_button__active : ''
+                }`}
                 type="button"
                 onClick={handleClick}
             >
@@ -36,8 +37,9 @@ function Sidebar() {
                 <span />
             </button>
             <nav
-                className={`${css.menu__nav} ${isShow ? css.menu__nav__active : ''
-                    }`}
+                className={`${css.menu__nav} ${
+                    isShow ? css.menu__nav__active : ''
+                }`}
             >
                 <div className={css.nav__contentBlock}>
                     <div className={css.contentBlock__box}>

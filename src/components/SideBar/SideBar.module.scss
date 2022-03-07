@@ -7,9 +7,9 @@ $width_menu: 64px;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     width: $width_menu;
-    background: #151B1F;
+    background: #151b1f;
     color: #fff;
     padding: 32px 0 15px;
     @media (max-width: 1023px) {
@@ -19,6 +19,12 @@ $width_menu: 64px;
         background: transparent;
         width: 64px;
         padding: 16px 0 15px;
+        min-height: auto;
+    }
+    &__active {
+        @media (max-width: 767px) {
+            min-height: 100vh;
+        }
     }
     &__nav {
         position: absolute;
@@ -160,7 +166,7 @@ $width_menu: 64px;
 
 .nav__ {
     &contentBlock {
-        width: calc((100% - #{$width_menu})/2 + #{$width_menu});
+        width: calc((100% - #{$width_menu}) / 2 + #{$width_menu});
         height: 100%;
         padding: 0 64px 0 128px;
         display: flex;
@@ -168,7 +174,7 @@ $width_menu: 64px;
         justify-content: center;
         background-color: #111518;
         @media (max-width: 1439px) {
-            width: calc((100vw - 64px)/2 + 134px);
+            width: calc((100vw - 64px) / 2 + 134px);
         }
         @media (max-width: 1023px) {
             width: 100%;

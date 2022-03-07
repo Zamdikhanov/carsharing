@@ -1,11 +1,13 @@
 import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import { useState } from 'react';
 import { colorArray, rateArray, additionalServicesArray } from './constants';
 import css from './More.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 
 function More() {
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
     return (
         <div className={css.contentBlock}>
             <div className={css.contentBlock__currentData}>
@@ -32,32 +34,34 @@ function More() {
                 </fieldset>
                 <div className={css.inputDataTitle}>Дата аренды</div>
                 <div className={css.dateContainer}>
-                    <div
-                        className={css.date}
-                        htmlFor="dateStart"
-                        key="dateStart"
-                    >
+                    <div className={css.date}>
                         <div className={css.date__label}>С</div>
                         <DatePicker
+                            className={css.dateInput}
                             placeholderText="Введите дату и время"
+                            dateFormat="dd.MM.yyyy HH:mm "
                             locale="ru"
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
                             showTimeSelect
                             isClearable
-                            dateFormat="dd.MM.yyyy HH:mm "
+                            clearButtonClassName={css.clearButton}
                         />
                     </div>
-                    <label className={css.date} htmlFor="dateEnd" key="dateEnd">
+                    <div className={css.date}>
                         <div className={css.date__label}>По</div>
-                        <input
-                            className={css.date__input}
-                            type="datetime-local"
-                            name="dateEnd"
-                            id="dateEnd"
-                            // value={}
+                        <DatePicker
+                            className={css.dateInput}
+                            placeholderText="Введите дату и время"
+                            dateFormat="dd.MM.yyyy HH:mm "
+                            locale="ru"
+                            selected={endDate}
+                            onChange={(date) => setEndDate(date)}
+                            showTimeSelect
+                            isClearable
+                            clearButtonClassName={css.clearButton}
                         />
-                    </label>
+                    </div>
                 </div>
                 <div className={css.inputDataTitle}>Тариф</div>
                 <fieldset className={css.rateRadioContainer}>

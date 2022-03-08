@@ -27,46 +27,47 @@
     width: 100%;
     margin-bottom: 32px;
     overflow: hidden;
-    &__item {
-        display: flex;
-        align-items: flex-end;
-        width: 100%;
-        margin-bottom: 16px;
-        &:last-child {
-            margin-bottom: 0;
-        }
-        & .item__name {
-            flex: 1 0 auto;
+}
+
+.dataList__item {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    margin-bottom: 16px;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    & .item__name {
+        flex: 1 0 auto;
+        display: block;
+        max-width: 55%;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 16px;
+        color: $color_main_black;
+        padding-right: 4px;
+    }
+    & .item__dots {
+        flex: 0 1 auto;
+        overflow: hidden;
+        &::before {
             display: block;
-            max-width: 55%;
-            font-weight: 300;
-            font-size: 14px;
-            line-height: 16px;
-            color: $color_main_black;
-            padding-right: 4px;
-        }
-        & .item__dots {
-            flex: 0 1 auto;
+            white-space: nowrap;
             overflow: hidden;
-            &::before {
-                display: block;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: clip;
-                content: '.................................................................................................................................';
-            }
+            text-overflow: clip;
+            content: '.................................................................................................................................';
         }
-        & .item__value {
-            flex: 1 0 auto;
-            display: block;
-            max-width: 40%;
-            font-weight: 300;
-            font-size: 14px;
-            line-height: 16px;
-            text-align: right;
-            color: $color_gray_dark;
-            padding-left: 4px;
-        }
+    }
+    & .item__value {
+        flex: 1 0 auto;
+        display: block;
+        max-width: 40%;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: right;
+        color: $color_gray_dark;
+        padding-left: 4px;
     }
 }
 

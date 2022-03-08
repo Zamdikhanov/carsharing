@@ -1,13 +1,51 @@
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker, { registerLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import ru from 'date-fns/locale/ru';
 import { useState } from 'react';
 import { colorArray, rateArray, additionalServicesArray } from './constants';
 import css from './More.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 
+registerLocale('ru', ru);
+
 function More() {
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
+
+    const settingsDatePicker = {
+        className: css.dateInput,
+        clearButtonClassName: css.clearButton,
+        placeholderText: 'Введите дату и время',
+        dateFormat: 'dd.MM.yyyy HH:mm ',
+        locale: 'ru',
+        startDate,
+        endDate,
+        showTimeSelect: true,
+        isClearable: true,
+    };
+
+    const filterPassedTime = (time) => {
+        const currentDate = new Date();
+        const selectedDate = new Date(time);
+        const selectedEndTime = endDate
+            ? new Date(endDate)
+            : new Date(3000, 1, 1);
+        return (
+            currentDate.getTime() < selectedDate.getTime() &&
+            selectedDate.getTime() < selectedEndTime.getTime()
+        );
+    };
+
+    const filterFutureTime = (time) => {
+        const currentDate = new Date();
+        const selectedDate = new Date(time);
+        const selectedStartTime = startDate ? new Date(startDate) : new Date();
+        return (
+            currentDate.getTime() <= selectedDate.getTime() &&
+            selectedDate.getTime() > selectedStartTime.getTime()
+        );
+    };
+
     return (
         <div className={css.contentBlock}>
             <div className={css.contentBlock__currentData}>
@@ -37,29 +75,24 @@ function More() {
                     <div className={css.date}>
                         <div className={css.date__label}>С</div>
                         <DatePicker
-                            className={css.dateInput}
-                            placeholderText="Введите дату и время"
-                            dateFormat="dd.MM.yyyy HH:mm "
-                            locale="ru"
+                            {...settingsDatePicker}
+                            selectsStart
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
-                            showTimeSelect
-                            isClearable
-                            clearButtonClassName={css.clearButton}
+                            minDate={new Date()}
+                            maxDate={endDate}
+                            filterTime={filterPassedTime}
                         />
                     </div>
                     <div className={css.date}>
                         <div className={css.date__label}>По</div>
                         <DatePicker
-                            className={css.dateInput}
-                            placeholderText="Введите дату и время"
-                            dateFormat="dd.MM.yyyy HH:mm "
-                            locale="ru"
+                            {...settingsDatePicker}
+                            selectsEnd
                             selected={endDate}
                             onChange={(date) => setEndDate(date)}
-                            showTimeSelect
-                            isClearable
-                            clearButtonClassName={css.clearButton}
+                            minDate={startDate || new Date()}
+                            filterTime={filterFutureTime}
                         />
                     </div>
                 </div>

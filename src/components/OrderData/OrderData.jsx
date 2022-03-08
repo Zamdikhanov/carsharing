@@ -19,7 +19,7 @@ function OrderData(props) {
         priceMin = 0,
         priceMax = 0,
         price = 0,
-        cansel = false,
+        cancel = false,
         showConfirmation = null,
     } = props;
 
@@ -66,14 +66,14 @@ function OrderData(props) {
             </div>
             {!showConfirmation ? (
                 <NavLink
-                    className={cansel ? css.canselButton : css.button}
+                    className={cancel ? css.cancelButton : css.button}
                     to={linkHref}
                 >
                     {linkText}
                 </NavLink>
             ) : (
                 <button
-                    className={css.button}
+                    className={cancel ? css.cancelButton : css.button}
                     type="button"
                     onClick={() => {
                         showConfirmation(true);

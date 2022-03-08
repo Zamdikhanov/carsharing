@@ -1,9 +1,14 @@
+import { useState } from 'react';
 import order from './constants';
 import css from './Total.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 import defaultCarImage from '../../../assets/images/order-models/car-stub-picture.png';
+import Modal from './Modal/Modal';
 
-function Total() {
+function Total(props) {
+    const [isShow, setIsShow] = useState(false);
+    const { isConfirmedOrder } = props;
+
     const {
         carModel,
         carNumber,
@@ -13,8 +18,32 @@ function Total() {
         dateStart,
         imgUrl,
     } = order;
+
+    const orderData = {
+        linkHref: "/order/total",
+        city: "Ульяновск",
+        cityPoint: "Нариманова 42",
+        carModel: "Hyndai, i30 N",
+        carColor: "Голубой",
+        dateStart: "1111",
+        dateEnd: "2222",
+        selectedRate: "На сутки",
+        isFullTank,
+        price: "16 000",
+    }
+
+    if (isConfirmedOrder) {
+        orderData.cancel = true;
+        orderData.linkText = "Отменить";
+        orderData.showConfirmation = () => { };
+    } else {
+        orderData.linkText = "Заказать";
+        orderData.showConfirmation = setIsShow;
+    }
+
     return (
         <div className={css.contentBlock}>
+            {isShow && <Modal show={setIsShow} />}
             <div className={css.contentBlock__currentData}>
                 <div className={css.currentData__inner}>
                     <div className={css.carDescription}>
@@ -66,17 +95,7 @@ function Total() {
             </div>
             <div className={css.contentBlock__allOrderData}>
                 <OrderData
-                    linkHref="/order/total"
-                    linkText="Заказать"
-                    city="Ульяновск"
-                    cityPoint="Нариманова 42"
-                    carModel="Hyndai, i30 N"
-                    carColor="Голубой"
-                    dateStart="1111"
-                    dateEnd="2222"
-                    selectedRate="На сутки"
-                    isFullTank
-                    price="16 000"
+                    {...orderData}
                 />
             </div>
         </div>

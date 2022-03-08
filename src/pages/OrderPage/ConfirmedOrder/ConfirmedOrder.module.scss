@@ -1,0 +1,97 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+.orderContainer {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.orderContainer__sideBarBlock {
+    position: fixed;
+    z-index: 2;
+}
+
+.orderContainer__mainBlock {
+    display: flex;
+    flex-direction: column;
+    margin-left: 64px;
+    width: calc(100% - 64px);
+    height: 100vh;
+    padding: 32px 0 0;
+    @media (max-width: 1023px) {
+        margin-left: 86px;
+        width: calc(100% - 86px);
+    }
+    @media (max-width: 767px) {
+        margin-left: 0;
+        width: 100%;
+        padding: 16px 0 0;
+    }
+}
+
+.mainBlock__wrapper {
+    display: flex;
+    max-width: 1248px;
+    width: 100%;
+    margin: 0 auto;
+    @media (max-width: 1439px) {
+        width: calc(100% - 128px);
+        margin: 0 64px;
+    }
+    @media (max-width: 1023px) {
+        width: calc(100% - 64px);
+        margin: 0 32px;
+    }
+    @media (max-width: 767px) {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+.mainBlock__header {
+    display: block;
+    width: 100%;
+    margin-bottom: 32px;
+    flex: 0 1 auto;
+    @media (max-width: 767px) {
+        z-index: 1;
+        margin: 0;
+        padding: 16px 0 0;
+        height: 80px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: #fff;
+    }
+}
+
+.mainBlock__breadCrumbs {
+    width: 100%;
+    border-top: 1px solid $color_gray_light;
+    border-bottom: 1px solid $color_gray_light;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    @media (max-width: 767px) {
+        margin: 72px 0 0 0;
+    }
+}
+
+.orderNumber {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    @media (max-width: 767px) {
+        margin-left: 16px;
+    }
+}
+
+.mainBlock__content {
+    height: 100%;
+    width: 100%;
+}
+
+.heightMax {
+    height: 100%;
+    flex-grow: 1;
+}

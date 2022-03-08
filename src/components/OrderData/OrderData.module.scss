@@ -82,6 +82,7 @@
     @include button_default;
     width: 100%;
     margin-bottom: 32px;
+    border: none;
     @media (max-width: 1023px) {
         max-width: 320px;
     }
@@ -91,10 +92,11 @@
     }
 }
 
-.canselButton {
+.cancelButton {
     @include button_cansel;
     width: 100%;
     margin-bottom: 32px;
+    border: none;
     @media (max-width: 1023px) {
         max-width: 320px;
     }

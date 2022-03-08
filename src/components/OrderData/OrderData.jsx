@@ -20,6 +20,7 @@ function OrderData(props) {
         priceMax = 0,
         price = 0,
         cansel = false,
+        showConfirmation = null,
     } = props;
 
     function getInterval() {
@@ -63,12 +64,24 @@ function OrderData(props) {
                     {price ? `${price} ₽` : `от ${priceMin} до ${priceMax} ₽`}
                 </div>
             </div>
-            <NavLink
-                className={cansel ? css.canselButton : css.button}
-                to={linkHref}
-            >
-                {linkText}
-            </NavLink>
+            {!showConfirmation ? (
+                <NavLink
+                    className={cansel ? css.canselButton : css.button}
+                    to={linkHref}
+                >
+                    {linkText}
+                </NavLink>
+            ) : (
+                <button
+                    className={css.button}
+                    type="button"
+                    onClick={() => {
+                        showConfirmation(true);
+                    }}
+                >
+                    {linkText}
+                </button>
+            )}
         </div>
     );
 }

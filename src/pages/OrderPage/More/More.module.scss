@@ -1,0 +1,154 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+.contentBlock {
+    display: flex;
+    min-height: 100%;
+    width: 100%;
+    @media (max-width: 1023px) {
+        flex-wrap: wrap;
+    }
+    &__currentData {
+        flex: 1 1 auto;
+        padding: 32px 0 0;
+        @media (max-width: 1023px) {
+            width: 100%;
+        }
+        @media (max-width: 767px) {
+            padding: 16px 16px 0 16px;
+        }
+    }
+    &__allOrderData {
+        height: 100%;
+        width: 320px;
+        padding: 32px 0 0 32px;
+        border-left: 1px solid $color_gray_light;
+        @media (max-width: 1023px) {
+            width: 100%;
+            padding: 32px 0 0;
+            border: none;
+            height: auto;
+        }
+    }
+}
+
+.inputDataTitle {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    color: $color_main_black;
+    margin-bottom: 16px;
+}
+
+.radioContainer {
+    margin-bottom: 32px;
+    display: inline-flex;
+    border: none;
+}
+
+.rateRadioContainer {
+    display: inline-block;
+    margin-bottom: 32px;
+    border: none;
+}
+
+.radio {
+    display: flex;
+    margin-right: 16px;
+    border: none;
+    &.rateRadio {
+        margin-bottom: 8px;
+    }
+    &__input {
+        @include radio_input;
+    }
+    &__label {
+        @include radio_label;
+    }
+}
+
+.checkboxContainer {
+    display: inline-block;
+    margin-bottom: 32px;
+    border: none;
+}
+
+.checkbox {
+    display: flex;
+    margin-right: 16px;
+    margin-bottom: 8px;
+    border: none;
+    &__input {
+        @include checkbox_input;
+    }
+    &__label {
+        @include checkbox_label;
+    }
+}
+
+.dateContainer {
+    display: block;
+    margin-bottom: 32px;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    height: 22px;
+    width: 250px;
+    margin-bottom: 10px;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    &__label {
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 300;
+        margin-right: 8px;
+        width: 18px;
+        text-align: end;
+        flex: 1 0 auto;
+    }
+}
+
+.dateInput {
+    width: 100%;
+    height: 22px;
+    border: none;
+    border-bottom: 1px solid $color_gray_dark;
+    padding-left: 8px;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.clearButton {
+    width: 25px;
+    height: 20px;
+    position: absolute;
+    top: 1px;
+    right: 0;
+    padding: 0;
+    &::before {
+        content: '';
+        height: 11px;
+        width: 1px;
+        top: 4px;
+        right: 12px;
+        background-color: $color_main_black;
+        transform: rotate(45deg);
+        position: absolute;
+    }
+    &::after {
+        content: '';
+        height: 11px;
+        width: 1px;
+        background-color: $color_main_black;
+        transform: rotate(135deg);
+        position: absolute;
+        border-radius: 0;
+        padding: 0;
+        display: block;
+        left: 12px;
+        top: 4px;
+    }
+}

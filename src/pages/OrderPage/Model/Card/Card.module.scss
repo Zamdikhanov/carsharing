@@ -1,0 +1,65 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+.card {
+    cursor: pointer;
+    display: block;
+    position: relative;
+    width: 50%;
+    height: 224px;
+    @media (max-width: 480px) {
+        width: 100%;
+    }
+}
+
+.radio {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    &:checked+.card__inner {
+        border: 1px solid $color_main_accent;
+    }
+}
+
+.card__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    border: 1px solid $color_gray_light;
+    padding: 16px;
+    &:hover {
+        border: 1px solid $color_gray_dark;
+    }
+}
+
+.name {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: $color_main_black;
+}
+
+.price {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: $color_gray_dark;
+}
+
+.carImage {
+    width: 100%;
+    max-width: 256px;
+    height: 116px;
+    object-fit: contain;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: flex-end;
+}

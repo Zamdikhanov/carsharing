@@ -18,6 +18,7 @@ function More() {
         placeholderText: 'Введите дату и время',
         dateFormat: 'dd.MM.yyyy HH:mm ',
         locale: 'ru',
+        timeCaption: 'Время',
         startDate,
         endDate,
         showTimeSelect: true,

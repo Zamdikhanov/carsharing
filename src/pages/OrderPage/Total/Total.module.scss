@@ -1,0 +1,93 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+.contentBlock {
+    display: flex;
+    min-height: 100%;
+    width: 100%;
+    @media (max-width: 1023px) {
+        flex-wrap: wrap;
+    }
+    &__currentData {
+        flex: 1 1 auto;
+        padding: 32px 0 0;
+        @media (max-width: 1023px) {
+            width: 100%;
+        }
+        @media (max-width: 767px) {
+            padding: 16px 16px 0 16px;
+        }
+    }
+    &__allOrderData {
+        height: 100%;
+        width: 320px;
+        padding: 32px 0 0 32px;
+        border-left: 1px solid $color_gray_light;
+        @media (max-width: 1023px) {
+            width: 100%;
+            padding: 32px 0 0;
+            border: none;
+            height: auto;
+        }
+    }
+}
+
+.currentData__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 736px;
+    width: 100%;
+    @media (max-width: 1282px) {
+        width: calc(100% - 32px);
+        max-width: none;
+    }
+    @media (max-width: 1023px) {
+        width: 100%;
+    }
+}
+
+.carDescription {}
+
+.carModel {
+    height: 22px;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 8px;
+}
+
+.carNumber {
+    padding: 4px 8px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    border: 1px solid $color_gray_dark;
+    box-sizing: border-box;
+    border-radius: 4px;
+    width: fit-content;
+    margin-bottom: 8px;
+}
+
+.info {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 8px;
+    &__title {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+    }
+}
+
+.carImageBlock {
+    width: 256px;
+    height: 116px;
+}
+
+.carImage {
+    width: 256px;
+    height: 116px;
+    object-fit: contain;
+}

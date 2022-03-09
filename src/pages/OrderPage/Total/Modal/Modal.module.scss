@@ -1,0 +1,53 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+.container {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 5;
+}
+
+.contentBlock {
+    padding: 24px;
+    background-color: #fff;
+}
+
+.title {
+    text-align: center;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 32px;
+}
+
+.buttonBlock {
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: 767px) {
+        display: block;
+    }
+}
+
+.buttonConfirm {
+    @include button_default;
+    margin-right: 16px;
+    padding-left: 33px;
+    padding-right: 33px;
+    @media (max-width: 767px) {
+        margin-bottom: 16px;
+    }
+}
+
+.buttonCancel {
+    @include button_cansel;
+    padding-left: 38px;
+    padding-right: 38px;
+    border: none;
+}

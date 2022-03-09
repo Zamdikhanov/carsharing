@@ -6,6 +6,7 @@ import UserLocation from './pages/OrderPage/UserLocation/UserLocation';
 import Model from './pages/OrderPage/Model/Model';
 import More from './pages/OrderPage/More/More';
 import Total from './pages/OrderPage/Total/Total';
+import ConfirmedOrder from './pages/OrderPage/ConfirmedOrder/ConfirmedOrder';
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                         <Route path="total" element={<Total />} />
                         <Route path="*" element={<UserLocation />} />
                     </Route>
+                    <Route path="/confirmed-order" element={<ConfirmedOrder />} />
                 </Routes>
             </div>
         </BrowserRouter>

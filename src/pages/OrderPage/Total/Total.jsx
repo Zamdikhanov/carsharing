@@ -77,19 +77,11 @@ function Total(props) {
                         </div>
                     </div>
                     <div className={css.carImageBlock}>
-                        {imgUrl ? (
-                            <img
-                                className={css.carImage}
-                                src={imgUrl}
-                                alt={carModel}
-                            />
-                        ) : (
-                            <img
-                                className={css.carImage}
-                                src={defaultCarImage}
-                                alt={carModel}
-                            />
-                        )}
+                        <img
+                            className={css.carImage}
+                            src={imgUrl || defaultCarImage}
+                            alt={carModel}
+                        />
                     </div>
                 </div>
             </div>

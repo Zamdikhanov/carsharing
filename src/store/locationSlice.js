@@ -3,14 +3,35 @@ import { createSlice } from '@reduxjs/toolkit';
 import orderAPI from '../api/api';
 
 const initialState = {
-    city: 'Ульяновск',
-    point: '',
+    allCities: [{
+        "updatedAt": 0,
+        "createdAt": 0,
+        "name": "",
+        "id": ""
+    }],
+    allPoints: [{
+        "address": "",
+        "name": "",
+        "cityId": {
+            "name": "",
+            "id": ""
+        },
+        "id": ""
+    }],
+    selectedCity: '',
+    selectedPoint: '',
 };
 
 export const locationSlice = createSlice({
     name: 'location',
     initialState,
     reducers: {
+        setAllCities: (state, action) => {
+            state.allCities = action.payload;
+        },
+        setAllPoints: (state, action) => {
+            state.allPoints = action.payload;
+        },
         setCity: (state, action) => {
             state.city = action.payload;
         },
@@ -20,11 +41,16 @@ export const locationSlice = createSlice({
     },
 });
 
-export const { setCity, setPoint } = locationSlice.actions;
+export const { setAllCities, setAllPoints, setCity, setPoint } = locationSlice.actions;
 
-export const getCityList = () => async(dispatch) => {
+export const getAllCities = () => async(dispatch) => {
     const responce = await orderAPI.getCityList();
-    dispatch(console.log('slice ', responce.data));
+    dispatch(setAllCities(responce));
+};
+
+export const getAllPoints = () => async(dispatch) => {
+    const responce = await orderAPI.getPointList();
+    dispatch(setAllPoints(responce));
 };
 
 export default locationSlice.reducer;

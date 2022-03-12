@@ -4,14 +4,13 @@ import { options, pointOptions } from './constants';
 import css from './UserLocation.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 import YandexMap from '../../../components/YandexMap/YandexMap';
-import { getAllCities, getAllPoints } from '../../../store/locationSlice';
+import { getAllLocations } from '../../../store/locationSlice';
 
 function UserLocation() {
     const city = useSelector((state) => state.location.city);
     console.log('city=', city);
     const dispatch = useDispatch();
-    dispatch(getAllCities());
-    dispatch(getAllPoints());
+    dispatch(getAllLocations());
     return (
         <div className={css.contentBlock}>
             <div className={css.contentBlock__currentData}>

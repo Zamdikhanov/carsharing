@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import orderAPI from '../api/api';
 
 const initialState = {
-    allCities: [{
+    availableCities: [{
         "updatedAt": 0,
         "createdAt": 0,
         "name": "",
         "id": ""
     }],
-    allPoints: [{
+    availablePoints: [{
         "address": "",
         "name": "",
         "cityId": {
@@ -26,11 +26,11 @@ export const locationSlice = createSlice({
     name: 'location',
     initialState,
     reducers: {
-        setAllCities: (state, action) => {
-            state.allCities = action.payload;
+        setAvailableCities: (state, action) => {
+            state.availableCities = action.payload;
         },
-        setAllPoints: (state, action) => {
-            state.allPoints = action.payload;
+        setAvailablePoints: (state, action) => {
+            state.availablePoints = action.payload;
         },
         setCity: (state, action) => {
             state.city = action.payload;
@@ -41,16 +41,15 @@ export const locationSlice = createSlice({
     },
 });
 
-export const { setAllCities, setAllPoints, setCity, setPoint } = locationSlice.actions;
+export const { setAvailableCities, setAvailablePoints, setCity, setPoint } = locationSlice.actions;
 
-export const getAllCities = () => async(dispatch) => {
-    const responce = await orderAPI.getCityList();
-    dispatch(setAllCities(responce));
-};
-
-export const getAllPoints = () => async(dispatch) => {
-    const responce = await orderAPI.getPointList();
-    dispatch(setAllPoints(responce));
+export const getAllLocations = () => async(dispatch) => {
+    const responceCity = await orderAPI.getCityList();
+    const responcePoint = await orderAPI.getPointList();
+    const availablePoints = responcePoint.filter(point => point.cityId);
+    const availableCities = responceCity.filter(city => availablePoints.some(point => point.cityId.name === city.name));
+    dispatch(setAvailableCities(availableCities));
+    dispatch(setAvailablePoints(availablePoints));
 };
 
 export default locationSlice.reducer;

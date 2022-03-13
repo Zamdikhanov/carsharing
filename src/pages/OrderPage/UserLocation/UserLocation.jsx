@@ -49,11 +49,11 @@ function UserLocation() {
     }, []);
 
     useEffect(() => {
-        dispatch(setCity(selectValueCity?.label));
         if (selectValueCity?.label !== selectedCity) {
             setSelectValuePoint(null);
             dispatch(setPoint(null));
         }
+        dispatch(setCity(selectValueCity?.label));
     }, [selectValueCity]);
 
     useEffect(() => {
@@ -110,10 +110,10 @@ function UserLocation() {
                 <OrderData
                     linkHref="/order/model"
                     linkText="Выбрать модель"
-                    city="Ульяновск"
-                    cityPoint="Нариманова 42"
-                    priceMin="8 000"
-                    priceMax="12 000"
+                    city={selectedCity}
+                    cityPoint={selectedPoint}
+                    priceMin={selectedPoint ? "8 000" : ' *** '}
+                    priceMax={selectedPoint ? "80 000" : ' *** '}
                 />
             </div>
         </div>

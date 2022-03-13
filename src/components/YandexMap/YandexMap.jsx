@@ -1,15 +1,64 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable consistent-return */
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
-import { useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import css from './YandexMap.module.scss';
 import mapMark from '../../assets/icons/map-mark.svg';
 
-const coordinates = [
-    [54.314387, 48.402588],
-    [54.376395, 48.583124],
-];
-
 function YandexMap() {
+    const API_KEY = process.env.REACT_APP_YANDEX_API_KEY;
+
+    const selectedCity = useSelector(state => state.location.selectedCity);
+    const availablePointsInSelectedCity = useSelector(state => state.location.availablePointsInSelectedCity);
+    const selectedPoint = useSelector(state => state.location.selectedPoint);
+
     const map = useRef(null);
+
+    const [ymap, setYmap] = useState(null);
+    const [zoom, setZoom] = useState(8);
+    const [center, setCenter] = useState([54.314387, 48.402588]);
+
+    const mapState = useMemo(
+        () => ({ center, zoom }),
+        [zoom, center],
+    );
+
+    const [coordinates, setCoordinates] = useState(null);
+
+    const getCoordinates = async (address) => {
+        if (ymap) {
+            const myGeocoder = await ymap.geocode(address);
+            const firstGeoObject = myGeocoder.geoObjects.get(0);
+            return firstGeoObject.geometry.getCoordinates();
+        }
+    };
+
+    const changeMapCenter = async (address, isCity = false) => {
+        if (isCity) { setZoom(10) } else { setZoom(16) };
+        const coords = await getCoordinates(address);
+        setCenter(coords);
+    };
+
+    const getPoints = async (points) => {
+        const newCoordinates = [];
+        for (const item of points) {
+            const newCoordinate = await getCoordinates(`${selectedCity}, ${item.address}`);
+            newCoordinates.push({ newCoordinate, point: item });
+        }
+        setCoordinates(newCoordinates);
+    };
+
+    useEffect(() => {
+        if (!selectedPoint && selectedCity) { changeMapCenter(selectedCity, true) };
+        if (selectedPoint) { changeMapCenter(`${selectedCity}, ${selectedPoint}`) };
+    }, [selectedPoint]);
+
+    useEffect(() => {
+        if (availablePointsInSelectedCity) { getPoints(availablePointsInSelectedCity) };
+        if (selectedCity) { changeMapCenter(selectedCity, true) };
+    }, [availablePointsInSelectedCity]);
 
     const handleClick = (e) => {
         const placemarkCoords = e.get('coords');
@@ -19,17 +68,22 @@ function YandexMap() {
     };
 
     return (
-        <YMaps>
+        <YMaps query={{
+            apikey: API_KEY,
+            ns: 'use-load-option',
+            load: 'geocode'
+        }}>
             <div className={css.map}>
                 <Map
                     width="100%"
                     height="100%"
-                    defaultState={{ center: [54.314387, 48.402588], zoom: 10 }}
+                    state={mapState}
+                    onLoad={(ymaps) => setYmap(ymaps)}
                     instanceRef={map}
                 >
-                    {coordinates.map((coordinate) => (
+                    {coordinates && coordinates?.map((coordinate) => (
                         <Placemark
-                            geometry={coordinate}
+                            geometry={coordinate.newCoordinate}
                             options={{
                                 iconLayout: 'default#image',
                                 iconImageSize: [18, 18],

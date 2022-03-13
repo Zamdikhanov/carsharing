@@ -18,8 +18,17 @@ const initialState = {
         },
         "id": ""
     }],
-    selectedCity: '',
-    selectedPoint: '',
+    availablePointsInSelectedCity: [{
+        "address": "",
+        "name": "",
+        "cityId": {
+            "name": "",
+            "id": ""
+        },
+        "id": ""
+    }],
+    selectedCity: null,
+    selectedPoint: null,
 };
 
 export const locationSlice = createSlice({
@@ -33,10 +42,14 @@ export const locationSlice = createSlice({
             state.availablePoints = action.payload;
         },
         setCity: (state, action) => {
-            state.city = action.payload;
+            state.selectedCity = action.payload;
+            state.availablePointsInSelectedCity = state.availablePoints.filter(
+                (availablePoint) =>
+                availablePoint.cityId.name === state.selectedCity,
+            );
         },
         setPoint: (state, action) => {
-            state.point = action.payload;
+            state.selectedPoint = action.payload;
         },
     },
 });

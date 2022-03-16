@@ -2,28 +2,23 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable consistent-return */
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import css from './YandexMap.module.scss';
 import mapMark from '../../assets/icons/map-mark.svg';
+import { setPoint } from '../../store/locationSlice';
 
 function YandexMap() {
     const API_KEY = process.env.REACT_APP_YANDEX_API_KEY;
+    const dispatch = useDispatch();
 
-    const selectedCity = useSelector(state => state.location.selectedCity);
-    const availablePointsInSelectedCity = useSelector(state => state.location.availablePointsInSelectedCity);
-    const selectedPoint = useSelector(state => state.location.selectedPoint);
+    const { selectedCity, availablePointsInSelectedCity, selectedPoint } = useSelector(state => state.location);
 
     const map = useRef(null);
 
     const [ymap, setYmap] = useState(null);
     const [zoom, setZoom] = useState(8);
     const [center, setCenter] = useState([54.314387, 48.402588]);
-
-    const mapState = useMemo(
-        () => ({ center, zoom }),
-        [zoom, center],
-    );
 
     const [coordinates, setCoordinates] = useState(null);
 
@@ -53,14 +48,20 @@ function YandexMap() {
     useEffect(() => {
         if (!selectedPoint && selectedCity) { changeMapCenter(selectedCity, true) };
         if (selectedPoint) { changeMapCenter(`${selectedCity}, ${selectedPoint}`) };
-    }, [selectedPoint]);
+    }, [selectedPoint, selectedCity]);
+
+    useEffect(() => {
+        if (!selectedPoint && selectedCity) { changeMapCenter(selectedCity, true) };
+        if (selectedPoint) { changeMapCenter(`${selectedCity}, ${selectedPoint}`) };
+    }, []);
 
     useEffect(() => {
         if (availablePointsInSelectedCity) { getPoints(availablePointsInSelectedCity) };
         if (selectedCity) { changeMapCenter(selectedCity, true) };
     }, [availablePointsInSelectedCity]);
 
-    const handleClick = (e) => {
+    const handleClick = (e, point) => {
+        dispatch(setPoint(point));
         const placemarkCoords = e.get('coords');
         if (map.current) {
             map.current.setCenter(placemarkCoords);
@@ -77,7 +78,7 @@ function YandexMap() {
                 <Map
                     width="100%"
                     height="100%"
-                    state={mapState}
+                    state={{ center, zoom }}
                     onLoad={(ymaps) => setYmap(ymaps)}
                     instanceRef={map}
                 >
@@ -91,7 +92,7 @@ function YandexMap() {
                                 iconImageOffset: [-9, -9],
                             }}
                             key={coordinate[0]}
-                            onClick={handleClick}
+                            onClick={(e) => { handleClick(e, coordinate.point.address) }}
                         />
                     ))}
                 </Map>

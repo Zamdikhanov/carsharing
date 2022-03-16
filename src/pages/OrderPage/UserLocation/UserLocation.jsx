@@ -12,26 +12,19 @@ import {
 
 function UserLocation() {
     const dispatch = useDispatch();
-    const selectedCity = useSelector((state) => state.location.selectedCity);
-    const selectedPoint = useSelector((state) => state.location.selectedPoint);
-    const availableCities = useSelector(
-        (state) => state.location.availableCities,
-    );
-    const availablePointsInSelectedCity = useSelector(
-        (state) => state.location.availablePointsInSelectedCity,
-    );
+    const { selectedCity, selectedPoint, availableCities, availablePointsInSelectedCity } = useSelector((state) => state.location);
 
     const [selectValueCity, setSelectValueCity] = useState(
-        selectedCity && {
+        selectedCity ? {
             value: selectedCity,
             label: selectedCity,
-        },
+        } : null,
     );
     const [selectValuePoint, setSelectValuePoint] = useState(
-        selectedPoint && {
+        selectedPoint ? {
             value: selectedPoint,
             label: selectedPoint,
-        },
+        } : null,
     );
     const selectOptionsCities = availableCities.map((availableCity) => ({
         value: availableCity.name,
@@ -49,15 +42,44 @@ function UserLocation() {
     }, []);
 
     useEffect(() => {
-        if (selectValueCity?.label !== selectedCity) {
+        console.log('selectedCity');
+        setSelectValueCity(selectedCity ? {
+            value: selectedCity,
+            label: selectedCity,
+        } : null);
+    }, [selectedCity]);
+
+    useEffect(() => {
+        console.log('selectedPoint');
+        setSelectValuePoint(selectedPoint ? {
+            value: selectedPoint,
+            label: selectedPoint,
+        } : null);
+    }, [selectedPoint]);
+
+    useEffect(() => {
+        if (selectedCity !== selectValueCity?.label) {
             setSelectValuePoint(null);
             dispatch(setPoint(null));
+            dispatch(setCity(selectValueCity?.label));
         }
-        dispatch(setCity(selectValueCity?.label));
+        else {
+            console.log('64', selectValuePoint);
+
+            setSelectValuePoint(null);
+            setSelectValuePoint(selectedPoint ? {
+                value: selectedPoint,
+                label: selectedPoint,
+            } : null);
+            console.log('66', selectValuePoint);
+        }
     }, [selectValueCity]);
 
     useEffect(() => {
-        dispatch(setPoint(selectValuePoint?.label));
+        if (selectedPoint !== selectValuePoint?.label) {
+            dispatch(setPoint(selectValuePoint?.label));
+        }
+        console.log('74', selectValuePoint);
     }, [selectValuePoint]);
 
     return (
@@ -77,8 +99,7 @@ function UserLocation() {
                             name="city"
                             onChange={setSelectValueCity}
                             noOptionsMessage={({ inputValue }) =>
-                                (!inputValue && 'нет городов') ||
-                                'город не найден'
+                                (inputValue ? 'город не найден' : 'нет городов')
                             }
                         />
                     </div>
@@ -95,8 +116,7 @@ function UserLocation() {
                             name="point"
                             onChange={setSelectValuePoint}
                             noOptionsMessage={({ inputValue }) =>
-                                (!inputValue && 'сначала укажите город') ||
-                                'адрес не найден'
+                                (inputValue ? 'адрес не найден' : 'сначала укажите город')
                             }
                         />
                     </div>
@@ -112,8 +132,8 @@ function UserLocation() {
                     linkText="Выбрать модель"
                     city={selectedCity}
                     cityPoint={selectedPoint}
-                    priceMin={selectedPoint ? "8 000" : ' *** '}
-                    priceMax={selectedPoint ? "80 000" : ' *** '}
+                    priceMin={selectedPoint ? "8 000" : "0"}
+                    priceMax={selectedPoint ? "80 000" : "0"}
                 />
             </div>
         </div>

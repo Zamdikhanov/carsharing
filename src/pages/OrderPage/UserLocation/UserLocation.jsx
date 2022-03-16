@@ -1,87 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
+import { options, pointOptions } from './constants';
 import css from './UserLocation.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 import YandexMap from '../../../components/YandexMap/YandexMap';
-import {
-    getAllLocations,
-    setCity,
-    setPoint,
-} from '../../../store/locationSlice';
 
 function UserLocation() {
-    const dispatch = useDispatch();
-    const { selectedCity, selectedPoint, availableCities, availablePointsInSelectedCity } = useSelector((state) => state.location);
-
-    const [selectValueCity, setSelectValueCity] = useState(
-        selectedCity ? {
-            value: selectedCity,
-            label: selectedCity,
-        } : null,
-    );
-    const [selectValuePoint, setSelectValuePoint] = useState(
-        selectedPoint ? {
-            value: selectedPoint,
-            label: selectedPoint,
-        } : null,
-    );
-    const selectOptionsCities = availableCities.map((availableCity) => ({
-        value: availableCity.name,
-        label: availableCity.name,
-    }));
-    const selectOptionsPoints = availablePointsInSelectedCity.map(
-        (availablePoint) => ({
-            value: availablePoint.address,
-            label: availablePoint.address,
-        }),
-    );
-
-    useEffect(() => {
-        dispatch(getAllLocations());
-    }, []);
-
-    useEffect(() => {
-        console.log('selectedCity');
-        setSelectValueCity(selectedCity ? {
-            value: selectedCity,
-            label: selectedCity,
-        } : null);
-    }, [selectedCity]);
-
-    useEffect(() => {
-        console.log('selectedPoint');
-        setSelectValuePoint(selectedPoint ? {
-            value: selectedPoint,
-            label: selectedPoint,
-        } : null);
-    }, [selectedPoint]);
-
-    useEffect(() => {
-        if (selectedCity !== selectValueCity?.label) {
-            setSelectValuePoint(null);
-            dispatch(setPoint(null));
-            dispatch(setCity(selectValueCity?.label));
-        }
-        else {
-            console.log('64', selectValuePoint);
-
-            setSelectValuePoint(null);
-            setSelectValuePoint(selectedPoint ? {
-                value: selectedPoint,
-                label: selectedPoint,
-            } : null);
-            console.log('66', selectValuePoint);
-        }
-    }, [selectValueCity]);
-
-    useEffect(() => {
-        if (selectedPoint !== selectValuePoint?.label) {
-            dispatch(setPoint(selectValuePoint?.label));
-        }
-        console.log('74', selectValuePoint);
-    }, [selectValuePoint]);
-
     return (
         <div className={css.contentBlock}>
             <div className={css.contentBlock__currentData}>
@@ -93,14 +16,9 @@ function UserLocation() {
                             classNamePrefix={css.input}
                             placeholder="Начните вводить город ..."
                             isClearable="true"
-                            defaultValue={selectValueCity}
-                            options={selectOptionsCities}
+                            options={options}
                             id="city"
                             name="city"
-                            onChange={setSelectValueCity}
-                            noOptionsMessage={({ inputValue }) =>
-                                (inputValue ? 'город не найден' : 'нет городов')
-                            }
                         />
                     </div>
                     <div className={css.search} htmlFor="point">
@@ -110,14 +28,9 @@ function UserLocation() {
                             classNamePrefix={css.input}
                             placeholder="Начните вводить пункт ..."
                             isClearable="true"
-                            value={selectValuePoint}
-                            options={selectOptionsPoints}
+                            options={pointOptions}
                             id="point"
                             name="point"
-                            onChange={setSelectValuePoint}
-                            noOptionsMessage={({ inputValue }) =>
-                                (inputValue ? 'адрес не найден' : 'сначала укажите город')
-                            }
                         />
                     </div>
                 </div>
@@ -130,10 +43,10 @@ function UserLocation() {
                 <OrderData
                     linkHref="/order/model"
                     linkText="Выбрать модель"
-                    city={selectedCity}
-                    cityPoint={selectedPoint}
-                    priceMin={selectedPoint ? "8 000" : "0"}
-                    priceMax={selectedPoint ? "80 000" : "0"}
+                    city="Ульяновск"
+                    cityPoint="Нариманова 42"
+                    priceMin="8 000"
+                    priceMax="12 000"
                 />
             </div>
         </div>

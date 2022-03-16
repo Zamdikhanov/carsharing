@@ -21,10 +21,7 @@ function App() {
                         <Route path="total" element={<Total />} />
                         <Route path="*" element={<UserLocation />} />
                     </Route>
-                    <Route
-                        path="/confirmed-order"
-                        element={<ConfirmedOrder />}
-                    />
+                    <Route path="/confirmed-order" element={<ConfirmedOrder />} />
                 </Routes>
             </div>
         </BrowserRouter>

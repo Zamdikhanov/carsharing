@@ -12,19 +12,28 @@ import {
 
 function UserLocation() {
     const dispatch = useDispatch();
-    const { selectedCity, selectedPoint, availableCities, availablePointsInSelectedCity } = useSelector((state) => state.location);
+    const {
+        selectedCity,
+        selectedPoint,
+        availableCities,
+        availablePointsInSelectedCity,
+    } = useSelector((state) => state.location);
 
     const [selectValueCity, setSelectValueCity] = useState(
-        selectedCity ? {
-            value: selectedCity,
-            label: selectedCity,
-        } : null,
+        selectedCity
+            ? {
+                  value: selectedCity,
+                  label: selectedCity,
+              }
+            : null,
     );
     const [selectValuePoint, setSelectValuePoint] = useState(
-        selectedPoint ? {
-            value: selectedPoint,
-            label: selectedPoint,
-        } : null,
+        selectedPoint
+            ? {
+                  value: selectedPoint,
+                  label: selectedPoint,
+              }
+            : null,
     );
     const selectOptionsCities = availableCities.map((availableCity) => ({
         value: availableCity.name,
@@ -42,19 +51,25 @@ function UserLocation() {
     }, []);
 
     useEffect(() => {
-        console.log('selectedCity');
-        setSelectValueCity(selectedCity ? {
-            value: selectedCity,
-            label: selectedCity,
-        } : null);
+        setSelectValueCity(
+            selectedCity
+                ? {
+                      value: selectedCity,
+                      label: selectedCity,
+                  }
+                : null,
+        );
     }, [selectedCity]);
 
     useEffect(() => {
-        console.log('selectedPoint');
-        setSelectValuePoint(selectedPoint ? {
-            value: selectedPoint,
-            label: selectedPoint,
-        } : null);
+        setSelectValuePoint(
+            selectedPoint
+                ? {
+                      value: selectedPoint,
+                      label: selectedPoint,
+                  }
+                : null,
+        );
     }, [selectedPoint]);
 
     useEffect(() => {
@@ -62,16 +77,16 @@ function UserLocation() {
             setSelectValuePoint(null);
             dispatch(setPoint(null));
             dispatch(setCity(selectValueCity?.label));
-        }
-        else {
-            console.log('64', selectValuePoint);
-
+        } else {
             setSelectValuePoint(null);
-            setSelectValuePoint(selectedPoint ? {
-                value: selectedPoint,
-                label: selectedPoint,
-            } : null);
-            console.log('66', selectValuePoint);
+            setSelectValuePoint(
+                selectedPoint
+                    ? {
+                          value: selectedPoint,
+                          label: selectedPoint,
+                      }
+                    : null,
+            );
         }
     }, [selectValueCity]);
 
@@ -79,7 +94,6 @@ function UserLocation() {
         if (selectedPoint !== selectValuePoint?.label) {
             dispatch(setPoint(selectValuePoint?.label));
         }
-        console.log('74', selectValuePoint);
     }, [selectValuePoint]);
 
     return (
@@ -99,7 +113,7 @@ function UserLocation() {
                             name="city"
                             onChange={setSelectValueCity}
                             noOptionsMessage={({ inputValue }) =>
-                                (inputValue ? 'город не найден' : 'нет городов')
+                                inputValue ? 'город не найден' : 'нет городов'
                             }
                         />
                     </div>
@@ -116,7 +130,9 @@ function UserLocation() {
                             name="point"
                             onChange={setSelectValuePoint}
                             noOptionsMessage={({ inputValue }) =>
-                                (inputValue ? 'адрес не найден' : 'сначала укажите город')
+                                inputValue
+                                    ? 'адрес не найден'
+                                    : 'сначала укажите город'
                             }
                         />
                     </div>
@@ -132,8 +148,8 @@ function UserLocation() {
                     linkText="Выбрать модель"
                     city={selectedCity}
                     cityPoint={selectedPoint}
-                    priceMin={selectedPoint ? "8 000" : "0"}
-                    priceMax={selectedPoint ? "80 000" : "0"}
+                    priceMin={selectedPoint ? '8 000' : '0'}
+                    priceMax={selectedPoint ? '80 000' : '0'}
                 />
             </div>
         </div>

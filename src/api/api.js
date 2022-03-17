@@ -7,14 +7,13 @@ const instance = axios.create({
 
 const orderAPI = {
     getCityList() {
-        return instance.get(`db/city`)
-            .then((response) =>
-                response.data.data);
+        return instance.get(`db/city`).then((response) => response.data.data);
     },
     getPointList() {
-        return instance.get(`db/point`)
-            .then((response) =>
-                response.data.data);
+        return instance.get(`db/point`).then((response) => response.data.data);
+    },
+    getCarList() {
+        return instance.get(`db/car`).then((response) => response.data.data);
     },
 };
 

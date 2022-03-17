@@ -1,9 +1,26 @@
+import { useEffect, useReducer } from 'react';
+import { useDispatch } from 'react-redux';
 import { checkboxArray, cars } from './constants';
 import css from './Model.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 import Card from './Card/Card';
+import { getCars } from '../../../store/carModelSlice';
 
 function Model() {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        console.log('cars dispatch before');
+
+        dispatch(getCars());
+        console.log('cars dispath after');
+
+    }, [])
+
+    const cars1 = useReducer(state => state.carModel.cars);
+    console.log('cars', cars1);
+
     return (
         <div className={css.contentBlock}>
             <div className={css.contentBlock__currentData}>

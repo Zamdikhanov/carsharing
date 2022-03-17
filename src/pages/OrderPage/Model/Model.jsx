@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkboxArray } from './constants';
 import css from './Model.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 import Card from './Card/Card';
 import { getCars } from '../../../store/carModelSlice';
+import Preloader from '../../../components/Preloader/Preloader';
 
 function Model() {
     const dispatch = useDispatch();
-    const isFetching = useSelector((state) => state.carModel.isFetching);
-    const cars = useSelector((state) => state.carModel.cars);
+    const { isFetching, cars, carCategory } = useSelector((state) => state.carModel);
 
     useEffect(() => {
         dispatch(getCars());
@@ -19,7 +18,7 @@ function Model() {
         <div className={css.contentBlock}>
             <div className={css.contentBlock__currentData}>
                 <fieldset className={css.carClassContainer}>
-                    {checkboxArray.map((checkbox) => (
+                    {carCategory.map((checkbox) => (
                         <label
                             className={css.carClass}
                             htmlFor={checkbox.id}
@@ -30,16 +29,16 @@ function Model() {
                                 type="radio"
                                 name="carClass"
                                 id={checkbox.id}
-                                value={checkbox.value}
+                                value={checkbox.name}
                             />
                             <div className={css.carClass__label}>
-                                {checkbox.label}
+                                {checkbox.name}
                             </div>
                         </label>
                     ))}
                 </fieldset>
                 {isFetching ? (
-                    <div> download </div>
+                    <Preloader />
                 ) : (
                     <fieldset className={css.cards}>
                         {cars.map((car) => (

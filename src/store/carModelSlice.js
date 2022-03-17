@@ -26,6 +26,7 @@ const initialState = {
         id: null,
     }, ],
     isFetching: false,
+    carCategory: [],
 };
 
 export const carModelSlice = createSlice({
@@ -37,16 +38,32 @@ export const carModelSlice = createSlice({
         },
         setIsFetching: (state, action) => {
             state.isFetching = action.payload;
-        }
+        },
+        setCarCategory: (state) => {
+            const carCategory = state.cars.reduce((acc, car) => {
+                const hasCategoryInAcc = acc.some(
+                    (category) => category.id === car.categoryId.id,
+                );
+                if (car.categoryId && !hasCategoryInAcc) {
+                    acc.push({
+                        id: car.categoryId.id,
+                        name: car.categoryId.name,
+                    });
+                }
+                return acc;
+            }, []);
+            state.carCategory = carCategory;
+        },
     },
 });
 
-export const { setCars, setIsFetching } = carModelSlice.actions;
+export const { setCars, setIsFetching, setCarCategory } = carModelSlice.actions;
 
 export const getCars = () => async(dispatch) => {
     dispatch(setIsFetching(true));
     const responce = await orderAPI.getCarList();
-    dispatch(setCars(responce));
+    await dispatch(setCars(responce));
+    await dispatch(setCarCategory());
     dispatch(setIsFetching(false));
 };
 

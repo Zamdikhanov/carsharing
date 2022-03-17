@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import css from './Card.module.scss';
 import carStubPicture from '../../../../assets/images/order-models/car-stub-picture.png';
 
 function Card({ car }) {
+
+    const [hasError, setHasError] = useState(false);
+
     return (
         <label className={css.card} htmlFor={car.id}>
             <input
@@ -20,12 +24,9 @@ function Card({ car }) {
                 </div>
                 <div className={css.imageContainer}>
                     <img
+                        onError={() => setHasError(true)}
                         className={css.carImage}
-                        src={
-                            car?.thumbnail?.path
-                                ? car.thumbnail.path
-                                : carStubPicture
-                        }
+                        src={hasError ? carStubPicture : car.thumbnail.path}
                         alt={car.name}
                     />
                 </div>

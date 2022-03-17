@@ -21,7 +21,11 @@ function Card({ car }) {
                 <div className={css.imageContainer}>
                     <img
                         className={css.carImage}
-                        src={car.imgUrl ? car.imgUrl : carStubPicture}
+                        src={
+                            car?.thumbnail?.path
+                                ? car.thumbnail.path
+                                : carStubPicture
+                        }
                         alt={car.name}
                     />
                 </div>

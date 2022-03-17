@@ -1,25 +1,19 @@
-import { useEffect, useReducer } from 'react';
-import { useDispatch } from 'react-redux';
-import { checkboxArray, cars } from './constants';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkboxArray } from './constants';
 import css from './Model.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 import Card from './Card/Card';
 import { getCars } from '../../../store/carModelSlice';
 
 function Model() {
-
     const dispatch = useDispatch();
+    const isFetching = useSelector((state) => state.carModel.isFetching);
+    const cars = useSelector((state) => state.carModel.cars);
 
     useEffect(() => {
-        console.log('cars dispatch before');
-
         dispatch(getCars());
-        console.log('cars dispath after');
-
-    }, [])
-
-    const cars1 = useReducer(state => state.carModel.cars);
-    console.log('cars', cars1);
+    }, []);
 
     return (
         <div className={css.contentBlock}>
@@ -44,11 +38,15 @@ function Model() {
                         </label>
                     ))}
                 </fieldset>
-                <fieldset className={css.cards}>
-                    {cars.map((car) => (
-                        <Card car={car} key={car.id} />
-                    ))}
-                </fieldset>
+                {isFetching ? (
+                    <div> download </div>
+                ) : (
+                    <fieldset className={css.cards}>
+                        {cars.map((car) => (
+                            <Card car={car} key={car.id} />
+                        ))}
+                    </fieldset>
+                )}
             </div>
             <div className={css.contentBlock__allOrderData}>
                 <OrderData

@@ -33,7 +33,8 @@
 
 .carClassContainer {
     margin-bottom: 45px;
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;
     border: none;
 }
 

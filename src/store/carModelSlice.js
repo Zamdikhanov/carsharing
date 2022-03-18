@@ -27,6 +27,8 @@ const initialState = {
     }, ],
     isFetching: false,
     carCategory: [],
+    selectedCategoryIndex: 0,
+    selectedCarIndex: 0,
 };
 
 export const carModelSlice = createSlice({
@@ -51,13 +53,22 @@ export const carModelSlice = createSlice({
                     });
                 }
                 return acc;
-            }, []);
+            }, [{
+                id: "ZamdikhanovCarCategory",
+                name: "Все",
+            }]);
             state.carCategory = carCategory;
+        },
+        setSelectedCategoryIndex: (state, action) => {
+            state.selectedCategoryIndex = action.payload;
+        },
+        setSelectedCarIndex: (state, action) => {
+            state.selectedCarIndex = action.payload;
         },
     },
 });
 
-export const { setCars, setIsFetching, setCarCategory } = carModelSlice.actions;
+export const { setCars, setIsFetching, setCarCategory, setSelectedCategoryIndex, setSelectedCarIndex } = carModelSlice.actions;
 
 export const getCars = () => async(dispatch) => {
     dispatch(setIsFetching(true));

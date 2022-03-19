@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/carsharing/static/css/main.a5f4495c.css",
-    "main.js": "/carsharing/static/js/main.a80247bb.js",
+    "main.css": "/carsharing/static/css/main.830da7a3.css",
+    "main.js": "/carsharing/static/js/main.94761e52.js",
     "static/media/Roboto-Medium.ttf": "/carsharing/static/media/Roboto-Medium.7429a63c09f79a1760b0.ttf",
     "static/media/Roboto-Regular.ttf": "/carsharing/static/media/Roboto-Regular.a8d6ac03c7b96b7acb62.ttf",
     "static/media/Roboto-Bold.ttf": "/carsharing/static/media/Roboto-Bold.75371f53f06181df75f1.ttf",
@@ -10,6 +10,7 @@
     "static/media/slide-3.jpg": "/carsharing/static/media/slide-3.5f0cb7cbe8cfebef30a5.jpg",
     "static/media/slide-2.jpg": "/carsharing/static/media/slide-2.59450da3799215472e17.jpg",
     "static/media/slide-1.jpg": "/carsharing/static/media/slide-1.9a5a18fceb11e80fd413.jpg",
+    "static/media/loading.gif": "/carsharing/static/media/loading.68a11aa5ce5eb94c1240.gif",
     "static/media/Instagram.svg": "/carsharing/static/media/Instagram.a854485345aa4339f17d17b17e4a39d7.svg",
     "static/media/telegram.svg": "/carsharing/static/media/telegram.09b8ba12e62bde2f38cb0cc05b366b8d.svg",
     "static/media/map-postion.svg": "/carsharing/static/media/map-postion.ba7f43cc179f9cdc1d602411683a8ce3.svg",
@@ -18,11 +19,11 @@
     "static/media/check-mark.svg": "/carsharing/static/media/check-mark.599a4157a9af0498854e.svg",
     "static/media/map-mark.svg": "/carsharing/static/media/map-mark.c961018a89ef1f0da3c21f3cc6bb3785.svg",
     "static/media/triangle.svg": "/carsharing/static/media/triangle.3f54b55d7d55c4a8870ecaeb995be364.svg",
-    "main.a5f4495c.css.map": "/carsharing/static/css/main.a5f4495c.css.map",
-    "main.a80247bb.js.map": "/carsharing/static/js/main.a80247bb.js.map"
+    "main.830da7a3.css.map": "/carsharing/static/css/main.830da7a3.css.map",
+    "main.94761e52.js.map": "/carsharing/static/js/main.94761e52.js.map"
   },
   "entrypoints": [
-    "static/css/main.a5f4495c.css",
-    "static/js/main.a80247bb.js"
+    "static/css/main.830da7a3.css",
+    "static/js/main.94761e52.js"
   ]
 }

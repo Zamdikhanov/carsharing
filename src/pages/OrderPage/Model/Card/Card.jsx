@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import css from './Card.module.scss';
 import carStubPicture from '../../../../assets/images/order-models/car-stub-picture.png';
-import { setSelectedCar } from '../../../../store/carModelSlice';
+import { setCar } from '../../../../store/carModelSlice';
 
 function Card({ car, selectedCar }) {
     const dispatch = useDispatch();
     const [hasError, setHasError] = useState(false);
 
     const handleClick = () => {
-        dispatch(setSelectedCar(car));
-    }
+        dispatch(setCar(car));
+    };
 
     return (
         <label className={css.card} htmlFor={car.id}>
@@ -21,9 +21,7 @@ function Card({ car, selectedCar }) {
                 value={car.name}
                 id={car.id}
                 checked={selectedCar.id === car.id}
-                onClick={() =>
-                    handleClick()
-                }
+                onClick={() => handleClick()}
             />
             <div className={css.card__inner}>
                 <div className={css.info}>

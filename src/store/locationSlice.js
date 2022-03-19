@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import orderAPI from '../api/api';
+import { setOrderCity, setOrderCityPoint } from './orderSlice';
 
 const initialState = {
     availableCities: [{
@@ -41,20 +42,20 @@ export const locationSlice = createSlice({
         setAvailablePoints: (state, action) => {
             state.availablePoints = action.payload;
         },
-        setCity: (state, action) => {
+        setSelectedCity: (state, action) => {
             state.selectedCity = action.payload;
             state.availablePointsInSelectedCity = state.availablePoints.filter(
                 (availablePoint) =>
                 availablePoint.cityId.name === state.selectedCity,
             );
         },
-        setPoint: (state, action) => {
+        setSelectedPoint: (state, action) => {
             state.selectedPoint = action.payload;
         },
     },
 });
 
-export const { setAvailableCities, setAvailablePoints, setCity, setPoint } = locationSlice.actions;
+export const { setAvailableCities, setAvailablePoints, setSelectedCity, setSelectedPoint } = locationSlice.actions;
 
 export const getAllLocations = () => async(dispatch) => {
     const responceCity = await orderAPI.getCityList();
@@ -64,5 +65,13 @@ export const getAllLocations = () => async(dispatch) => {
     dispatch(setAvailableCities(availableCities));
     dispatch(setAvailablePoints(availablePoints));
 };
+export const setCity = (point) => async(dispatch) => {
+    dispatch(setSelectedCity(point));
+    dispatch(setOrderCity(point));
+}
+export const setPoint = (point) => async(dispatch) => {
+    dispatch(setSelectedPoint(point));
+    dispatch(setOrderCityPoint(point));
+}
 
 export default locationSlice.reducer;

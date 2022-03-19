@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import ListString from './ListString';
 import css from './OrderData.module.scss';
@@ -6,22 +7,25 @@ function OrderData(props) {
     const {
         linkHref,
         linkText,
-        city = null,
-        cityPoint = null,
-        carModel = null,
-        carColor = null,
-        dateStart = null,
-        dateEnd = null,
-        selectedRate = null,
-        isFullTank = false,
-        isChildChair = false,
-        isRightHandDrive = false,
-        priceMin = 0,
-        priceMax = 0,
-        price = 0,
         cancel = false,
         showConfirmation = null,
     } = props;
+
+    const {
+        city,
+        cityPoint,
+        priceMin,
+        priceMax,
+        carModel,
+        carColor,
+        dateStart,
+        dateEnd,
+        selectedRate,
+        isFullTank,
+        isChildChair,
+        isRightHandDrive,
+        price,
+    } = useSelector((state) => state.order.order);
 
     function getInterval() {
         return '1д2ч';
@@ -40,7 +44,9 @@ function OrderData(props) {
                             data={`${city}, ${cityPoint}`}
                         />
                     )}
-                    {carModel && <ListString title="Модель" data={carModel} />}
+                    {carModel && (
+                        <ListString title="Модель" data={carModel.name} />
+                    )}
                     {carColor && <ListString title="Цвет" data={carColor} />}
                     {dateStart && dateEnd && (
                         <ListString

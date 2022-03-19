@@ -22,17 +22,17 @@ function UserLocation() {
     const [selectValueCity, setSelectValueCity] = useState(
         selectedCity
             ? {
-                value: selectedCity,
-                label: selectedCity,
-            }
+                  value: selectedCity,
+                  label: selectedCity,
+              }
             : null,
     );
     const [selectValuePoint, setSelectValuePoint] = useState(
         selectedPoint
             ? {
-                value: selectedPoint,
-                label: selectedPoint,
-            }
+                  value: selectedPoint,
+                  label: selectedPoint,
+              }
             : null,
     );
     const selectOptionsCities = availableCities.map((availableCity) => ({
@@ -54,9 +54,9 @@ function UserLocation() {
         setSelectValueCity(
             selectedCity
                 ? {
-                    value: selectedCity,
-                    label: selectedCity,
-                }
+                      value: selectedCity,
+                      label: selectedCity,
+                  }
                 : null,
         );
     }, [selectedCity]);
@@ -65,9 +65,9 @@ function UserLocation() {
         setSelectValuePoint(
             selectedPoint
                 ? {
-                    value: selectedPoint,
-                    label: selectedPoint,
-                }
+                      value: selectedPoint,
+                      label: selectedPoint,
+                  }
                 : null,
         );
     }, [selectedPoint]);
@@ -82,9 +82,9 @@ function UserLocation() {
             setSelectValuePoint(
                 selectedPoint
                     ? {
-                        value: selectedPoint,
-                        label: selectedPoint,
-                    }
+                          value: selectedPoint,
+                          label: selectedPoint,
+                      }
                     : null,
             );
         }
@@ -143,14 +143,7 @@ function UserLocation() {
                 </div>
             </div>
             <div className={css.contentBlock__allOrderData}>
-                <OrderData
-                    linkHref="/order/model"
-                    linkText="Выбрать модель"
-                    city={selectedCity}
-                    cityPoint={selectedPoint}
-                    priceMin='0'
-                    priceMax='0'
-                />
+                <OrderData linkHref="/order/model" linkText="Выбрать модель" />
             </div>
         </div>
     );

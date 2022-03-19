@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import orderAPI from '../api/api';
+import { setOrderCarModel } from './orderSlice';
 
 const initialState = {
     cars: [{
@@ -108,6 +109,11 @@ export const getCars = () => async(dispatch) => {
     await dispatch(setCars(responce));
     await dispatch(setCarCategory());
     dispatch(setIsFetching(false));
+};
+
+export const setCar = (item) => async(dispatch) => {
+    dispatch(setSelectedCar(item));
+    dispatch(setOrderCarModel(item));
 };
 
 export default carModelSlice.reducer;

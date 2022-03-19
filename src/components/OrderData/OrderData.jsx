@@ -14,8 +14,6 @@ function OrderData(props) {
     const {
         city,
         cityPoint,
-        // priceMin,
-        // priceMax,
         carModel,
         carColor,
         dateStart,
@@ -44,7 +42,7 @@ function OrderData(props) {
                             data={`${city}, ${cityPoint}`}
                         />
                     )}
-                    {carModel && (
+                    {carModel.id && (
                         <ListString title="Модель" data={carModel.name} />
                     )}
                     {carColor && <ListString title="Цвет" data={carColor} />}

@@ -36,8 +36,8 @@ const initialState = {
         updatedAt: null,
         createdAt: null,
         description: null,
-        priceMin: null,
-        priceMax: null,
+        priceMin: 0,
+        priceMax: 0,
         name: null,
         number: null,
         categoryId: {

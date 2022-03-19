@@ -14,8 +14,8 @@ function OrderData(props) {
     const {
         city,
         cityPoint,
-        priceMin,
-        priceMax,
+        // priceMin,
+        // priceMax,
         carModel,
         carColor,
         dateStart,
@@ -67,7 +67,9 @@ function OrderData(props) {
                 </ul>
                 <div className={css.price}>
                     Цена:
-                    {price ? `${price} ₽` : `от ${priceMin} до ${priceMax} ₽`}
+                    {price
+                        ? `${price} ₽`
+                        : `от ${carModel.priceMin} до ${carModel.priceMax} ₽`}
                 </div>
             </div>
             {!showConfirmation ? (

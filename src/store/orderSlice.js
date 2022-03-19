@@ -5,7 +5,10 @@ const initialState = {
     order: {
         city: null,
         cityPoint: null,
-        carModel: null,
+        carModel: {
+            priceMin: 0,
+            priceMax: 0,
+        },
         carColor: null,
         dateStart: null,
         dateEnd: null,
@@ -13,8 +16,6 @@ const initialState = {
         isFullTank: false,
         isChildChair: false,
         isRightHandDrive: false,
-        priceMin: 0,
-        priceMax: 0,
         price: 0,
     }
 };

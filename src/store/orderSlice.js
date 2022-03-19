@@ -8,6 +8,7 @@ const initialState = {
         carModel: {
             priceMin: 0,
             priceMax: 0,
+            colors: [],
         },
         carColor: null,
         dateStart: null,
@@ -33,6 +34,12 @@ export const OrderSlice = createSlice({
         setOrderCarModel: (state, action) => {
             state.order.carModel = action.payload;
         },
+        setOrderSelectedRate: (state, action) => {
+            state.order.selectedRate = action.payload;
+        },
+        setOrderCarColor: (state, action) => {
+            state.order.carColor = action.payload;
+        },
     },
 });
 
@@ -40,6 +47,8 @@ export const {
     setOrderCity,
     setOrderCityPoint,
     setOrderCarModel,
+    setOrderSelectedRate,
+    setOrderCarColor,
 } = OrderSlice.actions;
 
 

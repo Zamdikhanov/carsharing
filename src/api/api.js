@@ -15,6 +15,9 @@ const orderAPI = {
     getCarList() {
         return instance.get(`db/car`).then((response) => response.data.data);
     },
+    getRate() {
+        return instance.get(`db/rate`).then((response) => response.data.data);
+    },
 };
 
 export default orderAPI;

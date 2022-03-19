@@ -61,13 +61,16 @@
     & .item__value {
         flex: 1 0 auto;
         display: block;
-        max-width: 45%;
+        max-width: 50%;
         font-weight: 300;
         font-size: 14px;
         line-height: 16px;
         text-align: right;
         color: $color_gray_dark;
         padding-left: 4px;
+        & span {
+            color: $color_gray_dark;
+        }
     }
 }
 

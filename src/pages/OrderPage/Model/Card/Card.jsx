@@ -21,7 +21,7 @@ function Card({ car, selectedCar }) {
                 value={car.name}
                 id={car.id}
                 checked={selectedCar.id === car.id}
-                onClick={() => handleClick()}
+                onChange={() => handleClick()}
             />
             <div className={css.card__inner}>
                 <div className={css.info}>

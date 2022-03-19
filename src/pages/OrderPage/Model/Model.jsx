@@ -3,18 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import css from './Model.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 import Card from './Card/Card';
-import {
-    getCars,
-    setSelectedCategoryId,
-} from '../../../store/carModelSlice';
+import { getCars, setSelectedCategoryId } from '../../../store/carModelSlice';
 import Preloader from '../../../components/Preloader/Preloader';
 
 function Model() {
     const dispatch = useDispatch();
     const { isFetching, cars, carCategory, selectedCategoryId, selectedCar } =
         useSelector((state) => state.carModel);
-    const { selectedCity, selectedPoint } =
-        useSelector((state) => state.location);
+    const { selectedCity, selectedPoint } = useSelector(
+        (state) => state.location,
+    );
 
     useEffect(() => {
         if (cars.length < 2 && cars[0].id === null) dispatch(getCars());
@@ -37,7 +35,7 @@ function Model() {
                                 id={checkbox.id}
                                 value={checkbox.name}
                                 checked={selectedCategoryId === checkbox.id}
-                                onClick={() =>
+                                onChange={() =>
                                     dispatch(setSelectedCategoryId(checkbox.id))
                                 }
                             />
@@ -52,9 +50,17 @@ function Model() {
                 ) : (
                     <fieldset className={css.cards}>
                         {cars
-                            .filter((car) => car.categoryId?.id === selectedCategoryId || selectedCategoryId === 'allCarCategory')
+                            .filter(
+                                (car) =>
+                                    car.categoryId?.id === selectedCategoryId ||
+                                    selectedCategoryId === 'allCarCategory',
+                            )
                             .map((car) => (
-                                <Card car={car} selectedCar={selectedCar} key={car.id} />
+                                <Card
+                                    car={car}
+                                    selectedCar={selectedCar}
+                                    key={car.id}
+                                />
                             ))}
                     </fieldset>
                 )}

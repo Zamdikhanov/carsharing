@@ -14,8 +14,6 @@ function OrderData(props) {
     const {
         city,
         cityPoint,
-        // priceMin,
-        // priceMax,
         carModel,
         carColor,
         dateStart,
@@ -41,10 +39,14 @@ function OrderData(props) {
                     {city && cityPoint && (
                         <ListString
                             title="Пункт выдачи"
-                            data={`${city}, ${cityPoint}`}
+                            data={
+                                <span>
+                                    {city} <br /> {cityPoint}
+                                </span>
+                            }
                         />
                     )}
-                    {carModel && (
+                    {carModel.id && (
                         <ListString title="Модель" data={carModel.name} />
                     )}
                     {carColor && <ListString title="Цвет" data={carColor} />}
@@ -55,7 +57,10 @@ function OrderData(props) {
                         />
                     )}
                     {selectedRate && (
-                        <ListString title="Тариф" data={selectedRate} />
+                        <ListString
+                            title="Тариф"
+                            data={selectedRate.rateTypeId.name}
+                        />
                     )}
                     {isFullTank && <ListString title="Полный бак" data="Да" />}
                     {isChildChair && (

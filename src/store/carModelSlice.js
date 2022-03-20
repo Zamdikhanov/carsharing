@@ -118,6 +118,7 @@ export const setCar = (item) => async(dispatch) => {
     dispatch(setOrderCarModel(item));
     if (item.id) {
         dispatch(setStepMoreIsShow(true));
+        dispatch(resetMore());
     } else {
         dispatch(setStepMoreIsShow(false));
     }
@@ -149,7 +150,6 @@ export const resetCarModel = () => async(dispatch) => {
             id: null,
         }),
     );
-    dispatch(setStepMoreIsShow(false));
     dispatch(resetMore());
 };
 

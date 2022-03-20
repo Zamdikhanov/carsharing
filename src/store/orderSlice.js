@@ -13,6 +13,7 @@ const initialState = {
         carColor: null,
         dateStart: null,
         dateEnd: null,
+        dateInterval: null,
         selectedRate: null,
         isFullTank: false,
         isChildChair: false,
@@ -40,14 +41,26 @@ export const OrderSlice = createSlice({
         setOrderCarColor: (state, action) => {
             state.order.carColor = action.payload;
         },
-        setOrderIsFullTank: (state) => {
+        toggleOrderIsFullTank: (state) => {
             state.order.isFullTank = !state.order.isFullTank;
         },
-        setOrderIsChildChair: (state) => {
+        toggleOrderIsChildChair: (state) => {
             state.order.isChildChair = !state.order.isChildChair;
         },
-        setOrderIsRightHandDrive: (state) => {
+        toggleOrderIsRightHandDrive: (state) => {
             state.order.isRightHandDrive = !state.order.isRightHandDrive;
+        },
+        setOrderDateStart: (state, action) => {
+            state.order.dateStart = action.payload;
+        },
+        setOrderDateEnd: (state, action) => {
+            state.order.dateEnd = action.payload;
+        },
+        setOrderDateInterval: (state, action) => {
+            state.order.dateInterval = action.payload;
+        },
+        setOrderPrice: (state, action) => {
+            state.order.price = action.payload;
         },
     },
 });
@@ -58,9 +71,13 @@ export const {
     setOrderCarModel,
     setOrderSelectedRate,
     setOrderCarColor,
-    setOrderIsFullTank,
-    setOrderIsChildChair,
-    setOrderIsRightHandDrive,
+    toggleOrderIsFullTank,
+    toggleOrderIsChildChair,
+    toggleOrderIsRightHandDrive,
+    setOrderDateStart,
+    setOrderDateEnd,
+    setOrderDateInterval,
+    setOrderPrice,
 } = OrderSlice.actions;
 
 export default OrderSlice.reducer;

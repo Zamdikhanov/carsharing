@@ -16,18 +16,13 @@ function OrderData(props) {
         cityPoint,
         carModel,
         carColor,
-        dateStart,
-        dateEnd,
+        dateInterval,
         selectedRate,
         isFullTank,
         isChildChair,
         isRightHandDrive,
         price,
     } = useSelector((state) => state.order.order);
-
-    function getInterval() {
-        return '1д2ч';
-    }
 
     return (
         <div className={css.container}>
@@ -50,10 +45,10 @@ function OrderData(props) {
                         <ListString title="Модель" data={carModel.name} />
                     )}
                     {carColor && <ListString title="Цвет" data={carColor} />}
-                    {dateStart && dateEnd && (
+                    {dateInterval && (
                         <ListString
                             title="Длительность аренды"
-                            data={getInterval(dateStart, dateEnd, selectedRate)}
+                            data={dateInterval}
                         />
                     )}
                     {selectedRate && (

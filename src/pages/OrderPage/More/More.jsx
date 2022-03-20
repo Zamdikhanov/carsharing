@@ -9,16 +9,18 @@ import Preloader from '../../../components/Preloader/Preloader';
 import {
     getRates,
     setColor,
+    setMoreEndDate,
+    setMoreStartDate,
     setRate,
     setServices,
 } from '../../../store/moreSlice';
+import getFormattedInterval from '../../../components/helpers/FormattedInterval';
+import { setOrderDateInterval, setOrderPrice } from '../../../store/orderSlice';
+import priceCalc from '../../../components/helpers/priceCalc';
 
 registerLocale('ru', ru);
 
 function More() {
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
-
     const dispatch = useDispatch();
     const {
         isFetching,
@@ -26,40 +28,50 @@ function More() {
         selectedColor,
         selectedRate,
         additionalServices,
+        selectedStartDate,
+        selectedEndDate,
     } = useSelector((state) => state.more);
     const { carModel } = useSelector((state) => state.order.order);
 
     const [colors] = useState(['Любой', ...carModel.colors]);
+    const [startDate, setStartDate] = useState(
+        selectedStartDate ? new Date(selectedStartDate) : null,
+    );
+    const [endDate, setEndDate] = useState(
+        selectedEndDate ? new Date(selectedEndDate) : null,
+    );
 
     useEffect(() => {
         if (rates.length < 2 && rates[0].id === null) dispatch(getRates());
         dispatch(setColor(selectedColor));
+        setStartDate(selectedStartDate ? new Date(selectedStartDate) : null);
+        setEndDate(selectedEndDate ? new Date(selectedEndDate) : null);
     }, []);
 
-    function getFormattedDateAndTime(time) {
-        if (time === null || time < 0) {
-            return '';
+    useEffect(() => {
+        let interval;
+        if (startDate && endDate) {
+            interval = getFormattedInterval(
+                endDate.getTime() - startDate.getTime(),
+            );
+            dispatch(setOrderDateInterval(interval));
+            dispatch(setMoreStartDate(startDate.getTime()));
+            dispatch(setMoreEndDate(endDate.getTime()));
         }
-        const min = Math.round((time % 3600000) / 60000);
-        let interval = (time - (time % 3600000)) / 3600000;
-        const hour = interval % 24;
-        interval = (interval - hour) / 24;
-        const day = interval % 30;
-        interval = (interval - day) / 30;
-        const month = interval % 12;
-        return `${month}мес${day}д${hour}ч${min}мин `;
-    }
+    }, [startDate, endDate]);
 
     useEffect(() => {
         if (startDate && endDate) {
-            console.log('start ', startDate);
-            console.log('start ', startDate.getTime());
-            console.log('end ', endDate);
-            console.log('end ', endDate.getTime());
-            console.log('diff ', endDate.getTime() - startDate.getTime());
-            console.log('diff ', getFormattedDateAndTime(endDate.getTime() - startDate.getTime()));
+            const price = priceCalc(
+                startDate.getTime(),
+                endDate.getTime(),
+                selectedRate,
+                carModel,
+                additionalServices,
+            );
+            dispatch(setOrderPrice(price));
         }
-    }, [startDate, endDate]);
+    }, [selectedRate, selectedStartDate, selectedEndDate, additionalServices]);
 
     const settingsDatePicker = {
         className: css.dateInput,
@@ -193,9 +205,7 @@ function More() {
                                 name="services"
                                 id={service.id}
                                 checked={service.value}
-                                onChange={() =>
-                                    dispatch(setServices(index))
-                                }
+                                onChange={() => dispatch(setServices(index))}
                             />
                             <div className={css.checkbox__label}>
                                 {`${service.name}, ${service.price}р`}

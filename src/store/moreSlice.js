@@ -3,9 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import orderAPI from '../api/api';
 import {
     setOrderCarColor,
-    setOrderIsChildChair,
-    setOrderIsFullTank,
-    setOrderIsRightHandDrive,
+    setOrderDateEnd,
+    setOrderDateStart,
+    toggleOrderIsChildChair,
+    toggleOrderIsFullTank,
+    toggleOrderIsRightHandDrive,
     setOrderSelectedRate,
 } from './orderSlice';
 
@@ -43,6 +45,8 @@ const initialState = {
         },
         { id: 'isRightWheel', name: 'Правый руль', value: false, price: 1600 },
     ],
+    selectedStartDate: null,
+    selectedEndDate: null,
     isFetching: false,
 };
 
@@ -65,6 +69,12 @@ export const moreSlice = createSlice({
         setServicesValue: (state, action) => {
             state.additionalServices[action.payload].value = !state.additionalServices[action.payload].value;
         },
+        setSelectedStartDate: (state, action) => {
+            state.selectedStartDate = action.payload;
+        },
+        setSelectedEndDate: (state, action) => {
+            state.selectedEndDate = action.payload;
+        },
     },
 });
 
@@ -74,6 +84,8 @@ export const {
     setSelectedRate,
     setSelectedColor,
     setServicesValue,
+    setSelectedStartDate,
+    setSelectedEndDate,
 } = moreSlice.actions;
 
 export const setRate = (item) => async(dispatch) => {
@@ -98,16 +110,26 @@ export const setServices = (item) => async(dispatch) => {
     dispatch(setServicesValue(item));
     switch (item) {
         case 0:
-            dispatch(setOrderIsFullTank());
+            dispatch(toggleOrderIsFullTank());
             break;
         case 1:
-            dispatch(setOrderIsChildChair());
+            dispatch(toggleOrderIsChildChair());
             break;
         case 2:
-            dispatch(setOrderIsRightHandDrive());
+            dispatch(toggleOrderIsRightHandDrive());
             break;
         default:
     }
+};
+
+export const setMoreStartDate = (item) => async(dispatch) => {
+    dispatch(setSelectedStartDate(item));
+    dispatch(setOrderDateStart(item));
+};
+
+export const setMoreEndDate = (item) => async(dispatch) => {
+    dispatch(setSelectedEndDate(item));
+    dispatch(setOrderDateEnd(item));
 };
 
 export default moreSlice.reducer;

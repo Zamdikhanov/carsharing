@@ -1,7 +1,13 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import orderAPI from '../api/api';
-import { setOrderCarColor, setOrderSelectedRate } from './orderSlice';
+import {
+    setOrderCarColor,
+    setOrderIsChildChair,
+    setOrderIsFullTank,
+    setOrderIsRightHandDrive,
+    setOrderSelectedRate,
+} from './orderSlice';
 
 const initialState = {
     rates: [{
@@ -11,10 +17,10 @@ const initialState = {
         rateTypeId: {
             unit: null,
             name: null,
-            id: null
+            id: null,
         },
-        id: null
-    }],
+        id: null,
+    }, ],
     selectedRate: {
         updatedAt: null,
         createdAt: null,
@@ -22,15 +28,20 @@ const initialState = {
         rateTypeId: {
             unit: null,
             name: null,
-            id: null
+            id: null,
         },
-        id: null
+        id: null,
     },
     selectedColor: 'Любой',
     additionalServices: [
-        { id: "isFullTank", name: "Полный бак", value: false, price: 500 },
-        { id: "isNeedChildChair", name: "Детское кресло", value: false, price: 200 },
-        { id: "isRightWheel", name: "Правый руль", value: false, price: 1600 },
+        { id: 'isFullTank', name: 'Полный бак', value: false, price: 500 },
+        {
+            id: 'isNeedChildChair',
+            name: 'Детское кресло',
+            value: false,
+            price: 200,
+        },
+        { id: 'isRightWheel', name: 'Правый руль', value: false, price: 1600 },
     ],
     isFetching: false,
 };
@@ -81,6 +92,22 @@ export const getRates = () => async(dispatch) => {
 export const setColor = (item) => async(dispatch) => {
     dispatch(setSelectedColor(item));
     dispatch(setOrderCarColor(item));
+};
+
+export const setServices = (item) => async(dispatch) => {
+    dispatch(setServicesValue(item));
+    switch (item) {
+        case 0:
+            dispatch(setOrderIsFullTank());
+            break;
+        case 1:
+            dispatch(setOrderIsChildChair());
+            break;
+        case 2:
+            dispatch(setOrderIsRightHandDrive());
+            break;
+        default:
+    }
 };
 
 export default moreSlice.reducer;

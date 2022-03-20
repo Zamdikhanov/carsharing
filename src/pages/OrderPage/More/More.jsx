@@ -10,7 +10,7 @@ import {
     getRates,
     setColor,
     setRate,
-    setServicesValue,
+    setServices,
 } from '../../../store/moreSlice';
 
 registerLocale('ru', ru);
@@ -35,6 +35,31 @@ function More() {
         if (rates.length < 2 && rates[0].id === null) dispatch(getRates());
         dispatch(setColor(selectedColor));
     }, []);
+
+    function getFormattedDateAndTime(time) {
+        if (time === null || time < 0) {
+            return '';
+        }
+        const min = Math.round((time % 3600000) / 60000);
+        let interval = (time - (time % 3600000)) / 3600000;
+        const hour = interval % 24;
+        interval = (interval - hour) / 24;
+        const day = interval % 30;
+        interval = (interval - day) / 30;
+        const month = interval % 12;
+        return `${month}мес${day}д${hour}ч${min}мин `;
+    }
+
+    useEffect(() => {
+        if (startDate && endDate) {
+            console.log('start ', startDate);
+            console.log('start ', startDate.getTime());
+            console.log('end ', endDate);
+            console.log('end ', endDate.getTime());
+            console.log('diff ', endDate.getTime() - startDate.getTime());
+            console.log('diff ', getFormattedDateAndTime(endDate.getTime() - startDate.getTime()));
+        }
+    }, [startDate, endDate]);
 
     const settingsDatePicker = {
         className: css.dateInput,
@@ -169,7 +194,7 @@ function More() {
                                 id={service.id}
                                 checked={service.value}
                                 onChange={() =>
-                                    dispatch(setServicesValue(index))
+                                    dispatch(setServices(index))
                                 }
                             />
                             <div className={css.checkbox__label}>
@@ -185,7 +210,6 @@ function More() {
                     linkText="Итого"
                     dateStart="1111"
                     dateEnd="2222"
-                    isFullTank
                     price="16 000"
                 />
             </div>

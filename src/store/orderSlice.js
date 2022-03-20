@@ -18,7 +18,7 @@ const initialState = {
         isChildChair: false,
         isRightHandDrive: false,
         price: 0,
-    }
+    },
 };
 
 export const OrderSlice = createSlice({
@@ -40,6 +40,15 @@ export const OrderSlice = createSlice({
         setOrderCarColor: (state, action) => {
             state.order.carColor = action.payload;
         },
+        setOrderIsFullTank: (state) => {
+            state.order.isFullTank = !state.order.isFullTank;
+        },
+        setOrderIsChildChair: (state) => {
+            state.order.isChildChair = !state.order.isChildChair;
+        },
+        setOrderIsRightHandDrive: (state) => {
+            state.order.isRightHandDrive = !state.order.isRightHandDrive;
+        },
     },
 });
 
@@ -49,7 +58,9 @@ export const {
     setOrderCarModel,
     setOrderSelectedRate,
     setOrderCarColor,
+    setOrderIsFullTank,
+    setOrderIsChildChair,
+    setOrderIsRightHandDrive,
 } = OrderSlice.actions;
-
 
 export default OrderSlice.reducer;

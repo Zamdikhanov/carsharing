@@ -9,7 +9,11 @@ import {
     toggleOrderIsFullTank,
     toggleOrderIsRightHandDrive,
     setOrderSelectedRate,
+    setOrderDateInterval,
+    resetOrderServices,
+    setOrderPrice,
 } from './orderSlice';
+import { setStepTotalIsShow } from './stepDisableSlice';
 
 const initialState = {
     rates: [{
@@ -75,6 +79,27 @@ export const moreSlice = createSlice({
         setSelectedEndDate: (state, action) => {
             state.selectedEndDate = action.payload;
         },
+        resetServices: (state) => {
+            state.additionalServices = [{
+                    id: 'isFullTank',
+                    name: 'Полный бак',
+                    value: false,
+                    price: 500,
+                },
+                {
+                    id: 'isNeedChildChair',
+                    name: 'Детское кресло',
+                    value: false,
+                    price: 200,
+                },
+                {
+                    id: 'isRightWheel',
+                    name: 'Правый руль',
+                    value: false,
+                    price: 1600,
+                },
+            ];
+        },
     },
 });
 
@@ -86,6 +111,7 @@ export const {
     setServicesValue,
     setSelectedStartDate,
     setSelectedEndDate,
+    resetServices,
 } = moreSlice.actions;
 
 export const setRate = (item) => async(dispatch) => {
@@ -130,6 +156,30 @@ export const setMoreStartDate = (item) => async(dispatch) => {
 export const setMoreEndDate = (item) => async(dispatch) => {
     dispatch(setSelectedEndDate(item));
     dispatch(setOrderDateEnd(item));
+};
+
+export const resetMore = () => async(dispatch) => {
+    dispatch(
+        setRate({
+            updatedAt: null,
+            createdAt: null,
+            price: null,
+            rateTypeId: {
+                unit: null,
+                name: null,
+                id: null,
+            },
+            id: null,
+        }),
+    );
+    dispatch(setColor(null));
+    dispatch(setMoreStartDate(null));
+    dispatch(setMoreEndDate(null));
+    dispatch(setOrderDateInterval(null));
+    dispatch(resetServices());
+    dispatch(resetOrderServices());
+    dispatch(setOrderPrice(0));
+    dispatch(setStepTotalIsShow(false));
 };
 
 export default moreSlice.reducer;

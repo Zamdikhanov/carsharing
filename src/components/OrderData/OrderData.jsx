@@ -66,7 +66,7 @@ function OrderData(props) {
                             data={dateInterval}
                         />
                     )}
-                    {selectedRate && (
+                    {selectedRate?.id && (
                         <ListString
                             title="Тариф"
                             data={selectedRate.rateTypeId.name}

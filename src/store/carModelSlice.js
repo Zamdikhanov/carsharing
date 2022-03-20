@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import orderAPI from '../api/api';
+import { resetMore } from './moreSlice';
 import { setOrderCarModel } from './orderSlice';
 import { setStepMoreIsShow } from './stepDisableSlice';
 
@@ -93,32 +94,6 @@ export const carModelSlice = createSlice({
         setSelectedCar: (state, action) => {
             state.selectedCar = action.payload;
         },
-        resetCarModel: (state) => {
-            state.isFetching = false;
-            state.selectedCategoryId = 'allCarCategory';
-            state.selectedCar = {
-                updatedAt: null,
-                createdAt: null,
-                description: null,
-                priceMin: 0,
-                priceMax: 0,
-                name: null,
-                number: null,
-                categoryId: {
-                    name: null,
-                    description: null,
-                    id: null,
-                },
-                thumbnail: {
-                    mimetype: null,
-                    originalname: null,
-                    size: null,
-                    path: null,
-                },
-                colors: [],
-                id: null,
-            };
-        },
     },
 });
 
@@ -128,7 +103,6 @@ export const {
     setCarCategory,
     setSelectedCategoryId,
     setSelectedCar,
-    resetCarModel,
 } = carModelSlice.actions;
 
 export const getCars = () => async(dispatch) => {
@@ -142,7 +116,41 @@ export const getCars = () => async(dispatch) => {
 export const setCar = (item) => async(dispatch) => {
     dispatch(setSelectedCar(item));
     dispatch(setOrderCarModel(item));
-    if (item.id) { dispatch(setStepMoreIsShow(true)) } else { dispatch(setStepMoreIsShow(false)) }
+    if (item.id) {
+        dispatch(setStepMoreIsShow(true));
+    } else {
+        dispatch(setStepMoreIsShow(false));
+    }
+};
+
+export const resetCarModel = () => async(dispatch) => {
+    dispatch(setSelectedCategoryId('allCarCategory'));
+    dispatch(
+        setCar({
+            updatedAt: null,
+            createdAt: null,
+            description: null,
+            priceMin: 0,
+            priceMax: 0,
+            name: null,
+            number: null,
+            categoryId: {
+                name: null,
+                description: null,
+                id: null,
+            },
+            thumbnail: {
+                mimetype: null,
+                originalname: null,
+                size: null,
+                path: null,
+            },
+            colors: [],
+            id: null,
+        }),
+    );
+    dispatch(setStepMoreIsShow(false));
+    dispatch(resetMore());
 };
 
 export default carModelSlice.reducer;

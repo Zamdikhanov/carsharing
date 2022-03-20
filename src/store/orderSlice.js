@@ -62,6 +62,11 @@ export const OrderSlice = createSlice({
         setOrderPrice: (state, action) => {
             state.order.price = action.payload;
         },
+        resetOrderServices: (state) => {
+            state.order.isFullTank = false;
+            state.order.isChildChair = false;
+            state.order.isRightHandDrive = false;
+        },
     },
 });
 
@@ -78,6 +83,7 @@ export const {
     setOrderDateEnd,
     setOrderDateInterval,
     setOrderPrice,
+    resetOrderServices,
 } = OrderSlice.actions;
 
 export default OrderSlice.reducer;

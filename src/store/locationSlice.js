@@ -2,6 +2,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import orderAPI from '../api/api';
 import { setOrderCity, setOrderCityPoint } from './orderSlice';
+import { setStepModelIsShow } from './stepDisableSlice';
+import { resetCarModel } from './carModelSlice';
 
 const initialState = {
     availableCities: [{
@@ -72,6 +74,10 @@ export const setCity = (point) => async(dispatch) => {
 export const setPoint = (point) => async(dispatch) => {
     dispatch(setSelectedPoint(point));
     dispatch(setOrderCityPoint(point));
+    if (point) { dispatch(setStepModelIsShow(true)) } else {
+        dispatch(setStepModelIsShow(false));
+        dispatch(resetCarModel());
+    }
 }
 
 export default locationSlice.reducer;

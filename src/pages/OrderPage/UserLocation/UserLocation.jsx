@@ -143,7 +143,11 @@ function UserLocation() {
                 </div>
             </div>
             <div className={css.contentBlock__allOrderData}>
-                <OrderData linkHref="/order/model" linkText="Выбрать модель" />
+                <OrderData
+                    linkHref="/order/model"
+                    linkText="Выбрать модель"
+                    nextStep="model"
+                />
             </div>
         </div>
     );

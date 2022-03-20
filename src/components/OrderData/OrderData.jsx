@@ -9,7 +9,10 @@ function OrderData(props) {
         linkText,
         cancel = false,
         showConfirmation = null,
+        nextStep = 'model',
     } = props;
+
+    const step = useSelector((state) => state.step);
 
     const {
         city,
@@ -23,6 +26,18 @@ function OrderData(props) {
         isRightHandDrive,
         price,
     } = useSelector((state) => state.order.order);
+
+    const handleClickLink = (e, isShow) => {
+        if (!isShow) e.preventDefault();
+    };
+
+    const handleClickButton = (e, isShow) => {
+        if (!isShow) {
+            e.preventDefault();
+        } else {
+            showConfirmation(true);
+        }
+    };
 
     return (
         <div className={css.container}>
@@ -74,8 +89,13 @@ function OrderData(props) {
             </div>
             {!showConfirmation ? (
                 <NavLink
-                    className={cancel ? css.cancelButton : css.button}
+                    className={`${cancel ? css.cancelButton : css.button} 
+                    ${!step[nextStep].isShow && css.button_disable}
+                    `}
                     to={linkHref}
+                    onClick={(e) => {
+                        handleClickLink(e, step[nextStep].isShow);
+                    }}
                 >
                     {linkText}
                 </NavLink>
@@ -83,8 +103,8 @@ function OrderData(props) {
                 <button
                     className={cancel ? css.cancelButton : css.button}
                     type="button"
-                    onClick={() => {
-                        showConfirmation(true);
+                    onClick={(e) => {
+                        handleClickButton(e, step[nextStep].isShow);
                     }}
                 >
                     {linkText}

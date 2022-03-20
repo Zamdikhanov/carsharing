@@ -17,6 +17,7 @@ import {
 import getFormattedInterval from '../../../components/helpers/FormattedInterval';
 import { setOrderDateInterval, setOrderPrice } from '../../../store/orderSlice';
 import priceCalc from '../../../components/helpers/priceCalc';
+import { setStepTotalIsShow } from '../../../store/stepDisableSlice';
 
 registerLocale('ru', ru);
 
@@ -70,8 +71,12 @@ function More() {
                 additionalServices,
             );
             dispatch(setOrderPrice(price));
+            dispatch(setStepTotalIsShow(true));
+        } else {
+            dispatch(setOrderPrice(0));
+            dispatch(setStepTotalIsShow(false));
         }
-    }, [selectedRate, selectedStartDate, selectedEndDate, additionalServices]);
+    }, [selectedRate, startDate, endDate, additionalServices]);
 
     const settingsDatePicker = {
         className: css.dateInput,
@@ -218,9 +223,7 @@ function More() {
                 <OrderData
                     linkHref="/order/total"
                     linkText="Итого"
-                    dateStart="1111"
-                    dateEnd="2222"
-                    price="16 000"
+                    nextStep="total"
                 />
             </div>
         </div>

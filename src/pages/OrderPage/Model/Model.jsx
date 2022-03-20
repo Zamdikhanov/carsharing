@@ -10,9 +10,6 @@ function Model() {
     const dispatch = useDispatch();
     const { isFetching, cars, carCategory, selectedCategoryId, selectedCar } =
         useSelector((state) => state.carModel);
-    const { selectedCity, selectedPoint } = useSelector(
-        (state) => state.location,
-    );
 
     useEffect(() => {
         if (cars.length < 2 && cars[0].id === null) dispatch(getCars());
@@ -69,11 +66,7 @@ function Model() {
                 <OrderData
                     linkHref="/order/more"
                     linkText="Дополнительно"
-                    city={selectedCity}
-                    cityPoint={selectedPoint}
-                    carModel={selectedCar.name || ''}
-                    priceMin={selectedCar.priceMin || '0'}
-                    priceMax={selectedCar.priceMax || '0'}
+                    nextStep="more"
                 />
             </div>
         </div>

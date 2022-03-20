@@ -2,6 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import orderAPI from '../api/api';
 import { setOrderCarModel } from './orderSlice';
+import { setStepMoreIsShow } from './stepDisableSlice';
 
 const initialState = {
     cars: [{
@@ -92,6 +93,32 @@ export const carModelSlice = createSlice({
         setSelectedCar: (state, action) => {
             state.selectedCar = action.payload;
         },
+        resetCarModel: (state) => {
+            state.isFetching = false;
+            state.selectedCategoryId = 'allCarCategory';
+            state.selectedCar = {
+                updatedAt: null,
+                createdAt: null,
+                description: null,
+                priceMin: 0,
+                priceMax: 0,
+                name: null,
+                number: null,
+                categoryId: {
+                    name: null,
+                    description: null,
+                    id: null,
+                },
+                thumbnail: {
+                    mimetype: null,
+                    originalname: null,
+                    size: null,
+                    path: null,
+                },
+                colors: [],
+                id: null,
+            };
+        },
     },
 });
 
@@ -101,6 +128,7 @@ export const {
     setCarCategory,
     setSelectedCategoryId,
     setSelectedCar,
+    resetCarModel,
 } = carModelSlice.actions;
 
 export const getCars = () => async(dispatch) => {
@@ -114,6 +142,7 @@ export const getCars = () => async(dispatch) => {
 export const setCar = (item) => async(dispatch) => {
     dispatch(setSelectedCar(item));
     dispatch(setOrderCarModel(item));
+    if (item.id) { dispatch(setStepMoreIsShow(true)) } else { dispatch(setStepMoreIsShow(false)) }
 };
 
 export default carModelSlice.reducer;

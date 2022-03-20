@@ -86,6 +86,13 @@
     width: 100%;
     margin-bottom: 32px;
     border: none;
+    &_disable {
+        background: $color_gray_light;
+        cursor: auto;
+        &:hover {
+            background: $color_gray_light;
+        }
+    }
     @media (max-width: 1023px) {
         max-width: 320px;
     }

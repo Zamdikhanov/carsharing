@@ -1,14 +1,25 @@
-import { checkboxArray, cars } from './constants';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import css from './Model.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 import Card from './Card/Card';
+import { getCars, setSelectedCategoryId } from '../../../store/carModelSlice';
+import Preloader from '../../../components/Preloader/Preloader';
 
 function Model() {
+    const dispatch = useDispatch();
+    const { isFetching, cars, carCategory, selectedCategoryId, selectedCar } =
+        useSelector((state) => state.carModel);
+
+    useEffect(() => {
+        if (cars.length < 2 && cars[0].id === null) dispatch(getCars());
+    }, []);
+
     return (
         <div className={css.contentBlock}>
             <div className={css.contentBlock__currentData}>
                 <fieldset className={css.carClassContainer}>
-                    {checkboxArray.map((checkbox) => (
+                    {carCategory.map((checkbox) => (
                         <label
                             className={css.carClass}
                             htmlFor={checkbox.id}
@@ -19,29 +30,43 @@ function Model() {
                                 type="radio"
                                 name="carClass"
                                 id={checkbox.id}
-                                value={checkbox.value}
+                                value={checkbox.name}
+                                checked={selectedCategoryId === checkbox.id}
+                                onChange={() =>
+                                    dispatch(setSelectedCategoryId(checkbox.id))
+                                }
                             />
                             <div className={css.carClass__label}>
-                                {checkbox.label}
+                                {checkbox.name}
                             </div>
                         </label>
                     ))}
                 </fieldset>
-                <fieldset className={css.cards}>
-                    {cars.map((car) => (
-                        <Card car={car} key={car.id} />
-                    ))}
-                </fieldset>
+                {isFetching ? (
+                    <Preloader />
+                ) : (
+                    <fieldset className={css.cards}>
+                        {cars
+                            .filter(
+                                (car) =>
+                                    car.categoryId?.id === selectedCategoryId ||
+                                    selectedCategoryId === 'allCarCategory',
+                            )
+                            .map((car) => (
+                                <Card
+                                    car={car}
+                                    selectedCar={selectedCar}
+                                    key={car.id}
+                                />
+                            ))}
+                    </fieldset>
+                )}
             </div>
             <div className={css.contentBlock__allOrderData}>
                 <OrderData
                     linkHref="/order/more"
                     linkText="Дополнительно"
-                    city="Ульяновск"
-                    cityPoint="Нариманова 42"
-                    carModel="Hyndai, i30 N"
-                    priceMin="10 000"
-                    priceMax="32 000"
+                    nextStep="more"
                 />
             </div>
         </div>

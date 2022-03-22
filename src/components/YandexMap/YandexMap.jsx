@@ -99,7 +99,7 @@ function YandexMap() {
                                     iconImageHref: mapMark,
                                     iconImageOffset: [-9, -9],
                                 }}
-                                key={coordinate[0]}
+                                key={Date.now()}
                                 onClick={(e) => {
                                     handleClick(e, coordinate.point.address);
                                 }}

@@ -1,16 +1,83 @@
 import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ru from 'date-fns/locale/ru';
-import { useState } from 'react';
-import { colorArray, rateArray, additionalServicesArray } from './constants';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import css from './More.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
+import Preloader from '../../../components/Preloader/Preloader';
+import {
+    getRates,
+    setColor,
+    setMoreEndDate,
+    setMoreStartDate,
+    setRate,
+    setServices,
+} from '../../../store/moreSlice';
+import getFormattedInterval from '../../../components/helpers/FormattedInterval';
+import { setOrderDateInterval, setOrderPrice } from '../../../store/orderSlice';
+import priceCalc from '../../../components/helpers/priceCalc';
+import { setStepTotalIsShow } from '../../../store/stepDisableSlice';
 
 registerLocale('ru', ru);
 
 function More() {
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
+    const dispatch = useDispatch();
+    const {
+        isFetching,
+        rates,
+        selectedColor,
+        selectedRate,
+        additionalServices,
+        selectedStartDate,
+        selectedEndDate,
+    } = useSelector((state) => state.more);
+    const { carModel } = useSelector((state) => state.order.order);
+
+    const [colors] = useState(['Любой', ...carModel.colors]);
+    const [startDate, setStartDate] = useState(
+        selectedStartDate ? new Date(selectedStartDate) : null,
+    );
+    const [endDate, setEndDate] = useState(
+        selectedEndDate ? new Date(selectedEndDate) : null,
+    );
+
+    useEffect(() => {
+        if (rates.length < 2 && rates[0].id === null) dispatch(getRates());
+        dispatch(setColor(selectedColor || 'Любой'));
+        dispatch(setRate(selectedRate.id || rates[0]));
+        setStartDate(selectedStartDate ? new Date(selectedStartDate) : null);
+        setEndDate(selectedEndDate ? new Date(selectedEndDate) : null);
+    }, []);
+
+    useEffect(() => {
+        let interval;
+        if (startDate && endDate) {
+            interval = getFormattedInterval(
+                endDate.getTime() - startDate.getTime(),
+            );
+            dispatch(setOrderDateInterval(interval));
+            dispatch(setMoreStartDate(startDate.getTime()));
+            dispatch(setMoreEndDate(endDate.getTime()));
+        }
+    }, [startDate, endDate]);
+
+    useEffect(() => {
+        if (startDate && endDate) {
+            const price = priceCalc(
+                startDate.getTime(),
+                endDate.getTime(),
+                selectedRate,
+                carModel,
+                additionalServices,
+            );
+            dispatch(setOrderPrice(price));
+            dispatch(setStepTotalIsShow(true));
+        } else {
+            dispatch(setOrderPrice(0));
+            dispatch(setStepTotalIsShow(false));
+        }
+    }, [selectedRate, startDate, endDate, additionalServices]);
 
     const settingsDatePicker = {
         className: css.dateInput,
@@ -52,22 +119,22 @@ function More() {
             <div className={css.contentBlock__currentData}>
                 <div className={css.inputDataTitle}>Цвета</div>
                 <fieldset className={css.radioContainer}>
-                    {colorArray.map((color) => (
+                    {colors.map((color) => (
                         <label
                             className={css.radio}
-                            htmlFor={color.id}
-                            key={color.id}
+                            htmlFor={color}
+                            key={color}
                         >
                             <input
                                 className={css.radio__input}
                                 type="radio"
                                 name="color"
-                                id={color.id}
-                                value={color.value}
+                                id={color}
+                                value={color}
+                                checked={color === selectedColor}
+                                onChange={() => dispatch(setColor(color))}
                             />
-                            <div className={css.radio__label}>
-                                {color.label}
-                            </div>
+                            <div className={css.radio__label}>{color}</div>
                         </label>
                     ))}
                 </fieldset>
@@ -98,41 +165,56 @@ function More() {
                     </div>
                 </div>
                 <div className={css.inputDataTitle}>Тариф</div>
-                <fieldset className={css.rateRadioContainer}>
-                    {rateArray.map((rate) => (
-                        <label
-                            className={`${css.radio} ${css.rateRadio}`}
-                            htmlFor={rate.id}
-                            key={rate.id}
-                        >
-                            <input
-                                className={css.radio__input}
-                                type="radio"
-                                name="rate"
-                                id={rate.id}
-                                value={rate.value}
-                            />
-                            <div className={css.radio__label}>{rate.label}</div>
-                        </label>
-                    ))}
-                </fieldset>
+                {isFetching ? (
+                    <Preloader />
+                ) : (
+                    <fieldset className={css.rateRadioContainer}>
+                        {rates
+                            .filter(
+                                (rate) =>
+                                    rate?.rateTypeId?.name !== null &&
+                                    rate?.rateTypeId?.name !== undefined,
+                            )
+                            .map((rate) => (
+                                <label
+                                    className={`${css.radio} ${css.rateRadio}`}
+                                    htmlFor={rate.id}
+                                    key={rate.id}
+                                >
+                                    <input
+                                        className={css.radio__input}
+                                        type="radio"
+                                        name="rate"
+                                        id={rate.id}
+                                        value={rate.id}
+                                        checked={selectedRate.id === rate.id}
+                                        onChange={() => dispatch(setRate(rate))}
+                                    />
+                                    <div className={css.radio__label}>
+                                        {`${rate.rateTypeId.name}, ${rate.price}  ₽/${rate.rateTypeId.unit}`}
+                                    </div>
+                                </label>
+                            ))}
+                    </fieldset>
+                )}
                 <div className={css.inputDataTitle}>Доп услуги</div>
                 <div className={css.checkboxContainer}>
-                    {additionalServicesArray.map((services) => (
+                    {additionalServices.map((service, index) => (
                         <label
                             className={`${css.checkbox}`}
-                            htmlFor={services.id}
-                            key={services.id}
+                            htmlFor={service.id}
+                            key={service.id}
                         >
                             <input
                                 className={css.checkbox__input}
                                 type="checkbox"
                                 name="services"
-                                id={services.id}
-                                value={services.value}
+                                id={service.id}
+                                checked={service.value}
+                                onChange={() => dispatch(setServices(index))}
                             />
                             <div className={css.checkbox__label}>
-                                {services.label}
+                                {`${service.name}, ${service.price}р`}
                             </div>
                         </label>
                     ))}
@@ -142,15 +224,7 @@ function More() {
                 <OrderData
                     linkHref="/order/total"
                     linkText="Итого"
-                    city="Ульяновск"
-                    cityPoint="Нариманова 42"
-                    carModel="Hyndai, i30 N"
-                    carColor="Голубой"
-                    dateStart="1111"
-                    dateEnd="2222"
-                    selectedRate="На сутки"
-                    isFullTank
-                    price="16 000"
+                    nextStep="total"
                 />
             </div>
         </div>

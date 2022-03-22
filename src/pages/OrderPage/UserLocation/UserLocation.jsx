@@ -146,10 +146,7 @@ function UserLocation() {
                 <OrderData
                     linkHref="/order/model"
                     linkText="Выбрать модель"
-                    city={selectedCity}
-                    cityPoint={selectedPoint}
-                    priceMin={selectedPoint ? '8 000' : '0'}
-                    priceMax={selectedPoint ? '80 000' : '0'}
+                    nextStep="model"
                 />
             </div>
         </div>

@@ -1,7 +1,17 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import css from './Card.module.scss';
 import carStubPicture from '../../../../assets/images/order-models/car-stub-picture.png';
+import { setCar } from '../../../../store/carModelSlice';
 
-function Card({ car }) {
+function Card({ car, selectedCar }) {
+    const dispatch = useDispatch();
+    const [hasError, setHasError] = useState(false);
+
+    const handleClick = () => {
+        dispatch(setCar(car));
+    };
+
     return (
         <label className={css.card} htmlFor={car.id}>
             <input
@@ -10,6 +20,8 @@ function Card({ car }) {
                 name="car"
                 value={car.name}
                 id={car.id}
+                checked={selectedCar.id === car.id}
+                onChange={() => handleClick()}
             />
             <div className={css.card__inner}>
                 <div className={css.info}>
@@ -20,8 +32,9 @@ function Card({ car }) {
                 </div>
                 <div className={css.imageContainer}>
                     <img
+                        onError={() => setHasError(true)}
                         className={css.carImage}
-                        src={car.imgUrl ? car.imgUrl : carStubPicture}
+                        src={hasError ? carStubPicture : car.thumbnail.path}
                         alt={car.name}
                     />
                 </div>

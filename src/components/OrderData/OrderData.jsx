@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import ListString from './ListString';
 import css from './OrderData.module.scss';
@@ -6,26 +7,37 @@ function OrderData(props) {
     const {
         linkHref,
         linkText,
-        city = null,
-        cityPoint = null,
-        carModel = null,
-        carColor = null,
-        dateStart = null,
-        dateEnd = null,
-        selectedRate = null,
-        isFullTank = false,
-        isChildChair = false,
-        isRightHandDrive = false,
-        priceMin = 0,
-        priceMax = 0,
-        price = 0,
         cancel = false,
         showConfirmation = null,
+        nextStep = 'model',
     } = props;
 
-    function getInterval() {
-        return '1д2ч';
-    }
+    const step = useSelector((state) => state.step);
+
+    const {
+        city,
+        cityPoint,
+        carModel,
+        carColor,
+        dateInterval,
+        selectedRate,
+        isFullTank,
+        isChildChair,
+        isRightHandDrive,
+        price,
+    } = useSelector((state) => state.order.order);
+
+    const handleClickLink = (e, isShow) => {
+        if (!isShow) e.preventDefault();
+    };
+
+    const handleClickButton = (e, isShow) => {
+        if (!isShow) {
+            e.preventDefault();
+        } else {
+            showConfirmation(true);
+        }
+    };
 
     return (
         <div className={css.container}>
@@ -37,19 +49,28 @@ function OrderData(props) {
                     {city && cityPoint && (
                         <ListString
                             title="Пункт выдачи"
-                            data={`${city}, ${cityPoint}`}
+                            data={
+                                <span>
+                                    {city} <br /> {cityPoint}
+                                </span>
+                            }
                         />
                     )}
-                    {carModel && <ListString title="Модель" data={carModel} />}
+                    {carModel.id && (
+                        <ListString title="Модель" data={carModel.name} />
+                    )}
                     {carColor && <ListString title="Цвет" data={carColor} />}
-                    {dateStart && dateEnd && (
+                    {dateInterval && (
                         <ListString
                             title="Длительность аренды"
-                            data={getInterval(dateStart, dateEnd, selectedRate)}
+                            data={dateInterval}
                         />
                     )}
-                    {selectedRate && (
-                        <ListString title="Тариф" data={selectedRate} />
+                    {selectedRate?.id && (
+                        <ListString
+                            title="Тариф"
+                            data={selectedRate.rateTypeId.name}
+                        />
                     )}
                     {isFullTank && <ListString title="Полный бак" data="Да" />}
                     {isChildChair && (
@@ -61,13 +82,20 @@ function OrderData(props) {
                 </ul>
                 <div className={css.price}>
                     Цена:
-                    {price ? `${price} ₽` : `от ${priceMin} до ${priceMax} ₽`}
+                    {price
+                        ? `${price} ₽`
+                        : `от ${carModel.priceMin} до ${carModel.priceMax} ₽`}
                 </div>
             </div>
             {!showConfirmation ? (
                 <NavLink
-                    className={cancel ? css.cancelButton : css.button}
+                    className={`${cancel ? css.cancelButton : css.button} 
+                    ${!step[nextStep].isShow && css.button_disable}
+                    `}
                     to={linkHref}
+                    onClick={(e) => {
+                        handleClickLink(e, step[nextStep].isShow);
+                    }}
                 >
                     {linkText}
                 </NavLink>
@@ -75,8 +103,8 @@ function OrderData(props) {
                 <button
                     className={cancel ? css.cancelButton : css.button}
                     type="button"
-                    onClick={() => {
-                        showConfirmation(true);
+                    onClick={(e) => {
+                        handleClickButton(e, step[nextStep].isShow);
                     }}
                 >
                     {linkText}

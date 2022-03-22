@@ -36,5 +36,12 @@
         & .item__link_active {
             color: $color_main_accent;
         }
+        & .item__link_disable {
+            color: $color_gray_dark;
+            cursor: auto;
+            &:hover {
+                color: $color_gray_dark;
+            }
+        }
     }
 }

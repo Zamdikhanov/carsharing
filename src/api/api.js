@@ -13,13 +13,19 @@ const orderAPI = {
         return instance.get(`db/point`).then((response) => response.data.data);
     },
     getCategoryList() {
-        return instance.get(`db/category`).then((response) => response.data.data);
+        return instance
+            .get(`db/category`)
+            .then((response) => response.data.data);
     },
     getCarList() {
-        return instance.get(`db/car?page=1&limit=10`).then((response) => response.data.data);
+        return instance
+            .get(`db/car?page=1&limit=20`)
+            .then((response) => response.data.data);
     },
-    getCarFromCategoryList(id) {
-        return instance.get(`db/car?categoryId=${id}`).then((response) => response.data.data);
+    getCarsFromCategory(id) {
+        return instance
+            .get(`db/car?categoryId=${id}`)
+            .then((response) => response.data.data);
     },
 };
 

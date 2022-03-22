@@ -68,9 +68,11 @@ export const carModelSlice = createSlice({
         },
         setCarCategory: (state, action) => {
             state.carCategory = [{
-                id: 'allCarCategory',
-                name: 'Все',
-            }, ...action.payload];
+                    id: 'allCarCategory',
+                    name: 'Все',
+                },
+                ...action.payload,
+            ];
         },
         setSelectedCategoryId: (state, action) => {
             state.selectedCategoryId = action.payload;
@@ -92,6 +94,13 @@ export const {
 export const getCategory = () => async(dispatch) => {
     const responce = await orderAPI.getCategoryList();
     dispatch(setCarCategory(responce));
+};
+
+export const getCarsFromCategory = (id) => async(dispatch) => {
+    dispatch(setIsFetching(true));
+    const responce = await orderAPI.getCarsFromCategory(id);
+    dispatch(setCars(responce));
+    dispatch(setIsFetching(false));
 };
 
 export const getAllCars = () => async(dispatch) => {

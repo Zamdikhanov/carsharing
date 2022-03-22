@@ -5,6 +5,7 @@ import OrderData from '../../../components/OrderData/OrderData';
 import Card from './Card/Card';
 import {
     getAllCars,
+    getCarsFromCategory,
     setSelectedCategoryId,
 } from '../../../store/carModelSlice';
 import Preloader from '../../../components/Preloader/Preloader';
@@ -20,6 +21,14 @@ function Model() {
     useEffect(() => {
         if (cars.length < 2 && cars[0].id === null) dispatch(getAllCars());
     }, []);
+
+    useEffect(() => {
+        if (selectedCategoryId === 'allCarCategory') {
+            dispatch(getAllCars())
+        } else {
+            dispatch(getCarsFromCategory(selectedCategoryId));
+        };
+    }, [selectedCategoryId])
 
     return (
         <div className={css.contentBlock}>

@@ -4,7 +4,7 @@ import css from './Model.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 import Card from './Card/Card';
 import {
-    getCars,
+    getAllCars,
     setSelectedCategoryId,
 } from '../../../store/carModelSlice';
 import Preloader from '../../../components/Preloader/Preloader';
@@ -13,11 +13,12 @@ function Model() {
     const dispatch = useDispatch();
     const { isFetching, cars, carCategory, selectedCategoryId, selectedCar } =
         useSelector((state) => state.carModel);
-    const { selectedCity, selectedPoint } =
-        useSelector((state) => state.location);
+    const { selectedCity, selectedPoint } = useSelector(
+        (state) => state.location,
+    );
 
     useEffect(() => {
-        if (cars.length < 2 && cars[0].id === null) dispatch(getCars());
+        if (cars.length < 2 && cars[0].id === null) dispatch(getAllCars());
     }, []);
 
     return (
@@ -51,11 +52,13 @@ function Model() {
                     <Preloader />
                 ) : (
                     <fieldset className={css.cards}>
-                        {cars
-                            .filter((car) => car.categoryId?.id === selectedCategoryId || selectedCategoryId === 'allCarCategory')
-                            .map((car) => (
-                                <Card car={car} selectedCar={selectedCar} key={car.id} />
-                            ))}
+                        {cars.map((car) => (
+                            <Card
+                                car={car}
+                                selectedCar={selectedCar}
+                                key={car.id}
+                            />
+                        ))}
                     </fieldset>
                 )}
             </div>

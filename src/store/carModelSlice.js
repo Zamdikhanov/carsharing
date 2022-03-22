@@ -66,25 +66,11 @@ export const carModelSlice = createSlice({
         setIsFetching: (state, action) => {
             state.isFetching = action.payload;
         },
-        setCarCategory: (state) => {
-            const carCategory = state.cars.reduce(
-                (acc, car) => {
-                    const hasCategoryInAcc = acc.some(
-                        (category) => category.id === car.categoryId.id,
-                    );
-                    if (car.categoryId && !hasCategoryInAcc) {
-                        acc.push({
-                            id: car.categoryId.id,
-                            name: car.categoryId.name,
-                        });
-                    }
-                    return acc;
-                }, [{
-                    id: 'allCarCategory',
-                    name: 'Все',
-                }, ],
-            );
-            state.carCategory = carCategory;
+        setCarCategory: (state, action) => {
+            state.carCategory = [{
+                id: 'allCarCategory',
+                name: 'Все',
+            }, ...action.payload];
         },
         setSelectedCategoryId: (state, action) => {
             state.selectedCategoryId = action.payload;
@@ -103,11 +89,17 @@ export const {
     setSelectedCar,
 } = carModelSlice.actions;
 
-export const getCars = () => async(dispatch) => {
+export const getCategory = () => async(dispatch) => {
+    const responce = await orderAPI.getCategoryList();
+    dispatch(setCarCategory(responce));
+};
+
+export const getAllCars = () => async(dispatch) => {
     dispatch(setIsFetching(true));
-    const responce = await orderAPI.getCarList();
-    await dispatch(setCars(responce));
-    await dispatch(setCarCategory());
+    const responce = await orderAPI.getCategoryList();
+    dispatch(setCarCategory(responce));
+    const responceCar = await orderAPI.getCarList();
+    await dispatch(setCars(responceCar));
     dispatch(setIsFetching(false));
 };
 

@@ -18,6 +18,11 @@ const orderAPI = {
     getRate() {
         return instance.get(`db/rate`).then((response) => response.data.data);
     },
+    postOrder(order) {
+        return instance
+            .post(`/db/order`, order)
+            .then((response) => response.data.data);
+    },
 };
 
 export default orderAPI;

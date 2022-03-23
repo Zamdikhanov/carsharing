@@ -7,25 +7,25 @@ import Modal from './Modal/Modal';
 import formatDate from '../../../components/helpers/formatDate';
 
 function Total() {
-
-    const { carModel, dateStart, isFullTank, isChildChair, isRightHandDrive, } = useSelector(state => state.order.order)
+    const { carModel, dateStart, isFullTank, isChildChair, isRightHandDrive } =
+        useSelector((state) => state.order.order);
 
     const [isShow, setIsShow] = useState(false);
     const [formatedDateStart, setFormatedDateStart] = useState();
 
     const orderData = {
-        linkHref: "/order/total",
-        linkText: "Заказать",
+        linkHref: '/order/total',
+        linkText: 'Заказать',
         showConfirmation: setIsShow,
-    }
+    };
 
     useEffect(() => {
         setFormatedDateStart(formatDate(dateStart));
-    }, [])
+    }, []);
 
     useEffect(() => {
         setFormatedDateStart(formatDate(dateStart));
-    }, [dateStart])
+    }, [dateStart]);
 
     return (
         <div className={css.contentBlock}>
@@ -34,7 +34,11 @@ function Total() {
                 <div className={css.currentData__inner}>
                     <div className={css.carDescription}>
                         <div className={css.carModel}>{carModel.name}</div>
-                        <div className={css.carNumber}>{carModel.number}</div>
+                        {carModel.number && (
+                            <div className={css.carNumber}>
+                                {carModel.number}
+                            </div>
+                        )}
                         {isFullTank && (
                             <div className={css.info}>
                                 <span className={css.info__title}>Топливо</span>{' '}
@@ -72,9 +76,7 @@ function Total() {
                 </div>
             </div>
             <div className={css.contentBlock__allOrderData}>
-                <OrderData
-                    {...orderData}
-                />
+                <OrderData {...orderData} />
             </div>
         </div>
     );

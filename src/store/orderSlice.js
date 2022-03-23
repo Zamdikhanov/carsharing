@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import orderAPI from '../api/api';
 
 const initialState = {
     order: {
@@ -37,6 +38,12 @@ const initialState = {
         isRightHandDrive: false,
         price: 0,
     },
+    fullReadyOrder: {
+        orderStatusId: {
+            name: null,
+            id: null,
+        }
+    }
 };
 
 export const OrderSlice = createSlice({
@@ -84,6 +91,9 @@ export const OrderSlice = createSlice({
             state.order.isChildChair = false;
             state.order.isRightHandDrive = false;
         },
+        setFullReadyOrderStatusId: (state, action) => {
+            state.fullReadyOrder.orderStatusId = action.payload;
+        },
     },
 });
 
@@ -101,6 +111,12 @@ export const {
     setOrderDateInterval,
     setOrderPrice,
     resetOrderServices,
+    setFullReadyOrderStatusId,
 } = OrderSlice.actions;
+
+export const getOrderStatusId = () => async(dispatch) => {
+    const responce = await orderAPI.getOrderStatusId();
+    dispatch(setFullReadyOrderStatusId(responce));
+};
 
 export default OrderSlice.reducer;

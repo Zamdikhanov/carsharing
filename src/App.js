@@ -10,10 +10,7 @@ import ConfirmedOrder from './pages/OrderPage/ConfirmedOrder/ConfirmedOrder';
 
 function App() {
     return (
-        <BrowserRouter
-            // basename="/carsharing"
-            basename={process.env.PUBLIC_URL}
-        >
+        <BrowserRouter basename="/carsharing">
             <div className="App">
                 <Routes>
                     <Route path="/" element={<MainPage />} />

@@ -30,6 +30,10 @@ const orderAPI = {
     getRate() {
         return instance.get(`db/rate`).then((response) => response.data.data);
     },
+    getOrderStatusId() {
+        return instance.get(`/db/orderStatus`).
+        then((response) => response.data.data[0]);
+    },
     postOrder(order) {
         return instance
             .post(`/db/order`, order)

@@ -10,8 +10,8 @@ const initialState = {
             updatedAt: null,
             createdAt: null,
             description: null,
-            priceMin: null,
-            priceMax: null,
+            priceMin: 0,
+            priceMax: 0,
             name: null,
             number: null,
             categoryId: {
@@ -39,11 +39,19 @@ const initialState = {
         price: 0,
     },
     fullReadyOrder: {
-        orderStatusId: {
-            name: null,
-            id: null,
-        }
-    }
+        orderStatusId: { id: '' },
+        cityId: { id: '' },
+        pointId: { id: '' },
+        carId: { id: '' },
+        color: '',
+        dateFrom: 0,
+        dateTo: 0,
+        rateId: { id: '' },
+        price: 0,
+        isFullTank: true,
+        isNeedChildChair: true,
+        isRightWheel: true,
+    },
 };
 
 export const OrderSlice = createSlice({
@@ -52,6 +60,7 @@ export const OrderSlice = createSlice({
     reducers: {
         setOrderCity: (state, action) => {
             state.order.city = action.payload;
+            state.fullReadyOrder.cityId = action.payload;
         },
         setOrderCityPoint: (state, action) => {
             state.order.cityPoint = action.payload;
@@ -94,6 +103,12 @@ export const OrderSlice = createSlice({
         setFullReadyOrderStatusId: (state, action) => {
             state.fullReadyOrder.orderStatusId = action.payload;
         },
+        setFullReadyOrderCityId: (state, action) => {
+            state.fullReadyOrder.cityId.id = action.payload;
+        },
+        setFullReadyOrderPointId: (state, action) => {
+            state.fullReadyOrder.pointId.id = action.payload;
+        },
     },
 });
 
@@ -112,6 +127,8 @@ export const {
     setOrderPrice,
     resetOrderServices,
     setFullReadyOrderStatusId,
+    setFullReadyOrderCityId,
+    setFullReadyOrderPointId,
 } = OrderSlice.actions;
 
 export const getOrderStatusId = () => async(dispatch) => {

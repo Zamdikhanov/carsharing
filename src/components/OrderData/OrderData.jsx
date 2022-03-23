@@ -51,7 +51,7 @@ function OrderData(props) {
                             title="Пункт выдачи"
                             data={
                                 <span>
-                                    {city} <br /> {cityPoint}
+                                    {city.name} <br /> {cityPoint.address}
                                 </span>
                             }
                         />

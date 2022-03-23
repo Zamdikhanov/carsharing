@@ -1,7 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import orderAPI from '../api/api';
-import { setOrderCity, setOrderCityPoint } from './orderSlice';
+import {
+    // setFullReadyOrderCityId,
+    // setFullReadyOrderPointId,
+    setOrderCity,
+    setOrderCityPoint,
+} from './orderSlice';
 import { setStepModelIsShow } from './stepDisableSlice';
 import { resetCarModel } from './carModelSlice';
 
@@ -48,7 +53,7 @@ export const locationSlice = createSlice({
             state.selectedCity = action.payload;
             state.availablePointsInSelectedCity = state.availablePoints.filter(
                 (availablePoint) =>
-                availablePoint.cityId.name === state.selectedCity,
+                availablePoint.cityId.name === state.selectedCity.name,
             );
         },
         setSelectedPoint: (state, action) => {
@@ -78,10 +83,13 @@ export const setCity = (point) => async(dispatch) => {
     dispatch(setSelectedCity(point));
     dispatch(setOrderCity(point));
 };
-export const setPoint = (point) => async(dispatch) => {
+export const setPoint = (point, state) => async(dispatch) => {
     dispatch(setSelectedPoint(point));
     dispatch(setOrderCityPoint(point));
-    if (point) {
+    // dispatch(setFullReadyOrderCityId(state.availablePointsInSelectedCity));
+    // dispatch(setFullReadyOrderPointId(point));
+    console.log(state);
+    if (point.id) {
         dispatch(setStepModelIsShow(true));
     } else {
         dispatch(setStepModelIsShow(false));

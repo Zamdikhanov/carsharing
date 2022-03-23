@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import css from './Model.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 import Card from './Card/Card';
-import { getCars, setSelectedCategoryId } from '../../../store/carModelSlice';
+import {
+    getAllCars,
+    getCarsFromCategory,
+    setSelectedCategoryId,
+} from '../../../store/carModelSlice';
 import Preloader from '../../../components/Preloader/Preloader';
 
 function Model() {
@@ -12,8 +16,16 @@ function Model() {
         useSelector((state) => state.carModel);
 
     useEffect(() => {
-        if (cars.length < 2 && cars[0].id === null) dispatch(getCars());
+        if (cars.length < 2 && cars[0].id === null) dispatch(getAllCars());
     }, []);
+
+    useEffect(() => {
+        if (selectedCategoryId === 'allCarCategory') {
+            dispatch(getAllCars());
+        } else {
+            dispatch(getCarsFromCategory(selectedCategoryId));
+        }
+    }, [selectedCategoryId]);
 
     return (
         <div className={css.contentBlock}>
@@ -46,19 +58,13 @@ function Model() {
                     <Preloader />
                 ) : (
                     <fieldset className={css.cards}>
-                        {cars
-                            .filter(
-                                (car) =>
-                                    car.categoryId?.id === selectedCategoryId ||
-                                    selectedCategoryId === 'allCarCategory',
-                            )
-                            .map((car) => (
-                                <Card
-                                    car={car}
-                                    selectedCar={selectedCar}
-                                    key={car.id}
-                                />
-                            ))}
+                        {cars.map((car) => (
+                            <Card
+                                car={car}
+                                selectedCar={selectedCar}
+                                key={car.id}
+                            />
+                        ))}
                     </fieldset>
                 )}
             </div>

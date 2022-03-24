@@ -1,12 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import orderAPI from '../api/api';
-import {
-    // setFullReadyOrderCityId,
-    // setFullReadyOrderPointId,
-    setOrderCity,
-    setOrderCityPoint,
-} from './orderSlice';
+import { setOrderCity, setOrderCityPoint } from './orderSlice';
 import { setStepModelIsShow } from './stepDisableSlice';
 import { resetCarModel } from './carModelSlice';
 
@@ -83,13 +78,10 @@ export const setCity = (point) => async(dispatch) => {
     dispatch(setSelectedCity(point));
     dispatch(setOrderCity(point));
 };
-export const setPoint = (point, state) => async(dispatch) => {
+export const setPoint = (point) => async(dispatch) => {
     dispatch(setSelectedPoint(point));
     dispatch(setOrderCityPoint(point));
-    // dispatch(setFullReadyOrderCityId(state.availablePointsInSelectedCity));
-    // dispatch(setFullReadyOrderPointId(point));
-    console.log(state);
-    if (point.id) {
+    if (point && point.id) {
         dispatch(setStepModelIsShow(true));
     } else {
         dispatch(setStepModelIsShow(false));

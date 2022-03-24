@@ -48,9 +48,9 @@ const initialState = {
         dateTo: 0,
         rateId: { id: '' },
         price: 0,
-        isFullTank: true,
-        isNeedChildChair: true,
-        isRightWheel: true,
+        isFullTank: false,
+        isNeedChildChair: false,
+        isRightWheel: false,
     },
 };
 
@@ -60,54 +60,61 @@ export const OrderSlice = createSlice({
     reducers: {
         setOrderCity: (state, action) => {
             state.order.city = action.payload;
-            state.fullReadyOrder.cityId = action.payload;
+            state.fullReadyOrder.cityId.id = action.payload && action.payload.id;
         },
         setOrderCityPoint: (state, action) => {
             state.order.cityPoint = action.payload;
+            state.fullReadyOrder.pointId.id = action.payload && action.payload.id;
         },
         setOrderCarModel: (state, action) => {
             state.order.carModel = action.payload;
+            state.fullReadyOrder.carId.id = action.payload && action.payload.id;
         },
         setOrderSelectedRate: (state, action) => {
             state.order.selectedRate = action.payload;
+            state.fullReadyOrder.rateId.id = action.payload && action.payload.id;
         },
         setOrderCarColor: (state, action) => {
             state.order.carColor = action.payload;
+            state.fullReadyOrder.color = action.payload;
         },
         toggleOrderIsFullTank: (state) => {
             state.order.isFullTank = !state.order.isFullTank;
+            state.fullReadyOrder.isFullTank = !state.fullReadyOrder.isFullTank;
         },
         toggleOrderIsChildChair: (state) => {
             state.order.isChildChair = !state.order.isChildChair;
+            state.fullReadyOrder.isNeedChildChair = !state.fullReadyOrder.isChildChair;
         },
         toggleOrderIsRightHandDrive: (state) => {
             state.order.isRightHandDrive = !state.order.isRightHandDrive;
+            state.fullReadyOrder.isRightWheel = !state.fullReadyOrder.isRightWheel;
         },
         setOrderDateStart: (state, action) => {
             state.order.dateStart = action.payload;
+            state.fullReadyOrder.dateFrom = action.payload;
         },
         setOrderDateEnd: (state, action) => {
             state.order.dateEnd = action.payload;
+            state.fullReadyOrder.dateTo = action.payload;
         },
         setOrderDateInterval: (state, action) => {
             state.order.dateInterval = action.payload;
         },
         setOrderPrice: (state, action) => {
             state.order.price = action.payload;
+            state.fullReadyOrder.price = action.payload;
         },
         resetOrderServices: (state) => {
             state.order.isFullTank = false;
             state.order.isChildChair = false;
             state.order.isRightHandDrive = false;
+            state.fullReadyOrder.isFullTank = false;
+            state.fullReadyOrder.isNeedChildChair = false;
+            state.fullReadyOrder.isRightWheel = false;
         },
         setFullReadyOrderStatusId: (state, action) => {
             state.fullReadyOrder.orderStatusId = action.payload;
-        },
-        setFullReadyOrderCityId: (state, action) => {
-            state.fullReadyOrder.cityId.id = action.payload;
-        },
-        setFullReadyOrderPointId: (state, action) => {
-            state.fullReadyOrder.pointId.id = action.payload;
         },
     },
 });
@@ -127,8 +134,6 @@ export const {
     setOrderPrice,
     resetOrderServices,
     setFullReadyOrderStatusId,
-    setFullReadyOrderCityId,
-    setFullReadyOrderPointId,
 } = OrderSlice.actions;
 
 export const getOrderStatusId = () => async(dispatch) => {

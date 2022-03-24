@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import orderAPI from '../../../../api/api';
 import { getOrderStatusId } from '../../../../store/orderSlice';
 import css from './Modal.module.scss';
@@ -8,14 +8,16 @@ import css from './Modal.module.scss';
 function Modal({ show }) {
     const { fullReadyOrder } = useSelector((state) => state.order);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getOrderStatusId());
     }, []);
 
-    const handleClick = async () => {
+    const handleClick = async (e) => {
+        e.preventDefault();
         const responce = await orderAPI.postOrder(fullReadyOrder);
-        console.log(responce);
+        navigate(`/confirmed-order/${responce.id}`);
     };
 
     return (
@@ -25,8 +27,8 @@ function Modal({ show }) {
                 <div className={css.buttonBlock}>
                     <NavLink
                         className={css.buttonConfirm}
-                        to="/confirmed-order"
-                        onClick={() => handleClick()}
+                        to="/confirmed-order/"
+                        onClick={(e) => handleClick(e)}
                     >
                         Подтвердить{' '}
                     </NavLink>

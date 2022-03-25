@@ -58,6 +58,19 @@ export const OrderSlice = createSlice({
     name: 'order',
     initialState,
     reducers: {
+        setOrder: (state, action) => {
+            state.order.city = action.payload.cityId;
+            state.order.cityPoint = action.payload.pointId;
+            state.order.carModel = action.payload.carId;
+            state.order.carColor = action.payload.color;
+            state.order.dateStart = action.payload.dateFrom;
+            state.order.dateEnd = action.payload.dateTo;
+            state.order.selectedRate = action.payload.rateId;
+            state.order.isFullTank = action.payload.isFullTank;
+            state.order.isChildChair = action.payload.isNeedChildChair;
+            state.order.isRightHandDrive = action.payload.isRightWheel;
+            state.order.price = action.payload.price;
+        },
         setOrderCity: (state, action) => {
             state.order.city = action.payload;
             state.fullReadyOrder.cityId.id = action.payload && action.payload.id;
@@ -120,6 +133,7 @@ export const OrderSlice = createSlice({
 });
 
 export const {
+    setOrder,
     setOrderCity,
     setOrderCityPoint,
     setOrderCarModel,
@@ -139,6 +153,11 @@ export const {
 export const getOrderStatusId = () => async(dispatch) => {
     const responce = await orderAPI.getOrderStatusId();
     dispatch(setFullReadyOrderStatusId(responce));
+};
+
+export const getOrderById = (id) => async(dispatch) => {
+    const responce = await orderAPI.getOrder(id);
+    dispatch(setOrder(responce));
 };
 
 export default OrderSlice.reducer;

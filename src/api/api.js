@@ -31,8 +31,9 @@ const orderAPI = {
         return instance.get(`db/rate`).then((response) => response.data.data);
     },
     getOrderStatusId() {
-        return instance.get(`/db/orderStatus`).
-        then((response) => response.data.data[0]);
+        return instance
+            .get(`/db/orderStatus`)
+            .then((response) => response.data.data[1]);
     },
     postOrder(order) {
         return instance
@@ -40,8 +41,9 @@ const orderAPI = {
             .then((response) => response.data.data);
     },
     getOrder(id) {
-        return instance.get(`/db/order/${id}`).
-        then((response) => response.data.data);
+        return instance
+            .get(`/db/order/${id}`)
+            .then((response) => response.data.data);
     },
 };
 

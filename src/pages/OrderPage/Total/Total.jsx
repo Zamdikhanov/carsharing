@@ -6,7 +6,7 @@ import defaultCarImage from '../../../assets/images/order-models/car-stub-pictur
 import Modal from './Modal/Modal';
 import formatDate from '../../../components/helpers/formatDate';
 
-function Total() {
+function Total({ isConfirmedOrder = false }) {
     const { carModel, dateStart, isFullTank, isChildChair, isRightHandDrive } =
         useSelector((state) => state.order.order);
 
@@ -18,6 +18,11 @@ function Total() {
         linkText: 'Заказать',
         showConfirmation: setIsShow,
     };
+
+    if (isConfirmedOrder) {
+        orderData.cancel = 'true';
+        orderData.linkText = 'Отменить';
+    }
 
     useEffect(() => {
         setFormatedDateStart(formatDate(dateStart));
@@ -33,6 +38,7 @@ function Total() {
             <div className={css.contentBlock__currentData}>
                 <div className={css.currentData__inner}>
                     <div className={css.carDescription}>
+                        {isConfirmedOrder && <div className={css.order_status}>Ваш заказ подтверждён</div>}
                         <div className={css.carModel}>{carModel.name}</div>
                         {carModel.number && (
                             <div className={css.carNumber}>

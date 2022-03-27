@@ -7,8 +7,14 @@ import Modal from './Modal/Modal';
 import formatDate from '../../../components/helpers/formatDate';
 
 function Total({ isConfirmedOrder = false }) {
-    const { carModel, dateStart, isFullTank, isChildChair, isRightHandDrive } =
-        useSelector((state) => state.order.order);
+    const {
+        carModel,
+        dateStart,
+        isFullTank,
+        isChildChair,
+        isRightHandDrive,
+        orderStatusId,
+    } = useSelector((state) => state.order.order);
 
     const [isShow, setIsShow] = useState(false);
     const [formatedDateStart, setFormatedDateStart] = useState();
@@ -32,13 +38,33 @@ function Total({ isConfirmedOrder = false }) {
         setFormatedDateStart(formatDate(dateStart));
     }, [dateStart]);
 
+    function confirmedOrderMessage() {
+        if (
+            isConfirmedOrder &&
+            orderStatusId?.id &&
+            orderStatusId.id === '5e26a1f0099b810b946c5d8b'
+        ) {
+            return (
+                <div className={css.order_status}>Ваш заказ подтверждён</div>
+            );
+        }
+        if (
+            isConfirmedOrder &&
+            orderStatusId?.id &&
+            orderStatusId.id === '5e26a1f5099b810b946c5d8c'
+        ) {
+            return <div className={css.order_status}>Ваш заказ отменён</div>;
+        }
+        return null;
+    }
+
     return (
         <div className={css.contentBlock}>
             {isShow && <Modal show={setIsShow} />}
             <div className={css.contentBlock__currentData}>
                 <div className={css.currentData__inner}>
                     <div className={css.carDescription}>
-                        {isConfirmedOrder && <div className={css.order_status}>Ваш заказ подтверждён</div>}
+                        {confirmedOrderMessage()}
                         <div className={css.carModel}>{carModel.name}</div>
                         {carModel.number && (
                             <div className={css.carNumber}>

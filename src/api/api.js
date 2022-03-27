@@ -40,6 +40,11 @@ const orderAPI = {
             .post(`/db/order`, order)
             .then((response) => response.data.data);
     },
+    canselOrder(order) {
+        return instance
+            .put(`/db/order`, order)
+            .then((response) => response.data.data);
+    },
     getOrder(id) {
         return instance
             .get(`/db/order/${id}`)

@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { canselOrder } from '../../store/orderSlice';
 import ListString from './ListString';
 import css from './OrderData.module.scss';
 
@@ -12,6 +13,7 @@ function OrderData(props) {
         nextStep = 'model',
     } = props;
 
+    const dispatch = useDispatch();
     const step = useSelector((state) => state.step);
 
     const {
@@ -37,6 +39,7 @@ function OrderData(props) {
         } else {
             showConfirmation(true);
         }
+        if (cancel) dispatch(canselOrder());
     };
 
     return (
@@ -87,7 +90,17 @@ function OrderData(props) {
                         : `от ${carModel.priceMin} до ${carModel.priceMax} ₽`}
                 </div>
             </div>
-            {!showConfirmation ? (
+            {showConfirmation ? (
+                <button
+                    className={cancel ? css.cancelButton : css.button}
+                    type="button"
+                    onClick={(e) => {
+                        handleClickButton(e, step[nextStep].isShow);
+                    }}
+                >
+                    {linkText}
+                </button>
+            ) : (
                 <NavLink
                     className={`${cancel ? css.cancelButton : css.button} 
                     ${!step[nextStep].isShow && css.button_disable}
@@ -99,16 +112,6 @@ function OrderData(props) {
                 >
                     {linkText}
                 </NavLink>
-            ) : (
-                <button
-                    className={cancel ? css.cancelButton : css.button}
-                    type="button"
-                    onClick={(e) => {
-                        handleClickButton(e, step[nextStep].isShow);
-                    }}
-                >
-                    {linkText}
-                </button>
             )}
         </div>
     );

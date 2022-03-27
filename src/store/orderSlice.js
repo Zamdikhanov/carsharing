@@ -38,6 +38,7 @@ const initialState = {
         isRightHandDrive: false,
         price: 0,
         orderStatusId: null,
+        id: null,
     },
     fullReadyOrder: {
         orderStatusId: { id: '' },
@@ -52,6 +53,7 @@ const initialState = {
         isFullTank: false,
         isNeedChildChair: false,
         isRightWheel: false,
+        id: null,
     },
 };
 
@@ -72,14 +74,18 @@ export const OrderSlice = createSlice({
             state.order.isRightHandDrive = action.payload.isRightWheel;
             state.order.price = action.payload.price;
             state.order.orderStatusId = action.payload.orderStatusId;
+            state.order.id = action.payload.id;
+            state.fullReadyOrder = action.payload;
         },
         setOrderCity: (state, action) => {
             state.order.city = action.payload;
-            state.fullReadyOrder.cityId.id = action.payload && action.payload.id;
+            state.fullReadyOrder.cityId.id =
+                action.payload && action.payload.id;
         },
         setOrderCityPoint: (state, action) => {
             state.order.cityPoint = action.payload;
-            state.fullReadyOrder.pointId.id = action.payload && action.payload.id;
+            state.fullReadyOrder.pointId.id =
+                action.payload && action.payload.id;
         },
         setOrderCarModel: (state, action) => {
             state.order.carModel = action.payload;
@@ -87,7 +93,8 @@ export const OrderSlice = createSlice({
         },
         setOrderSelectedRate: (state, action) => {
             state.order.selectedRate = action.payload;
-            state.fullReadyOrder.rateId.id = action.payload && action.payload.id;
+            state.fullReadyOrder.rateId.id =
+                action.payload && action.payload.id;
         },
         setOrderCarColor: (state, action) => {
             state.order.carColor = action.payload;
@@ -99,11 +106,13 @@ export const OrderSlice = createSlice({
         },
         toggleOrderIsChildChair: (state) => {
             state.order.isChildChair = !state.order.isChildChair;
-            state.fullReadyOrder.isNeedChildChair = !state.fullReadyOrder.isChildChair;
+            state.fullReadyOrder.isNeedChildChair =
+                !state.fullReadyOrder.isChildChair;
         },
         toggleOrderIsRightHandDrive: (state) => {
             state.order.isRightHandDrive = !state.order.isRightHandDrive;
-            state.fullReadyOrder.isRightWheel = !state.fullReadyOrder.isRightWheel;
+            state.fullReadyOrder.isRightWheel =
+                !state.fullReadyOrder.isRightWheel;
         },
         setOrderDateStart: (state, action) => {
             state.order.dateStart = action.payload;
@@ -153,19 +162,18 @@ export const {
     setFullReadyOrderStatusId,
 } = OrderSlice.actions;
 
-export const getOrderStatusId = () => async(dispatch) => {
+export const getOrderStatusId = () => async (dispatch) => {
     const responce = await orderAPI.getOrderStatusId();
     dispatch(setFullReadyOrderStatusId(responce));
 };
 
-export const getOrderById = (id) => async(dispatch) => {
+export const getOrderById = (id) => async (dispatch) => {
     const responce = await orderAPI.getOrder(id);
     dispatch(setOrder(responce));
 };
 
-export const canselOrder = () => async(dispatch) => {
-    setFullReadyOrderStatusId({ id: "5e26a1f5099b810b946c5d8c", name: "Отмененые" });
-    const responce = await orderAPI.canselOrder();
+export const cancelOrder = (order) => async (dispatch) => {
+    const responce = await orderAPI.cancelOrder(order);
     dispatch(setOrder(responce));
 };
 

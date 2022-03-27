@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { canselOrder } from '../../store/orderSlice';
+import { cancelOrder } from '../../store/orderSlice';
 import ListString from './ListString';
 import css from './OrderData.module.scss';
 
@@ -27,19 +27,23 @@ function OrderData(props) {
         isChildChair,
         isRightHandDrive,
         price,
+        orderStatusId,
     } = useSelector((state) => state.order.order);
+
+    const { order } = useSelector((state) => state.order);
 
     const handleClickLink = (e, isShow) => {
         if (!isShow) e.preventDefault();
     };
 
     const handleClickButton = (e, isShow) => {
-        if (!isShow) {
+        if (cancel) {
+            dispatch(cancelOrder(order));
+        } else if (!isShow) {
             e.preventDefault();
         } else {
             showConfirmation(true);
         }
-        if (cancel) dispatch(canselOrder());
     };
 
     return (
@@ -93,6 +97,7 @@ function OrderData(props) {
             {showConfirmation ? (
                 <button
                     className={cancel ? css.cancelButton : css.button}
+                    disabled={orderStatusId?.id === '5e26a1f5099b810b946c5d8c'}
                     type="button"
                     onClick={(e) => {
                         handleClickButton(e, step[nextStep].isShow);

@@ -28,6 +28,7 @@ function Total({ isConfirmedOrder = false }) {
     if (isConfirmedOrder) {
         orderData.cancel = 'true';
         orderData.linkText = 'Отменить';
+        orderData.cancel = true;
     }
 
     useEffect(() => {

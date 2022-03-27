@@ -40,9 +40,15 @@ const orderAPI = {
             .post(`/db/order`, order)
             .then((response) => response.data.data);
     },
-    canselOrder(order) {
+    cancelOrder(order) {
         return instance
-            .put(`/db/order`, order)
+            .put(`/db/order/${order.id}`, {
+                ...order,
+                orderStatusId: {
+                    id: '5e26a1f5099b810b946c5d8c',
+                    name: 'Отмененые',
+                },
+            })
             .then((response) => response.data.data);
     },
     getOrder(id) {

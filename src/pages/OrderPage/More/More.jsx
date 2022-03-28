@@ -45,7 +45,7 @@ function More() {
     useEffect(() => {
         if (rates.length < 2 && rates[0].id === null) dispatch(getRates());
         dispatch(setColor(selectedColor || 'Любой'));
-        dispatch(setRate(selectedRate.id || rates[0]));
+        dispatch(setRate(selectedRate || rates[0]));
         setStartDate(selectedStartDate ? new Date(selectedStartDate) : null);
         setEndDate(selectedEndDate ? new Date(selectedEndDate) : null);
     }, []);

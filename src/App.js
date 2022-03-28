@@ -22,7 +22,7 @@ function App() {
                         <Route path="*" element={<UserLocation />} />
                     </Route>
                     <Route
-                        path="/confirmed-order"
+                        path="/confirmed-order/:id"
                         element={<ConfirmedOrder />}
                     />
                 </Routes>

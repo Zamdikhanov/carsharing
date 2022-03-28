@@ -27,7 +27,7 @@ const initialState = {
         },
         colors: [],
         id: null,
-    }, ],
+    }],
     isFetching: false,
     carCategory: [{
         id: 'allCarCategory',

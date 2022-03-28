@@ -1,45 +1,31 @@
-import { useState } from 'react';
-import order from './constants';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import css from './Total.module.scss';
 import OrderData from '../../../components/OrderData/OrderData';
 import defaultCarImage from '../../../assets/images/order-models/car-stub-picture.png';
 import Modal from './Modal/Modal';
+import formatDate from '../../../components/helpers/formatDate';
 
-function Total(props) {
+function Total() {
+    const { carModel, dateStart, isFullTank, isChildChair, isRightHandDrive } =
+        useSelector((state) => state.order.order);
+
     const [isShow, setIsShow] = useState(false);
-    const { isConfirmedOrder } = props;
-
-    const {
-        carModel,
-        carNumber,
-        isFullTank,
-        isChildChair,
-        isRightHandDrive,
-        dateStart,
-        imgUrl,
-    } = order;
+    const [formatedDateStart, setFormatedDateStart] = useState();
 
     const orderData = {
-        linkHref: "/order/total",
-        city: "Ульяновск",
-        cityPoint: "Нариманова 42",
-        carModel: "Hyndai, i30 N",
-        carColor: "Голубой",
-        dateStart: "1111",
-        dateEnd: "2222",
-        selectedRate: "На сутки",
-        isFullTank,
-        price: "16 000",
-    }
+        linkHref: '/order/total',
+        linkText: 'Заказать',
+        showConfirmation: setIsShow,
+    };
 
-    if (isConfirmedOrder) {
-        orderData.cancel = true;
-        orderData.linkText = "Отменить";
-        orderData.showConfirmation = () => { };
-    } else {
-        orderData.linkText = "Заказать";
-        orderData.showConfirmation = setIsShow;
-    }
+    useEffect(() => {
+        setFormatedDateStart(formatDate(dateStart));
+    }, []);
+
+    useEffect(() => {
+        setFormatedDateStart(formatDate(dateStart));
+    }, [dateStart]);
 
     return (
         <div className={css.contentBlock}>
@@ -47,8 +33,12 @@ function Total(props) {
             <div className={css.contentBlock__currentData}>
                 <div className={css.currentData__inner}>
                     <div className={css.carDescription}>
-                        <div className={css.carModel}>{carModel}</div>
-                        <div className={css.carNumber}>{carNumber}</div>
+                        <div className={css.carModel}>{carModel.name}</div>
+                        {carModel.number && (
+                            <div className={css.carNumber}>
+                                {carModel.number}
+                            </div>
+                        )}
                         {isFullTank && (
                             <div className={css.info}>
                                 <span className={css.info__title}>Топливо</span>{' '}
@@ -73,22 +63,20 @@ function Total(props) {
                         )}
                         <div className={css.info}>
                             <span className={css.info__title}>Доступна с</span>{' '}
-                            {dateStart}
+                            {formatedDateStart}
                         </div>
                     </div>
                     <div className={css.carImageBlock}>
                         <img
                             className={css.carImage}
-                            src={imgUrl || defaultCarImage}
-                            alt={carModel}
+                            src={carModel?.thumbnail?.path || defaultCarImage}
+                            alt={carModel.name}
                         />
                     </div>
                 </div>
             </div>
             <div className={css.contentBlock__allOrderData}>
-                <OrderData
-                    {...orderData}
-                />
+                <OrderData {...orderData} />
             </div>
         </div>
     );

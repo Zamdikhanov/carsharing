@@ -48,7 +48,7 @@ export const locationSlice = createSlice({
             state.selectedCity = action.payload;
             state.availablePointsInSelectedCity = state.availablePoints.filter(
                 (availablePoint) =>
-                availablePoint.cityId.name === state.selectedCity,
+                availablePoint.cityId.name === state.selectedCity.name,
             );
         },
         setSelectedPoint: (state, action) => {
@@ -81,7 +81,7 @@ export const setCity = (point) => async(dispatch) => {
 export const setPoint = (point) => async(dispatch) => {
     dispatch(setSelectedPoint(point));
     dispatch(setOrderCityPoint(point));
-    if (point) {
+    if (point && point.id) {
         dispatch(setStepModelIsShow(true));
     } else {
         dispatch(setStepModelIsShow(false));

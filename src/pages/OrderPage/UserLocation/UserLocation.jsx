@@ -22,26 +22,26 @@ function UserLocation() {
     const [selectValueCity, setSelectValueCity] = useState(
         selectedCity
             ? {
-                  value: selectedCity,
-                  label: selectedCity,
-              }
+                value: selectedCity?.id,
+                label: selectedCity?.name,
+            }
             : null,
     );
     const [selectValuePoint, setSelectValuePoint] = useState(
         selectedPoint
             ? {
-                  value: selectedPoint,
-                  label: selectedPoint,
-              }
+                value: selectedPoint?.id,
+                label: selectedPoint?.address,
+            }
             : null,
     );
     const selectOptionsCities = availableCities.map((availableCity) => ({
-        value: availableCity.name,
+        value: availableCity.id,
         label: availableCity.name,
     }));
     const selectOptionsPoints = availablePointsInSelectedCity.map(
         (availablePoint) => ({
-            value: availablePoint.address,
+            value: availablePoint.id,
             label: availablePoint.address,
         }),
     );
@@ -54,9 +54,9 @@ function UserLocation() {
         setSelectValueCity(
             selectedCity
                 ? {
-                      value: selectedCity,
-                      label: selectedCity,
-                  }
+                    value: selectedCity?.id,
+                    label: selectedCity?.name,
+                }
                 : null,
         );
     }, [selectedCity]);
@@ -65,34 +65,34 @@ function UserLocation() {
         setSelectValuePoint(
             selectedPoint
                 ? {
-                      value: selectedPoint,
-                      label: selectedPoint,
-                  }
+                    value: selectedPoint?.id,
+                    label: selectedPoint?.address,
+                }
                 : null,
         );
     }, [selectedPoint]);
 
     useEffect(() => {
-        if (selectedCity !== selectValueCity?.label) {
+        if (selectedCity?.name !== selectValueCity?.label) {
             setSelectValuePoint(null);
             dispatch(setPoint(null));
-            dispatch(setCity(selectValueCity?.label));
+            dispatch(setCity({ name: selectValueCity?.label, id: selectValueCity?.value }));
         } else {
             setSelectValuePoint(null);
             setSelectValuePoint(
                 selectedPoint
                     ? {
-                          value: selectedPoint,
-                          label: selectedPoint,
-                      }
+                        value: selectedPoint?.id,
+                        label: selectedPoint?.address,
+                    }
                     : null,
             );
         }
     }, [selectValueCity]);
 
     useEffect(() => {
-        if (selectedPoint !== selectValuePoint?.label) {
-            dispatch(setPoint(selectValuePoint?.label));
+        if (selectedPoint?.address !== selectValuePoint?.label) {
+            dispatch(setPoint({ address: selectValuePoint?.label, id: selectValuePoint?.value }));
         }
     }, [selectValuePoint]);
 

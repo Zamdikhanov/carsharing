@@ -44,7 +44,7 @@ function YandexMap() {
         const newCoordinates = [];
         for (const item of points) {
             const newCoordinate = await getCoordinates(
-                `${selectedCity}, ${item.address}`,
+                `${selectedCity?.name}, ${item.address}`,
             );
             newCoordinates.push({ newCoordinate, point: item });
         }
@@ -52,19 +52,19 @@ function YandexMap() {
     };
 
     useEffect(() => {
-        if (!selectedPoint && selectedCity) changeMapCenter(selectedCity, true);
-        if (selectedPoint) changeMapCenter(`${selectedCity}, ${selectedPoint}`);
+        if (!selectedPoint && selectedCity) changeMapCenter(selectedCity?.name, true);
+        if (selectedPoint) changeMapCenter(`${selectedCity?.name}, ${selectedPoint?.address}`);
     }, [selectedPoint, selectedCity]);
 
     useEffect(() => {
-        if (!selectedPoint && selectedCity) changeMapCenter(selectedCity, true);
-        if (selectedPoint) changeMapCenter(`${selectedCity}, ${selectedPoint}`);
+        if (!selectedPoint && selectedCity) changeMapCenter(selectedCity?.name, true);
+        if (selectedPoint) changeMapCenter(`${selectedCity?.name}, ${selectedPoint?.address}`);
     }, []);
 
     useEffect(() => {
         if (availablePointsInSelectedCity)
             getPoints(availablePointsInSelectedCity);
-        if (selectedCity) changeMapCenter(selectedCity, true);
+        if (selectedCity) changeMapCenter(selectedCity?.name, true);
     }, [availablePointsInSelectedCity]);
 
     const handleClick = (e, point) => {

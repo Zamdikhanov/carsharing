@@ -52,13 +52,17 @@ function YandexMap() {
     };
 
     useEffect(() => {
-        if (!selectedPoint && selectedCity) changeMapCenter(selectedCity?.name, true);
-        if (selectedPoint) changeMapCenter(`${selectedCity?.name}, ${selectedPoint?.address}`);
+        if (!selectedPoint && selectedCity)
+            changeMapCenter(selectedCity?.name, true);
+        if (selectedPoint)
+            changeMapCenter(`${selectedCity?.name}, ${selectedPoint?.address}`);
     }, [selectedPoint, selectedCity]);
 
     useEffect(() => {
-        if (!selectedPoint && selectedCity) changeMapCenter(selectedCity?.name, true);
-        if (selectedPoint) changeMapCenter(`${selectedCity?.name}, ${selectedPoint?.address}`);
+        if (!selectedPoint && selectedCity)
+            changeMapCenter(selectedCity?.name, true);
+        if (selectedPoint)
+            changeMapCenter(`${selectedCity?.name}, ${selectedPoint?.address}`);
     }, []);
 
     useEffect(() => {
@@ -101,7 +105,7 @@ function YandexMap() {
                                 }}
                                 key={Date.now()}
                                 onClick={(e) => {
-                                    handleClick(e, coordinate.point.address);
+                                    handleClick(e, coordinate.point);
                                 }}
                             />
                         ))}

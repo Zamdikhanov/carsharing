@@ -31,12 +31,29 @@ const orderAPI = {
         return instance.get(`db/rate`).then((response) => response.data.data);
     },
     getOrderStatusId() {
-        return instance.get(`/db/orderStatus`).
-        then((response) => response.data.data[0]);
+        return instance
+            .get(`/db/orderStatus`)
+            .then((response) => response.data.data[1]);
     },
     postOrder(order) {
         return instance
             .post(`/db/order`, order)
+            .then((response) => response.data.data);
+    },
+    cancelOrder(order) {
+        return instance
+            .put(`/db/order/${order.id}`, {
+                ...order,
+                orderStatusId: {
+                    id: '5e26a1f5099b810b946c5d8c',
+                    name: 'Отмененые',
+                },
+            })
+            .then((response) => response.data.data);
+    },
+    getOrder(id) {
+        return instance
+            .get(`/db/order/${id}`)
             .then((response) => response.data.data);
     },
 };

@@ -1,18 +1,11 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import orderAPI from '../../../../api/api';
-import { getOrderStatusId } from '../../../../store/orderSlice';
 import css from './Modal.module.scss';
 
 function Modal({ show }) {
     const { fullReadyOrder } = useSelector((state) => state.order);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        dispatch(getOrderStatusId());
-    }, []);
 
     const handleClick = async (e) => {
         e.preventDefault();

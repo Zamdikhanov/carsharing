@@ -37,11 +37,11 @@ const initialState = {
         isChildChair: false,
         isRightHandDrive: false,
         price: 0,
-        orderStatusId: null,
+        orderStatusId: '5e26a1f0099b810b946c5d8b',
         id: null,
     },
     fullReadyOrder: {
-        orderStatusId: { id: '' },
+        orderStatusId: { id: '5e26a1f0099b810b946c5d8b' },
         cityId: { id: '' },
         pointId: { id: '' },
         carId: { id: '' },
@@ -106,13 +106,11 @@ export const OrderSlice = createSlice({
         },
         toggleOrderIsChildChair: (state) => {
             state.order.isChildChair = !state.order.isChildChair;
-            state.fullReadyOrder.isNeedChildChair =
-                !state.fullReadyOrder.isChildChair;
+            state.fullReadyOrder.isNeedChildChair = !state.fullReadyOrder.isChildChair;
         },
         toggleOrderIsRightHandDrive: (state) => {
             state.order.isRightHandDrive = !state.order.isRightHandDrive;
-            state.fullReadyOrder.isRightWheel =
-                !state.fullReadyOrder.isRightWheel;
+            state.fullReadyOrder.isRightWheel = !state.fullReadyOrder.isRightWheel;
         },
         setOrderDateStart: (state, action) => {
             state.order.dateStart = action.payload;
@@ -137,10 +135,6 @@ export const OrderSlice = createSlice({
             state.fullReadyOrder.isNeedChildChair = false;
             state.fullReadyOrder.isRightWheel = false;
         },
-        setFullReadyOrderStatusId: (state, action) => {
-            state.fullReadyOrder.orderStatusId = action.payload;
-            state.order.orderStatusId = action.payload;
-        },
     },
 });
 
@@ -162,17 +156,12 @@ export const {
     setFullReadyOrderStatusId,
 } = OrderSlice.actions;
 
-export const getOrderStatusId = () => async (dispatch) => {
-    const responce = await orderAPI.getOrderStatusId();
-    dispatch(setFullReadyOrderStatusId(responce));
-};
-
-export const getOrderById = (id) => async (dispatch) => {
+export const getOrderById = (id) => async(dispatch) => {
     const responce = await orderAPI.getOrder(id);
     dispatch(setOrder(responce));
 };
 
-export const cancelOrder = (order) => async (dispatch) => {
+export const cancelOrder = (order) => async(dispatch) => {
     const responce = await orderAPI.cancelOrder(order);
     dispatch(setOrder(responce));
 };
